@@ -1,0 +1,5 @@
+DROP TABLE IF EXISTS tags CASCADE;
+
+CREATE TABLE tags(
+  
+);

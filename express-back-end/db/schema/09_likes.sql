@@ -1,0 +1,5 @@
+DROP TABLE IF EXISTS likes CASCADE;
+
+CREATE TABLE likes(
+  
+);

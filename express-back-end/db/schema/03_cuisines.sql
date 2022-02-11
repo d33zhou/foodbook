@@ -1,0 +1,5 @@
+DROP TABLE IF EXISTS cuisines CASCADE;
+
+CREATE TABLE cuisines(
+  
+);

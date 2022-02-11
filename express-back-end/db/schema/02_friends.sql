@@ -1,0 +1,5 @@
+DROP TABLE IF EXISTS friends CASCADE;
+
+CREATE TABLE friends(
+  
+);

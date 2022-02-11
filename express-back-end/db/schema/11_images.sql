@@ -1,0 +1,5 @@
+DROP TABLE IF EXISTS images CASCADE;
+
+CREATE TABLE images(
+  
+);
