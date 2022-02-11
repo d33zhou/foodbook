@@ -1,14 +1,29 @@
 import axios from 'axios';
-import { CssBaseline, ScopedCssBaseline } from '@mui/material';
+import {
+  Box,
+  Container,
+  CssBaseline,
+  ScopedCssBaseline,
+  Typography,
+} from '@mui/material';
 import './App.css';
+
+import ContainerLogin from './ContainerLogin';
 
 function App() {
   return (
     <>
       <CssBaseline />
-      <div className='App'>
-        <h1>hello world</h1>
-      </div>
+      <Box
+        className='App'
+        sx={{
+          backgroundColor: '#f0f2f5',
+          height: '100vh',
+        }}>
+        <Container maxWidth='lg'>
+          <ContainerLogin />
+        </Container>
+      </Box>
     </>
   );
 }
