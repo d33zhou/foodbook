@@ -1,8 +1,0 @@
-DROP TABLE IF EXISTS images CASCADE;
-
-CREATE TABLE images(
-  id SERIAL PRIMARY KEY NOT NULL,
-  image_link TEXT NOT NULL,
-  
-  recipe_id INTEGER REFERENCES recipes(id) ON DELETE CASCADE
-);

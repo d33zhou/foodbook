@@ -1,6 +1,0 @@
-DROP TABLE IF EXISTS restrictions CASCADE;
-
-CREATE TABLE restrictions(
-  id SERIAL PRIMARY KEY NOT NULL,
-  category VARCHAR(255) NOT NULL
-);
