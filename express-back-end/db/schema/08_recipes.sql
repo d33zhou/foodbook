@@ -8,10 +8,7 @@ CREATE TABLE recipes(
   servings INTEGER NOT NULL,
   
   creator_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  recipe_ingredient_id INTEGER REFERENCES recipe_ingredients(id) ON DELETE CASCADE,
   cuisine_id INTEGER REFERENCES cuisines(id) ON DELETE CASCADE,
-  image_id INTEGER REFERENCES images(id) ON DELETE CASCADE,
   difficulty_id INTEGER REFERENCES difficulties(id) ON DELETE CASCADE,
-  restriction_id INTEGER REFERENCES restrictions(id) ON DELETE CASCADE,
-  recipe_tag_id INTEGER REFERENCES recipe_tags(id) ON DELETE CASCADE
+  restriction_id INTEGER REFERENCES restrictions(id) ON DELETE CASCADE
 );
