@@ -30,7 +30,7 @@ CREATE TABLE recipes(
     'keto',
     'lactose-free',
     'low-carb'
-  )) NOT NULL,
+  )),
 
   creator_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
