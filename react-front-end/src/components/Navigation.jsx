@@ -4,7 +4,7 @@ const Navigation = () => {
   return (
     <Box
       sx={{
-        width: 'auto',
+        flexGrow: 1,
         marginRight: '4rem',
         textAlign: 'left',
       }}>
