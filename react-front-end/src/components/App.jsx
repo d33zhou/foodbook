@@ -13,6 +13,7 @@ import SearchAppBar from './SearchAppBar';
 import Navigation from './Navigation';
 import RecipeList from './RecipeList';
 import RecipeFilters from './RecipeFilters';
+import RecipeForm from './RecipeForm';
 
 function App() {
   return (
@@ -44,6 +45,11 @@ function App() {
 
           <RecipeFilters />
         </Box>
+        {/* Recipe Form */}
+        <Container maxWidth='sm'>
+          <h2>Recipe Form Component</h2>
+          <RecipeForm />
+        </Container>
       </Box>
     </>
   );
