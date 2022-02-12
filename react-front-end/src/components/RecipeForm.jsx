@@ -12,8 +12,8 @@ import {
 
 const RecipeForm = () => {
   // const [difficulty, setDifficulty] = useState('');
-  const [restrictions, setRestrictions] = useState('');
-  const [cuisine, setCuisine] = useState('');
+  // const [restrictions, setRestrictions] = useState('');
+  // const [cuisine, setCuisine] = useState('');
   const [recipe, setRecipe] = useState({
     title: '',
     image: '',
@@ -37,10 +37,18 @@ const RecipeForm = () => {
     });
   };
   const handleRestrictions = (event) => {
-    setRestrictions(event.target.value);
+    // setRestrictions(event.target.value);
+    setRecipe({
+      ...recipe,
+      restrictions: event.target.value,
+    });
   };
   const handleCuisine = (event) => {
-    setCuisine(event.target.value);
+    // setCuisine(event.target.value);
+    setRecipe({
+      ...recipe,
+      cuisine: event.target.value,
+    });
   };
 
   return (
@@ -191,15 +199,18 @@ const RecipeForm = () => {
           <Select
             labelId='demo-simple-select-standard-label'
             id='demo-simple-select-standard'
-            value={restrictions}
+            value={recipe.restrictions}
             onChange={handleRestrictions}
             label='Restrictions'>
             <MenuItem value=''>
               <em>None</em>
             </MenuItem>
-            <MenuItem value={10}>Easy</MenuItem>
-            <MenuItem value={20}>Medium</MenuItem>
-            <MenuItem value={30}>Hard</MenuItem>
+            <MenuItem value={'vegetarian'}>Vegetarian</MenuItem>
+            <MenuItem value={'vegan'}>Vegan</MenuItem>
+            <MenuItem value={'kosher'}>Kosher</MenuItem>
+            <MenuItem value={'keto'}>Keto</MenuItem>
+            <MenuItem value={'lactose-free'}>Lactose-Free</MenuItem>
+            <MenuItem value={'low-carb'}>Low Carb</MenuItem>
           </Select>
         </FormControl>
 
@@ -210,15 +221,25 @@ const RecipeForm = () => {
           <Select
             labelId='demo-simple-select-standard-label'
             id='demo-simple-select-standard'
-            value={cuisine}
+            value={recipe.cuisine}
             onChange={handleCuisine}
             label='Cuisine'>
             <MenuItem value=''>
               <em>None</em>
             </MenuItem>
-            <MenuItem value={10}>Easy</MenuItem>
-            <MenuItem value={20}>Medium</MenuItem>
-            <MenuItem value={30}>Hard</MenuItem>
+            <MenuItem value={'american'}>American</MenuItem>
+            <MenuItem value={'chinese'}>Chinese</MenuItem>
+            <MenuItem value={'japanese'}>Japanese</MenuItem>
+            <MenuItem value={'italian'}>Italian</MenuItem>
+            <MenuItem value={'korean'}>Korean</MenuItem>
+            <MenuItem value={'indian'}>Indian</MenuItem>
+            <MenuItem value={'greek'}>Greek</MenuItem>
+            <MenuItem value={'spanish'}>Spanish</MenuItem>
+            <MenuItem value={'mediterranean'}>Mediterranean</MenuItem>
+            <MenuItem value={'lebanese'}>Lebanese</MenuItem>
+            <MenuItem value={'moroccan'}>Moroccan</MenuItem>
+            <MenuItem value={'turkish'}>Turkish</MenuItem>
+            <MenuItem value={'thai'}>Thai</MenuItem>
           </Select>
         </FormControl>
         <Button variant='contained'>Submit</Button>
