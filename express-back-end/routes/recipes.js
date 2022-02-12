@@ -1,7 +1,7 @@
-let express = require('express');
-let router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-/* GET / get all recipes */
+/* GET /api/recipes get all recipes */
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });

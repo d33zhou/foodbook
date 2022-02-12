@@ -1,23 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const app = express();
-const cookieSession = require('cookie-session');
 
-app.use(cookieSession({
-  name: "session",
-  keys: ['key1', 'key2'],
-}));
 
 /* GET / homepage/landing page with the login */
 router.get('/', (req, res) => {
-  res.status(200);
+  res.status(200).send('Hello world');
 });
 
 /* GET /login/:id when user clicks login */
 router.get('/login/:id', (req, res) => {
-
+  console.log(req.session);
   // assign cookie credentials
-  req.session.userId = req.params.id;
+  req.session['user_id'] = req.params.id;
 
   // redirect to homepage
   res
