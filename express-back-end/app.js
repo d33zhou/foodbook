@@ -2,14 +2,14 @@ const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const logger = require('morgan');
-const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const recipesRouter = require('./routes/recipes');
 const authRouter = require('./routes/auth');
 const app = express();
-const dbHelpers = require('./helpers/dbHelpers')(db);
+const db = require('./db'); // making the connection the the database => db
+const dbHelpers = require('./helpers/db_helpers')(db);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -20,15 +20,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false })); app.use(bodyParser.json());
-app.use(cookieSession({
-  name: "session",
-  keys: ['key1', 'key2'],
-}));
+
 
 app.use('/', indexRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/recipes', recipesRouter);
-app.use('/api/auth',authRouter);
+app.use('/api/auth',authRouter(dbHelpers));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
