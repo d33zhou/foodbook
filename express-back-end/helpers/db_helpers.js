@@ -12,7 +12,7 @@ module.exports = (db) => {
 
   const addUser = (firstName, lastName, email, password,avatar) => {
     const query = {
-      text: `INSERT INTO users (first_name, last_name, email, password,avatar) VALUES ($1, $2, $3, $4,$5) RETURNING *` ,
+      text: `INSERT INTO users (first_name, last_name, email, password, avatar) VALUES ($1, $2, $3, $4,$5) RETURNING *` ,
       values: [firstName, lastName, email, password,avatar]
     };
 
@@ -30,7 +30,9 @@ module.exports = (db) => {
 
     return db
       .query(query)
-      .then(result => result.rows[0])
+      .then(result => {
+        return result.rows[0];
+      })
       .catch((err) => err);
   };
 

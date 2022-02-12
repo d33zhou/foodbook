@@ -1,10 +1,13 @@
+require("dotenv").config();
+
 const express = require("express");
 const router = express.Router();
+const SECRET = process.env.SECRET;
 const jwt = require("jsonwebtoken");
 
 module.exports = (dbHelpers) => {
 
-  /* POST /api/auth/register get all recipes */
+  /* POST /api/auth/register to register a new user */
   router.post("/register", function(req, res) {
     const { email, password, firstName, lastName, avatar } = req.body;
     dbHelpers.getUserByEmail(email)
@@ -18,14 +21,14 @@ module.exports = (dbHelpers) => {
         }
 
       })
-    // .then(() => res.redirect('/api/recipes'))
+      .then((newUser) => res.json(newUser).send("Success"))
       .catch(err => res.json({
         error: err.message
       }));
 
   });
     
-  /* POST /api/auth/login get all recipes */
+  /* POST /api/auth/login to login */
   router.post("/login", function(req, res) {
     // get the email and password entered from body
     const { email, password } = req.body;
@@ -34,22 +37,24 @@ module.exports = (dbHelpers) => {
     if (!email || !password) {
       return res.status(400).send({ message: "Please enter email or password" });
     }
-  
-    const user = dbHelpers.getUserByEmail(email)
+    
+    dbHelpers.getUserByEmail(email)
       .then((user) => {
         return user;
+      }).then((user) => {
+        const payload = {
+          userID: user.id,
+          email: user.email,
+        };
+
+        // generate a token with payload
+        const token = jwt.sign(payload,SECRET);
+
+        return res.status(200).send({message:"Welcome!",token});
+
       })
       .catch((err) => res.json({ error: err.message }));
-  
-    const payload = {
-      userID: user.id,
-      email: user.email,
-    };
-  
-    //generate a token with payload
-    const token = jwt.sign(payload);
-  
-    return res.status(200).send(token);
+    
   });
 
   return router;
