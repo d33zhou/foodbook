@@ -11,44 +11,53 @@ import {
 } from '@mui/material';
 
 const RecipeForm = () => {
-  // const [difficulty, setDifficulty] = useState('');
-  // const [restrictions, setRestrictions] = useState('');
-  // const [cuisine, setCuisine] = useState('');
   const [recipe, setRecipe] = useState({
     title: '',
     image: '',
     description: '',
-    ingredients: {},
     directions: '',
     prepTime: 0,
     difficulty: '',
     restrictions: '',
     cuisine: '',
   });
+  const [ingredientFields, setIngredientFields] = useState([
+    { amount: '', ingredientName: '' },
+  ]);
 
   console.log(recipe);
-  // console.log(difficulty);
+  console.log(ingredientFields);
 
   const handleDifficulty = (event) => {
-    // setDifficulty(event.target.value);
     setRecipe({
       ...recipe,
       difficulty: event.target.value,
     });
   };
   const handleRestrictions = (event) => {
-    // setRestrictions(event.target.value);
     setRecipe({
       ...recipe,
       restrictions: event.target.value,
     });
   };
   const handleCuisine = (event) => {
-    // setCuisine(event.target.value);
     setRecipe({
       ...recipe,
       cuisine: event.target.value,
     });
+  };
+
+  const handleChangeInput = (index, event) => {
+    const values = [...ingredientFields];
+    values[index][event.target.name] = event.target.value;
+    setIngredientFields(values);
+  };
+
+  const handleAddIngredientField = () => {
+    setIngredientFields([
+      ...ingredientFields,
+      { amount: '', ingredientName: '' },
+    ]);
   };
 
   return (
@@ -96,55 +105,39 @@ const RecipeForm = () => {
             })
           }
         />
-        <TextField
-          sx={{
-            width: '30%',
-          }}
-          id='standard-basic'
-          label='Amount'
-          variant='standard'
-        />
-        <TextField
-          sx={{
-            width: '70%',
-          }}
-          id='standard-basic'
-          label='Ingredient'
-          variant='standard'
-        />
-        <TextField
-          sx={{
-            width: '30%',
-          }}
-          id='standard-basic'
-          label='Amount'
-          variant='standard'
-        />
-        <TextField
-          sx={{
-            width: '70%',
-          }}
-          id='standard-basic'
-          label='Ingredient'
-          variant='standard'
-        />
-        <TextField
-          sx={{
-            width: '30%',
-          }}
-          id='standard-basic'
-          label='Amount'
-          variant='standard'
-        />
-        <TextField
-          sx={{
-            width: '70%',
-          }}
-          id='standard-basic'
-          label='Ingredient'
-          variant='standard'
-        />
-        <Button variant='outlined'>Add Ingredient</Button>
+        {ingredientFields.map((ingredient, index) => {
+          return (
+            <div key={index}>
+              <TextField
+                sx={{
+                  width: '30%',
+                }}
+                id='standard-basic'
+                name='amount'
+                label='Amount'
+                variant='standard'
+                value={ingredient.amount}
+                onChange={(e) => handleChangeInput(index, e)}
+              />
+              <TextField
+                sx={{
+                  width: '70%',
+                }}
+                id='standard-basic'
+                name='ingredientName'
+                label='Ingredient'
+                variant='standard'
+                value={ingredient.ingredientName}
+                onChange={(e) => handleChangeInput(index, e)}
+              />
+            </div>
+          );
+        })}
+
+        <Button variant='outlined' onClick={() => handleAddIngredientField()}>
+          Add Ingredient
+        </Button>
+
         <TextField
           fullWidth
           multiline
