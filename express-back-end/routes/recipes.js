@@ -23,10 +23,12 @@ module.exports = (dbHelpers) => {
       }));
   });
 
-  //POST /api/recipes/:id create a recipe 
-  router.post('/:id', function(req,res) {
-    
-  })
+  //POST /api/recipes create a recipe
+  // router.post('/', function(req,res) {
+  //   const {title,instructions,prep_minutes,servings,image_link,difficulty,cuisine,dietary_restriction} = req.body;
+      
+  //   dbHelpers.createRecipe();
+  // });
 
   return router;
 };

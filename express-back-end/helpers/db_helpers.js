@@ -66,12 +66,23 @@ module.exports = (db) => {
       .catch(err => err);
   };
 
+  const createRecipe = (title,instructions,prep_minutes,servings,image_link,difficulty,cuisine,dietary_restriction,creator_id) => {
+    const query = {
+      text:`INSERT INTO recipes (title,instructions,prep_minutes,servings,image_link,difficulty,cuisine,dietary_restriction,creator_id) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)`,
+      values: [title,instructions,prep_minutes,servings,image_link,difficulty,cuisine,dietary_restriction,creator_id]
+    };
+
+    return db.query(query)
+      .then(result => result.rows[0])
+      .catch(err => err);
+  };
 
   return {
     getUserById,
     getUserByEmail,
     addUser,
     getAllRecipes,
-    getRecipeById
+    getRecipeById,
+    createRecipe
   };
 };
