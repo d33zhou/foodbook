@@ -38,7 +38,14 @@ const parsedRecipes =
   });
 
 const RecipeList = () => {
-  return <>{parsedRecipes}</>;
+  return (
+    <Box
+      sx={{
+        flexGrow: 3,
+      }}>
+      {parsedRecipes}
+    </Box>
+  );
 };
 
 export default RecipeList;

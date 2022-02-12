@@ -32,6 +32,9 @@ function App() {
           maxWidth='lg'
           mx={{
             display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'flex-start',
+            columnGap: '4rem',
             margin: '0 auto',
           }}>
           <Navigation />
