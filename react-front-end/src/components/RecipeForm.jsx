@@ -11,34 +11,69 @@ import {
 } from '@mui/material';
 
 const RecipeForm = () => {
-  const [difficulty, setDifficulty] = useState('');
+  // const [difficulty, setDifficulty] = useState('');
   const [restrictions, setRestrictions] = useState('');
   const [cuisine, setCuisine] = useState('');
+  const [recipe, setRecipe] = useState({
+    title: '',
+    image: '',
+    description: '',
+    ingredients: {},
+    directions: '',
+    prepTime: 0,
+    difficulty: '',
+    restrictions: '',
+    cuisine: '',
+  });
+
+  console.log(recipe);
+  // console.log(difficulty);
 
   const handleDifficulty = (event) => {
-    setDifficulty(event.target.value);
+    // setDifficulty(event.target.value);
+    setRecipe({
+      ...recipe,
+      difficulty: event.target.value,
+    });
   };
   const handleRestrictions = (event) => {
-    setDifficulty(event.target.value);
+    setRestrictions(event.target.value);
   };
   const handleCuisine = (event) => {
-    setDifficulty(event.target.value);
+    setCuisine(event.target.value);
   };
 
   return (
     <FormGroup>
-      <Box component='form' sx={{}} noValidate autoComplete='off'>
+      <Box
+        component='form'
+        sx={{}}
+        noValidate
+        autoComplete='off'
+        onSubmit={(e) => e.preventDefault()}>
         <TextField
           fullWidth
           id='standard-basic'
           label='Recipe Title'
           variant='standard'
+          onChange={(e) =>
+            setRecipe({
+              ...recipe,
+              title: e.target.value,
+            })
+          }
         />
         <TextField
           fullWidth
           id='standard-basic'
           label='Add Image'
           variant='standard'
+          onChange={(e) =>
+            setRecipe({
+              ...recipe,
+              image: e.target.value,
+            })
+          }
         />
         <TextField
           fullWidth
@@ -46,6 +81,12 @@ const RecipeForm = () => {
           id='standard-basic'
           label='Description'
           variant='standard'
+          onChange={(e) =>
+            setRecipe({
+              ...recipe,
+              description: e.target.value,
+            })
+          }
         />
         <TextField
           sx={{
@@ -102,6 +143,12 @@ const RecipeForm = () => {
           id='standard-basic'
           label='Directions'
           variant='standard'
+          onChange={(e) =>
+            setRecipe({
+              ...recipe,
+              directions: e.target.value,
+            })
+          }
         />
         <TextField
           sx={{
@@ -110,6 +157,12 @@ const RecipeForm = () => {
           id='standard-basic'
           label='Prep Time (minutes)'
           variant='standard'
+          onChange={(e) =>
+            setRecipe({
+              ...recipe,
+              prepTime: e.target.value,
+            })
+          }
         />
 
         <FormControl variant='standard' sx={{ m: 1, minWidth: '40%' }}>
@@ -119,15 +172,15 @@ const RecipeForm = () => {
           <Select
             labelId='demo-simple-select-standard-label'
             id='demo-simple-select-standard'
-            value={difficulty}
+            value={recipe.difficulty}
             onChange={handleDifficulty}
             label='Difficulty'>
             <MenuItem value=''>
               <em>None</em>
             </MenuItem>
-            <MenuItem value={10}>Easy</MenuItem>
-            <MenuItem value={20}>Medium</MenuItem>
-            <MenuItem value={30}>Hard</MenuItem>
+            <MenuItem value={'easy'}>Easy</MenuItem>
+            <MenuItem value={'medium'}>Medium</MenuItem>
+            <MenuItem value={'hard'}>Hard</MenuItem>
           </Select>
         </FormControl>
 
