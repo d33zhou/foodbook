@@ -1,5 +1,6 @@
 module.exports = (db) => {
 
+  //-----------> User helpers <--------------
   // gets the user profile details
   const getUserById = (id) => {
     const query = {
@@ -41,6 +42,8 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
+
+  //-------> Recipe helpers <------------
   //get all recipes in db
   const getAllRecipes = () => {
 
@@ -53,7 +56,7 @@ module.exports = (db) => {
       .catch(err => err);
   };
 
-  //get all recipes in db
+  //get a specific recipe from db
   const getRecipeById = (id) => {
 
     const query = {
@@ -66,6 +69,7 @@ module.exports = (db) => {
       .catch(err => err);
   };
 
+  // add a new recipe to the db
   const createRecipe = (title,instructions,prep_minutes,servings,image_link,difficulty,cuisine,dietary_restriction) => {
     const query = {
       text:`INSERT INTO recipes (title,instructions,prep_minutes,servings,image_link,difficulty,cuisine,dietary_restriction) VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *`,
