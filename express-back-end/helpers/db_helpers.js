@@ -81,12 +81,38 @@ module.exports = (db) => {
       .catch(err => err);
   };
 
+  // edit a recipe in the db
+  const editRecipe = (id,title,instructions,prep_minutes,servings,image_link,difficulty,cuisine,dietary_restriction,creator_id) => {
+    const query = {
+      text:`UPDATE recipes SET title = $1,instructions = $2,prep_minutes = $3,servings = $4,image_link = $5,difficulty = $6,cuisine = $7,dietary_restriction = $8 WHERE id = $9 RETURNING *`,
+      values: [title,instructions,prep_minutes,servings,image_link,difficulty,cuisine,dietary_restriction,id]
+    };
+
+    return db.query(query)
+      .then(result => result.rows[0])
+      .catch(err => err);
+  };
+
+  //delete recipe in the db
+  const deleteRecipe = (id) => {
+    const query = {
+      text:`DELETE FROM recipes WHERE id = $1`,
+      values: [id]
+    };
+
+    return db.query(query)
+      .then(result => result.rows[0])
+      .catch(err => err);
+  };
+
   return {
     getUserById,
     getUserByEmail,
     addUser,
     getAllRecipes,
     getRecipeById,
-    createRecipe
+    createRecipe,
+    editRecipe,
+    deleteRecipe
   };
 };
