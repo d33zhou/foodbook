@@ -162,7 +162,31 @@ module.exports = (db) => {
       .catch(err => err);
   };
 
+  //-------> Likes helpers <------------
 
+  // like a recipe
+  const addLike = (user_id,recipe_id) => {
+    const query = {
+      text:`INSERT INTO LIKES (user_id,recipe_id) VALUES ($1,$2)`,
+      values: [user_id,recipe_id]
+    };
+    return db.query(query)
+      .then(result => result.rows[0])
+      .catch(err => err);
+
+  };
+
+  //unlike a recipe
+  const removeLike = (user_id,recipe_id) => {
+    const query = {
+      text:`DELETE FROM LIKES WHERE user_id = $1 AND recipe_id = $2`,
+      values: [user_id,recipe_id]
+    };
+    return db.query(query)
+      .then(result => result.rows[0])
+      .catch(err => err);
+
+  };
   return {
     getUserById,
     getUserByEmail,
@@ -175,6 +199,8 @@ module.exports = (db) => {
     getRecipesByIngredient,
     createIngredient,
     editIngredient,
-    deleteIngredient
+    deleteIngredient,
+    addLike,
+    removeLike
   };
 };
