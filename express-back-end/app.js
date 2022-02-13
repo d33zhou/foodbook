@@ -7,6 +7,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const recipesRouter = require('./routes/recipes');
 const authRouter = require('./routes/auth');
+const ingredientRouter = require('./routes/ingredients');
 const app = express();
 const db = require('./db'); // making the connection the the database => db
 const dbHelpers = require('./helpers/db_helpers')(db);
@@ -25,6 +26,7 @@ app.use('/', indexRouter);
 app.use('/api/users', usersRouter(dbHelpers));
 app.use('/api/recipes', recipesRouter(dbHelpers));
 app.use('/api/auth',authRouter(dbHelpers));
+app.use('/api/ingredients',ingredientRouter(dbHelpers));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

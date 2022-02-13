@@ -105,6 +105,20 @@ module.exports = (db) => {
       .catch(err => err);
   };
 
+  //-------> Ingredients helpers <------------
+  const getRecipesByIngredient = (id) => {
+    const query = {
+      text: `SELECT * FROM recipes WHERE id IN (SELECT recipe_id FROM ingredients WHERE id= $1)`,
+      values:[id]
+    };
+    return db.query(query)
+      .then(result => result.rows)
+      .catch(err => err);
+
+
+  };
+
+
   return {
     getUserById,
     getUserByEmail,
@@ -113,6 +127,7 @@ module.exports = (db) => {
     getRecipeById,
     createRecipe,
     editRecipe,
-    deleteRecipe
+    deleteRecipe,
+    getRecipesByIngredient
   };
 };
