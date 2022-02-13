@@ -63,8 +63,8 @@ module.exports = (dbHelpers) => {
       );
   });
 
-  //PUT /api/recipes/:id
-  router.put("/:id", function(req, res) {
+  //PUT /api/recipes/
+  router.put("/", function(req, res) {
     const {
       title,
       instructions,
@@ -75,12 +75,9 @@ module.exports = (dbHelpers) => {
       cuisine,
       dietary_restriction
     } = req.body;
-    
-    const { id } = req.params;
 
     dbHelpers
       .editRecipe(
-        id,
         title,
         instructions,
         prep_minutes,

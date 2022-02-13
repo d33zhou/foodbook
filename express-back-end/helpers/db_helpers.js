@@ -69,17 +69,6 @@ module.exports = (db) => {
       .catch(err => err);
   };
 
-  const getRecipeIdByTitle = (title) => {
-    const query = {
-      text:`SELECT id FROM recipes WHERE title = $1`,
-      values: [title]
-    };
-
-    return db.query(query)
-      .then(result => result.rows[0].id)
-      .catch(err => err);
-  };
-
   // add a new recipe to the db
   const createRecipe = (title,instructions,prep_minutes,servings,image_link,difficulty,cuisine,dietary_restriction) => {
     const query = {
@@ -93,10 +82,10 @@ module.exports = (db) => {
   };
 
   // edit a recipe in the db
-  const editRecipe = (id,title,instructions,prep_minutes,servings,image_link,difficulty,cuisine,dietary_restriction,creator_id) => {
+  const editRecipe = (title,instructions,prep_minutes,servings,image_link,difficulty,cuisine,dietary_restriction) => {
     const query = {
-      text:`UPDATE recipes SET title = $1,instructions = $2,prep_minutes = $3,servings = $4,image_link = $5,difficulty = $6,cuisine = $7,dietary_restriction = $8 WHERE id = $9 RETURNING *`,
-      values: [title,instructions,prep_minutes,servings,image_link,difficulty,cuisine,dietary_restriction,id]
+      text:`UPDATE recipes SET instructions = $1,prep_minutes = $2,servings = $3,image_link = $4,difficulty = $5,cuisine = $6,dietary_restriction = $7 WHERE title = $8 RETURNING *`,
+      values: [instructions,prep_minutes,servings,image_link,difficulty,cuisine,dietary_restriction, title]
     };
 
     return db.query(query)
@@ -118,10 +107,11 @@ module.exports = (db) => {
 
   //-------> Ingredients helpers <------------
 
-  const getRecipesByIngredient = (id) => {
+  // get all recipes that have an ingredient
+  const getRecipesByIngredient = (ingredient_name) => {
     const query = {
       text: `SELECT recipes.* , ingredients.ingredient_name, ingredients.amount FROM ingredients INNER JOIN recipes ON ingredients.recipe_id = recipes.id WHERE ingredients.ingredient_name LIKE $1`,
-      values:[id]
+      values:[ingredient_name]
     };
     return db.query(query)
       .then(result => result.rows[0])
@@ -130,8 +120,9 @@ module.exports = (db) => {
 
   };
 
+  //create ingredient in the db
   const createIngredient = (ingredient_name,amount,recipe_id) => {
-    
+
     const query = {
       text:` INSERT INTO ingredients (ingredient_name,amount,recipe_id) VALUES ($1,$2,$3) RETURNING *`,
       values:[ingredient_name,amount,recipe_id]
@@ -139,13 +130,37 @@ module.exports = (db) => {
     
     return db.query(query)
       .then(result => {
-        console.log(result.rows);
         return result.rows[0];
       })
       .catch(err => err);
 
   };
 
+  // edit an ingredient in the db
+  const editIngredient = (ingredient_name,amount,recipe_id) => {
+    const query = {
+      text:`UPDATE ingredients SET ingredient_name = $1,amount = $2 WHERE recipe_id = $3 RETURNING *`,
+      values: [ingredient_name,amount,recipe_id]
+    };
+
+    return db.query(query)
+      .then(result => {
+        return result.rows[0];
+      })
+      .catch(err => err);
+  };
+
+  //delete ingredient in the db
+  const deleteIngredient = (id) => {
+    const query = {
+      text:`DELETE FROM ingredients WHERE id = $1`,
+      values: [id]
+    };
+
+    return db.query(query)
+      .then(result => result.rows[0])
+      .catch(err => err);
+  };
 
 
   return {
@@ -158,6 +173,8 @@ module.exports = (db) => {
     editRecipe,
     deleteRecipe,
     getRecipesByIngredient,
-    createIngredient
+    createIngredient,
+    editIngredient,
+    deleteIngredient
   };
 };
