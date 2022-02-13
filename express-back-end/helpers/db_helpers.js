@@ -48,7 +48,7 @@ module.exports = (db) => {
   const getAllRecipes = () => {
 
     const query = {
-      text:`SELECT * FROM recipes`
+      text:`SELECT *,ingredients.ingredient_name, ingredients.amount FROM recipes JOIN ingredients ON ingredients.recipe_id = recipes.id `
     };
 
     return db.query(query)
@@ -60,12 +60,23 @@ module.exports = (db) => {
   const getRecipeById = (id) => {
 
     const query = {
-      text:`SELECT * FROM recipes WHERE id = $1`,
+      text:`SELECT *,ingredients.ingredient_name, ingredients.amount FROM recipes JOIN ingredients ON ingredients.recipe_id = recipes.id WHERE recipes.id = $1`,
       values: [id]
     };
 
     return db.query(query)
       .then(result => result.rows[0])
+      .catch(err => err);
+  };
+
+  const getRecipeIdByTitle = (title) => {
+    const query = {
+      text:`SELECT id FROM recipes WHERE title = $1`,
+      values: [title]
+    };
+
+    return db.query(query)
+      .then(result => result.rows[0].id)
       .catch(err => err);
   };
 
@@ -106,17 +117,35 @@ module.exports = (db) => {
   };
 
   //-------> Ingredients helpers <------------
+
   const getRecipesByIngredient = (id) => {
     const query = {
-      text: `SELECT * FROM recipes WHERE id IN (SELECT recipe_id FROM ingredients WHERE id= $1)`,
+      text: `SELECT recipes.* , ingredients.ingredient_name, ingredients.amount FROM ingredients INNER JOIN recipes ON ingredients.recipe_id = recipes.id WHERE ingredients.ingredient_name LIKE $1`,
       values:[id]
     };
     return db.query(query)
-      .then(result => result.rows)
+      .then(result => result.rows[0])
       .catch(err => err);
 
 
   };
+
+  const createIngredient = (ingredient_name,amount,recipe_id) => {
+    
+    const query = {
+      text:` INSERT INTO ingredients (ingredient_name,amount,recipe_id) VALUES ($1,$2,$3) RETURNING *`,
+      values:[ingredient_name,amount,recipe_id]
+    };
+    
+    return db.query(query)
+      .then(result => {
+        console.log(result.rows);
+        return result.rows[0];
+      })
+      .catch(err => err);
+
+  };
+
 
 
   return {
@@ -128,6 +157,7 @@ module.exports = (db) => {
     createRecipe,
     editRecipe,
     deleteRecipe,
-    getRecipesByIngredient
+    getRecipesByIngredient,
+    createIngredient
   };
 };

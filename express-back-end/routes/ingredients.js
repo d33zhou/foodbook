@@ -3,11 +3,11 @@ const router = express.Router();
 
 module.exports = (dbHelpers) => {
 
-  // GET /api/ingredients/:id get recipes with an ingredient
-  router.get("/:id", function(req, res) {
-    const { id } = req.params;
+  // GET /api/ingredients/ filter to get all recipes with an ingredient
+  router.get("/", function(req, res) {
+    const { ingredient_name } = req.body;
     dbHelpers
-      .getRecipesByIngredient(id)
+      .getRecipesByIngredient(ingredient_name)
       .then((recipe) => res.json(recipe))
       .catch((err) =>
         res.json({
@@ -16,40 +16,31 @@ module.exports = (dbHelpers) => {
       );
   });
 
-  //POST /api/recipes create a recipe
-  // router.post("/", function(req, res) {
-  //   const {
-  //     title,
-  //     instructions,
-  //     prep_minutes,
-  //     servings,
-  //     image_link,
-  //     difficulty,
-  //     cuisine,
-  //     dietary_restriction,
-  //   } = req.body;
+  //POST /api/ingredients create an ingredient
+  router.post("/", function(req, res) {
+    const {
+      ingredient_name,
+      amount,
+      recipe_id
+    } = req.body;
       
 
-  //   dbHelpers
-  //     .createRecipe(
-  //       title,
-  //       instructions,
-  //       prep_minutes,
-  //       servings,
-  //       image_link,
-  //       difficulty,
-  //       cuisine,
-  //       dietary_restriction
-  //     )
-  //     .then((recipe) => {
-  //       return res.json(recipe);
-  //     })
-  //     .catch((err) =>
-  //       res.json({
-  //         error: err.message,
-  //       })
-  //     );
-  // });
+    dbHelpers
+      .createIngredient(
+        ingredient_name,
+        amount,
+        recipe_id
+      )
+      .then((ingredient) => {
+        console.log(ingredient);
+        return res.json(ingredient);
+      })
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+  });
 
   // //PUT /api/recipes/:id
   // router.put("/:id", function(req, res) {

@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 module.exports = (dbHelpers) => {
-  /* GET /api/recipes get all recipes */
+
+  /* GET /api/recipes get all recipes and respective ingredients */
   router.get("/", function(req, res) {
     dbHelpers
       .getAllRecipes()
@@ -14,7 +15,7 @@ module.exports = (dbHelpers) => {
       );
   });
 
-  // GET /api/recipes/:id get one recipe
+  // GET /api/recipes/:id get one recipe and its ingredients
   router.get("/:id", function(req, res) {
     const { id } = req.params;
     dbHelpers
