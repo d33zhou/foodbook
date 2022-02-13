@@ -226,6 +226,36 @@ module.exports = (db) => {
       .catch(err => err);
 
   };
+
+  // ----------> Friends helpers <--------------
+
+  // add a friend
+  const addFriend = (user_id_1, user_id_2) => {
+    const query = {
+      text:`INSERT INTO friends(user_id_1,user_id_2) VALUES ($1,$2)`,
+      values: [user_id_1, user_id_2]
+    };
+
+    return db.query(query)
+      .then(result => result.rows[0])
+      .catch(err => err);
+
+  };
+
+  // remove a friend
+  const removeFriend = (user_id_1, user_id_2) => {
+    const query = {
+      text:`DELETE FROM friends WHERE user_id_1 = $1 AND user_id_2 = $2`,
+      values: [user_id_1, user_id_2]
+    };
+
+    return db.query(query)
+      .then(result => result.rows[0])
+      .catch(err => err);
+
+  };
+
+
   return {
     getUserById,
     getUserByEmail,
@@ -243,6 +273,8 @@ module.exports = (db) => {
     addLike,
     removeLike,
     addBookmark,
-    removeBookmark
+    removeBookmark,
+    addFriend,
+    removeFriend
   };
 };
