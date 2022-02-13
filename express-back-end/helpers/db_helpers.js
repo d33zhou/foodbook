@@ -180,7 +180,7 @@ module.exports = (db) => {
   // like a recipe
   const addLike = (user_id,recipe_id) => {
     const query = {
-      text:`INSERT INTO LIKES (user_id,recipe_id) VALUES ($1,$2)`,
+      text:`INSERT INTO likes (user_id,recipe_id) VALUES ($1,$2)`,
       values: [user_id,recipe_id]
     };
     return db.query(query)
@@ -192,7 +192,33 @@ module.exports = (db) => {
   //unlike a recipe
   const removeLike = (user_id,recipe_id) => {
     const query = {
-      text:`DELETE FROM LIKES WHERE user_id = $1 AND recipe_id = $2`,
+      text:`DELETE FROM likes WHERE user_id = $1 AND recipe_id = $2`,
+      values: [user_id,recipe_id]
+    };
+    return db.query(query)
+      .then(result => result.rows[0])
+      .catch(err => err);
+
+  };
+
+  //-------> Bookmark helpers <------------
+
+  // bookmark a recipe
+  const addBookmark = (user_id,recipe_id) => {
+    const query = {
+      text:`INSERT INTO bookmarks (user_id,recipe_id) VALUES ($1,$2)`,
+      values: [user_id,recipe_id]
+    };
+    return db.query(query)
+      .then(result => result.rows[0])
+      .catch(err => err);
+
+  };
+
+  //delete recipe bookmark
+  const removeBookmark = (user_id,recipe_id) => {
+    const query = {
+      text:`DELETE FROM bookmarks WHERE user_id = $1 AND recipe_id = $2`,
       values: [user_id,recipe_id]
     };
     return db.query(query)
@@ -215,6 +241,8 @@ module.exports = (db) => {
     editIngredient,
     deleteIngredient,
     addLike,
-    removeLike
+    removeLike,
+    addBookmark,
+    removeBookmark
   };
 };
