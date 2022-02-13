@@ -48,7 +48,20 @@ module.exports = (db) => {
   const getAllRecipes = () => {
 
     const query = {
-      text:`SELECT *,ingredients.ingredient_name, ingredients.amount FROM recipes JOIN ingredients ON ingredients.recipe_id = recipes.id `
+      text:`SELECT recipes.* ,ingredients.* FROM recipes JOIN ingredients ON ingredients.recipe_id = recipes.id`
+    };
+
+    return db.query(query)
+      .then(result => result.rows)
+      .catch(err => err);
+  };
+
+  //get all recipes by friends in db
+  const getAllRecipesByFriends = (user_id) => {
+
+    const query = {
+      text:`SELECT * FROM recipes WHERE creator_id IN (SELECT users.id FROM friends JOIN users ON users.id = friends.user_id_1 WHERE friends.user_id_2 = $1 UNION SELECT users.id FROM friends JOIN users ON users.id = friends.user_id_2 WHERE friends.user_id_1 = $1)`,
+      values: [user_id]
     };
 
     return db.query(query)
@@ -192,6 +205,7 @@ module.exports = (db) => {
     getUserByEmail,
     addUser,
     getAllRecipes,
+    getAllRecipesByFriends,
     getRecipeById,
     createRecipe,
     editRecipe,
