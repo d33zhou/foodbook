@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Box, Typography } from '@mui/material';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
@@ -6,6 +8,38 @@ import BookmarkOutlinedIcon from '@mui/icons-material/BookmarkOutlined';
 import { blue } from '@mui/material/colors';
 
 const RecipeItem = () => {
+  const [results, setResults] = useState({});
+  const [ingredients, setIngredients] = useState([]);
+
+  console.log('results ', results);
+  console.log('ingredients', ingredients);
+
+  useEffect(() => {
+    const testURL = `http://localhost:3001/api/recipes/1`;
+    axios
+      .get(testURL)
+      .then((response) => {
+        setResults({ ...response.data });
+      })
+      .catch((err) => console.log('Error ', err.message));
+  }, []);
+
+  useEffect(() => {
+    const ingredientsURL = `http://localhost:3001/api/ingredients/1`;
+    axios
+      .get(ingredientsURL)
+      .then((response) => {
+        setIngredients([...response.data]);
+      })
+      .catch((err) => console.log('Error ', err.message));
+  }, []);
+
+  const parsedIngredients = ingredients.map((ingredient) => (
+    <li key={ingredient.id}>
+      {ingredient.amount} - {ingredient.ingredient_name}
+    </li>
+  ));
+
   return (
     <Box
       maxWidth='lg'
@@ -26,18 +60,10 @@ const RecipeItem = () => {
           color='primary'
           fontWeight='bold'
           gutterBottom>
-          Really Really Good Pizza!
+          {results.title}
         </Typography>
-        <img
-          src='https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/delish-homemade-pizza-horizontal-1542312378.png'
-          alt=''
-        />
-        <Typography variant='p'>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel
-          obcaecati eaque eius fuga eum nihil, ipsum neque fugiat laboriosam,
-          facere unde nam, laborum aspernatur veniam inventore vero quos iure
-          deserunt!
-        </Typography>
+        <img src={results.image_link} alt='' />
+        <Typography variant='p'>{results.instructions}</Typography>
       </Box>
       <Box
         sx={{
@@ -71,11 +97,20 @@ const RecipeItem = () => {
         <Typography variant='h6' color='primary' fontWeight='bold' gutterBottom>
           Difficulty:
         </Typography>
+        <Typography variant='p' color='primary' fontWeight='bold' gutterBottom>
+          {results.difficulty}
+        </Typography>
         <Typography variant='h6' color='primary' fontWeight='bold' gutterBottom>
           Prep Time:
         </Typography>
+        <Typography variant='p' color='primary' fontWeight='bold' gutterBottom>
+          {results.prep_minutes} minutes
+        </Typography>
         <Typography variant='h6' color='primary' fontWeight='bold' gutterBottom>
           Ingredients:
+        </Typography>
+        <Typography variant='p' color='primary' fontWeight='bold' gutterBottom>
+          {parsedIngredients}
         </Typography>
       </Box>
     </Box>
