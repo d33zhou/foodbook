@@ -6,7 +6,7 @@ import RecipeListItem from './RecipeListItem';
 const RecipeList = () => {
   const [results, setResults] = useState([]);
 
-  console.log(results[0]);
+  // console.log(results[0]);
 
   const parsedRecipes =
     Array.isArray(results) &&
