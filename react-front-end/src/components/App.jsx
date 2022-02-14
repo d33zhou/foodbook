@@ -14,6 +14,7 @@ import Navigation from './Navigation';
 import RecipeList from './RecipeList';
 import RecipeFilters from './RecipeFilters';
 import RecipeForm from './RecipeForm';
+import User from './User';
 
 function App() {
   return (
@@ -50,6 +51,13 @@ function App() {
           <h2>Recipe Form Component</h2>
           <RecipeForm />
         </Container>
+
+        {/* User Profile */}
+        <Container>
+          <h1>User Profile</h1>
+          <User />
+        </Container>
+
       </Box>
     </>
   );
