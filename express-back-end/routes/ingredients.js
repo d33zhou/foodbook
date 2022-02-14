@@ -7,7 +7,7 @@ module.exports = (dbHelpers) => {
     const { recipe_id } = req.body;
     dbHelpers
       .getIngredientsByRecipe(recipe_id)
-      .then((ingredeints) => res.json(ingredeints))
+      .then((ingredients) => res.json(ingredients))
       .catch((err) =>
         res.json({
           error: err.message,
@@ -30,7 +30,7 @@ module.exports = (dbHelpers) => {
   });
 
   //POST /api/ingredients create an ingredient
-  router.post("/", function (req, res) {
+  router.post("/", function(req, res) {
     const { ingredient_name, amount, recipe_id } = req.body;
 
     dbHelpers
