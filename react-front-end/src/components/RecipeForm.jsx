@@ -25,8 +25,8 @@ const RecipeForm = () => {
     { amount: '', ingredientName: '' },
   ]);
 
-  console.log(recipe);
-  console.log(ingredientFields);
+  // console.log(recipe);
+  // console.log(ingredientFields);
 
   const handleDifficulty = (event) => {
     setRecipe({

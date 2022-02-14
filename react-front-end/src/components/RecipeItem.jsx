@@ -11,8 +11,8 @@ const RecipeItem = () => {
   const [results, setResults] = useState({});
   const [ingredients, setIngredients] = useState([]);
 
-  console.log('results ', results);
-  console.log('ingredients', ingredients);
+  // console.log('results ', results);
+  // console.log('ingredients', ingredients);
 
   useEffect(() => {
     const testURL = `http://localhost:3001/api/recipes/1`;
