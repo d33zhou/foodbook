@@ -2,8 +2,22 @@ const express = require("express");
 const router = express.Router();
 
 module.exports = (dbHelpers) => {
-  // GET /api/ingredients/ filter to get all recipes with an ingredient
-  router.get("/", function (req, res) {
+  // GET /api/ingredients/  to get ingredients by recipe id
+  router.get("/", function(req, res) {
+    const { recipe_id } = req.body;
+    dbHelpers
+      .getIngredientsByRecipe(recipe_id)
+      .then((ingredeints) => res.json(ingredeints))
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+  });
+  
+  
+  // GET /api/ingredients/filter filter to get all recipes with an ingredient
+  router.get("/filter", function(req, res) {
     const { ingredient_name } = req.body;
     dbHelpers
       .getRecipesByIngredient(ingredient_name)

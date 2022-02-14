@@ -48,7 +48,7 @@ module.exports = (db) => {
   const getAllRecipes = () => {
 
     const query = {
-      text:`SELECT recipes.* ,ingredients.* FROM recipes JOIN ingredients ON ingredients.recipe_id = recipes.id`
+      text:`SELECT recipes.* FROM recipes`
     };
 
     return db.query(query)
@@ -73,7 +73,7 @@ module.exports = (db) => {
   const getRecipeById = (id) => {
 
     const query = {
-      text:`SELECT *,ingredients.ingredient_name, ingredients.amount FROM recipes JOIN ingredients ON ingredients.recipe_id = recipes.id WHERE recipes.id = $1`,
+      text:`SELECT * FROM recipes WHERE recipes.id = $1`,
       values: [id]
     };
 
@@ -120,6 +120,18 @@ module.exports = (db) => {
 
   //-------> Ingredients helpers <------------
 
+  // get ingredients by recipe id
+  const getIngredientsByRecipe = (recipe_id) => {
+    const query = {
+      text: `SELECT * FROM ingredients WHERE recipe_id = $1`,
+      values:[recipe_id]
+    };
+    return db.query(query)
+      .then(result => result.rows)
+      .catch(err => err);
+  };
+
+
   // get all recipes that have an ingredient
   const getRecipesByIngredient = (ingredient_name) => {
     const query = {
@@ -127,10 +139,8 @@ module.exports = (db) => {
       values:[ingredient_name]
     };
     return db.query(query)
-      .then(result => result.rows[0])
+      .then(result => result.rows)
       .catch(err => err);
-
-
   };
 
   //create ingredient in the db
@@ -267,6 +277,7 @@ module.exports = (db) => {
     editRecipe,
     deleteRecipe,
     getRecipesByIngredient,
+    getIngredientsByRecipe,
     createIngredient,
     editIngredient,
     deleteIngredient,
