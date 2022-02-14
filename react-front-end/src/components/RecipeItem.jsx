@@ -8,25 +8,37 @@ import BookmarkOutlinedIcon from '@mui/icons-material/BookmarkOutlined';
 import { blue } from '@mui/material/colors';
 
 const RecipeItem = () => {
-  const [results, setResults] = useState([]);
+  const [results, setResults] = useState({});
+  const [ingredients, setIngredients] = useState([]);
 
-  console.log(results[0]);
+  console.log('results ', results);
+  console.log('ingredients', ingredients);
 
   useEffect(() => {
-    const testURL = `http://localhost:3001/api/recipes/`;
-    axios.get(testURL).then((response) => {
-      setResults([...response.data]);
-      // console.log(response.data);
-    });
+    const testURL = `http://localhost:3001/api/recipes/1`;
+    axios
+      .get(testURL)
+      .then((response) => {
+        setResults({ ...response.data });
+      })
+      .catch((err) => console.log('Error ', err.message));
   }, []);
 
   useEffect(() => {
-    const testURL = `http://localhost:3001/api/ingredients/`;
-    axios.get(testURL).then((response) => {
-      setResults([...response.data]);
-      // console.log(response.data);
-    });
+    const ingredientsURL = `http://localhost:3001/api/ingredients/1`;
+    axios
+      .get(ingredientsURL)
+      .then((response) => {
+        setIngredients([...response.data]);
+      })
+      .catch((err) => console.log('Error ', err.message));
   }, []);
+
+  const parsedIngredients = ingredients.map((ingredient) => (
+    <li>
+      {ingredient.amount} - {ingredient.ingredient_name}
+    </li>
+  ));
 
   return (
     <Box
@@ -48,10 +60,10 @@ const RecipeItem = () => {
           color='primary'
           fontWeight='bold'
           gutterBottom>
-          {results[0].title}
+          {results.title}
         </Typography>
-        <img src={results[0].image_link} alt='' />
-        <Typography variant='p'>{results[0].instructions}</Typography>
+        <img src={results.image_link} alt='' />
+        <Typography variant='p'>{results.instructions}</Typography>
       </Box>
       <Box
         sx={{
@@ -86,19 +98,19 @@ const RecipeItem = () => {
           Difficulty:
         </Typography>
         <Typography variant='p' color='primary' fontWeight='bold' gutterBottom>
-          {results[0].difficulty}
+          {results.difficulty}
         </Typography>
         <Typography variant='h6' color='primary' fontWeight='bold' gutterBottom>
           Prep Time:
         </Typography>
         <Typography variant='p' color='primary' fontWeight='bold' gutterBottom>
-          {results[0].prep_minutes} minutes
+          {results.prep_minutes} minutes
         </Typography>
         <Typography variant='h6' color='primary' fontWeight='bold' gutterBottom>
           Ingredients:
         </Typography>
         <Typography variant='p' color='primary' fontWeight='bold' gutterBottom>
-          {results[0].prep_minutes}
+          {parsedIngredients}
         </Typography>
       </Box>
     </Box>

@@ -3,10 +3,10 @@ const router = express.Router();
 
 module.exports = (dbHelpers) => {
   // GET /api/ingredients/  to get ingredients by recipe id
-  router.get("/", function(req, res) {
-    const { recipe_id } = req.body;
+  router.get("/:id", function(req, res) {
+    const { id } = req.params;
     dbHelpers
-      .getIngredientsByRecipe(recipe_id)
+      .getIngredientsByRecipe(id)
       .then((ingredients) => res.json(ingredients))
       .catch((err) =>
         res.json({
