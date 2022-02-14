@@ -26,7 +26,7 @@ const RecipeItem = () => {
           color='primary'
           fontWeight='bold'
           gutterBottom>
-          Really Good Pizza!
+          Really Really Good Pizza!
         </Typography>
         <img
           src='https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/delish-homemade-pizza-horizontal-1542312378.png'
