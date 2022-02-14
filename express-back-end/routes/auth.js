@@ -21,7 +21,7 @@ module.exports = (dbHelpers) => {
         }
 
       })
-      .then((newUser) => res.json(newUser).send("Success"))
+      .then((newUser) => res.json(newUser))
       .catch(err => res.json({
         error: err.message
       }));

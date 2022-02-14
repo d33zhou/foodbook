@@ -15,6 +15,7 @@ import RecipeList from './RecipeList';
 import RecipeFilters from './RecipeFilters';
 import RecipeForm from './RecipeForm';
 import User from './User';
+import RecipeItem from './RecipeItem';
 
 function App() {
   return (
@@ -58,6 +59,11 @@ function App() {
           <User />
         </Container>
 
+        {/* Recipe Item */}
+        <Container maxWidth='md'>
+          <h2>Recipe Item Component</h2>
+          <RecipeItem />
+        </Container>
       </Box>
     </>
   );
