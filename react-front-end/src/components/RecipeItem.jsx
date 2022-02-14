@@ -35,7 +35,7 @@ const RecipeItem = () => {
   }, []);
 
   const parsedIngredients = ingredients.map((ingredient) => (
-    <li>
+    <li key={ingredient.id}>
       {ingredient.amount} - {ingredient.ingredient_name}
     </li>
   ));
