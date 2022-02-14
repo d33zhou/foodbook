@@ -70,7 +70,7 @@ const RecipeForm = () => {
         onSubmit={(e) => e.preventDefault()}>
         <TextField
           fullWidth
-          id='standard-basic'
+          // id='standard-basic'
           label='Recipe Title'
           variant='standard'
           onChange={(e) =>
@@ -82,7 +82,7 @@ const RecipeForm = () => {
         />
         <TextField
           fullWidth
-          id='standard-basic'
+          // id='standard-basic'
           label='Add Image'
           variant='standard'
           onChange={(e) =>
@@ -95,7 +95,7 @@ const RecipeForm = () => {
         <TextField
           fullWidth
           multiline
-          id='standard-basic'
+          // id='standard-basic'
           label='Description'
           variant='standard'
           onChange={(e) =>
@@ -112,7 +112,7 @@ const RecipeForm = () => {
                 sx={{
                   width: '30%',
                 }}
-                id='standard-basic'
+                // id='standard-basic'
                 name='amount'
                 label='Amount'
                 variant='standard'
@@ -123,7 +123,7 @@ const RecipeForm = () => {
                 sx={{
                   width: '70%',
                 }}
-                id='standard-basic'
+                // id='standard-basic'
                 name='ingredientName'
                 label='Ingredient'
                 variant='standard'
@@ -141,7 +141,7 @@ const RecipeForm = () => {
         <TextField
           fullWidth
           multiline
-          id='standard-basic'
+          // id='standard-basic'
           label='Directions'
           variant='standard'
           onChange={(e) =>
@@ -155,7 +155,7 @@ const RecipeForm = () => {
           sx={{
             width: '50%',
           }}
-          id='standard-basic'
+          // id='standard-basic'
           label='Prep Time (minutes)'
           variant='standard'
           onChange={(e) =>

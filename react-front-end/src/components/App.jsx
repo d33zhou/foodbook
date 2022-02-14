@@ -14,6 +14,7 @@ import Navigation from './Navigation';
 import RecipeList from './RecipeList';
 import RecipeFilters from './RecipeFilters';
 import RecipeForm from './RecipeForm';
+import RecipeItem from './RecipeItem';
 
 function App() {
   return (
@@ -49,6 +50,12 @@ function App() {
         <Container maxWidth='sm'>
           <h2>Recipe Form Component</h2>
           <RecipeForm />
+        </Container>
+
+        {/* Recipe Item */}
+        <Container maxWidth='md'>
+          <h2>Recipe Item Component</h2>
+          <RecipeItem />
         </Container>
       </Box>
     </>
