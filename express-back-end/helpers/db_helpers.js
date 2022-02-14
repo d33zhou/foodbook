@@ -1,5 +1,6 @@
 module.exports = (db) => {
 
+  //-----------> User helpers <--------------
   // gets the user profile details
   const getUserById = (id) => {
     const query = {
@@ -41,11 +42,13 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
+
+  //-------> Recipe helpers <------------
   //get all recipes in db
   const getAllRecipes = () => {
 
     const query = {
-      text:`SELECT * FROM recipes`
+      text:`SELECT recipes.* ,ingredients.* FROM recipes JOIN ingredients ON ingredients.recipe_id = recipes.id`
     };
 
     return db.query(query)
@@ -53,11 +56,24 @@ module.exports = (db) => {
       .catch(err => err);
   };
 
-  //get all recipes in db
+  //get all recipes by friends in db
+  const getAllRecipesByFriends = (user_id) => {
+
+    const query = {
+      text:`SELECT * FROM recipes WHERE creator_id IN (SELECT users.id FROM friends JOIN users ON users.id = friends.user_id_1 WHERE friends.user_id_2 = $1 UNION SELECT users.id FROM friends JOIN users ON users.id = friends.user_id_2 WHERE friends.user_id_1 = $1)`,
+      values: [user_id]
+    };
+
+    return db.query(query)
+      .then(result => result.rows)
+      .catch(err => err);
+  };
+
+  //get a specific recipe from db
   const getRecipeById = (id) => {
 
     const query = {
-      text:`SELECT * FROM recipes WHERE id = $1`,
+      text:`SELECT *,ingredients.ingredient_name, ingredients.amount FROM recipes JOIN ingredients ON ingredients.recipe_id = recipes.id WHERE recipes.id = $1`,
       values: [id]
     };
 
@@ -66,10 +82,11 @@ module.exports = (db) => {
       .catch(err => err);
   };
 
-  const createRecipe = (title,instructions,prep_minutes,servings,image_link,difficulty,cuisine,dietary_restriction,creator_id) => {
+  // add a new recipe to the db
+  const createRecipe = (title,instructions,prep_minutes,servings,image_link,difficulty,cuisine,dietary_restriction) => {
     const query = {
-      text:`INSERT INTO recipes (title,instructions,prep_minutes,servings,image_link,difficulty,cuisine,dietary_restriction,creator_id) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)`,
-      values: [title,instructions,prep_minutes,servings,image_link,difficulty,cuisine,dietary_restriction,creator_id]
+      text:`INSERT INTO recipes (title,instructions,prep_minutes,servings,image_link,difficulty,cuisine,dietary_restriction) VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *`,
+      values: [title,instructions,prep_minutes,servings,image_link,difficulty,cuisine,dietary_restriction]
     };
 
     return db.query(query)
@@ -77,12 +94,187 @@ module.exports = (db) => {
       .catch(err => err);
   };
 
+  // edit a recipe in the db
+  const editRecipe = (title,instructions,prep_minutes,servings,image_link,difficulty,cuisine,dietary_restriction) => {
+    const query = {
+      text:`UPDATE recipes SET instructions = $1,prep_minutes = $2,servings = $3,image_link = $4,difficulty = $5,cuisine = $6,dietary_restriction = $7 WHERE title = $8 RETURNING *`,
+      values: [instructions,prep_minutes,servings,image_link,difficulty,cuisine,dietary_restriction, title]
+    };
+
+    return db.query(query)
+      .then(result => result.rows[0])
+      .catch(err => err);
+  };
+
+  //delete recipe in the db
+  const deleteRecipe = (id) => {
+    const query = {
+      text:`DELETE FROM recipes WHERE id = $1`,
+      values: [id]
+    };
+
+    return db.query(query)
+      .then(result => result.rows[0])
+      .catch(err => err);
+  };
+
+  //-------> Ingredients helpers <------------
+
+  // get all recipes that have an ingredient
+  const getRecipesByIngredient = (ingredient_name) => {
+    const query = {
+      text: `SELECT recipes.* , ingredients.ingredient_name, ingredients.amount FROM ingredients INNER JOIN recipes ON ingredients.recipe_id = recipes.id WHERE ingredients.ingredient_name LIKE $1`,
+      values:[ingredient_name]
+    };
+    return db.query(query)
+      .then(result => result.rows[0])
+      .catch(err => err);
+
+
+  };
+
+  //create ingredient in the db
+  const createIngredient = (ingredient_name,amount,recipe_id) => {
+
+    const query = {
+      text:` INSERT INTO ingredients (ingredient_name,amount,recipe_id) VALUES ($1,$2,$3) RETURNING *`,
+      values:[ingredient_name,amount,recipe_id]
+    };
+    
+    return db.query(query)
+      .then(result => {
+        return result.rows[0];
+      })
+      .catch(err => err);
+
+  };
+
+  // edit an ingredient in the db
+  const editIngredient = (ingredient_name,amount,recipe_id) => {
+    const query = {
+      text:`UPDATE ingredients SET ingredient_name = $1,amount = $2 WHERE recipe_id = $3 RETURNING *`,
+      values: [ingredient_name,amount,recipe_id]
+    };
+
+    return db.query(query)
+      .then(result => {
+        return result.rows[0];
+      })
+      .catch(err => err);
+  };
+
+  //delete ingredient in the db
+  const deleteIngredient = (id) => {
+    const query = {
+      text:`DELETE FROM ingredients WHERE id = $1`,
+      values: [id]
+    };
+
+    return db.query(query)
+      .then(result => result.rows[0])
+      .catch(err => err);
+  };
+
+  //-------> Likes helpers <------------
+
+  // like a recipe
+  const addLike = (user_id,recipe_id) => {
+    const query = {
+      text:`INSERT INTO likes (user_id,recipe_id) VALUES ($1,$2)`,
+      values: [user_id,recipe_id]
+    };
+    return db.query(query)
+      .then(result => result.rows[0])
+      .catch(err => err);
+
+  };
+
+  //unlike a recipe
+  const removeLike = (user_id,recipe_id) => {
+    const query = {
+      text:`DELETE FROM likes WHERE user_id = $1 AND recipe_id = $2`,
+      values: [user_id,recipe_id]
+    };
+    return db.query(query)
+      .then(result => result.rows[0])
+      .catch(err => err);
+
+  };
+
+  //-------> Bookmark helpers <------------
+
+  // bookmark a recipe
+  const addBookmark = (user_id,recipe_id) => {
+    const query = {
+      text:`INSERT INTO bookmarks (user_id,recipe_id) VALUES ($1,$2)`,
+      values: [user_id,recipe_id]
+    };
+    return db.query(query)
+      .then(result => result.rows[0])
+      .catch(err => err);
+
+  };
+
+  //delete recipe bookmark
+  const removeBookmark = (user_id,recipe_id) => {
+    const query = {
+      text:`DELETE FROM bookmarks WHERE user_id = $1 AND recipe_id = $2`,
+      values: [user_id,recipe_id]
+    };
+    return db.query(query)
+      .then(result => result.rows[0])
+      .catch(err => err);
+
+  };
+
+  // ----------> Friends helpers <--------------
+
+  // add a friend
+  const addFriend = (user_id_1, user_id_2) => {
+    const query = {
+      text:`INSERT INTO friends(user_id_1,user_id_2) VALUES ($1,$2)`,
+      values: [user_id_1, user_id_2]
+    };
+
+    return db.query(query)
+      .then(result => result.rows[0])
+      .catch(err => err);
+
+  };
+
+  // remove a friend
+  const removeFriend = (user_id_1, user_id_2) => {
+    const query = {
+      text:`DELETE FROM friends WHERE user_id_1 = $1 AND user_id_2 = $2`,
+      values: [user_id_1, user_id_2]
+    };
+
+    return db.query(query)
+      .then(result => result.rows[0])
+      .catch(err => err);
+
+  };
+
+
   return {
     getUserById,
     getUserByEmail,
     addUser,
     getAllRecipes,
+    getAllRecipesByFriends,
     getRecipeById,
-    createRecipe
+    createRecipe,
+    editRecipe,
+    deleteRecipe,
+    getRecipesByIngredient,
+    createIngredient,
+    editIngredient,
+    deleteIngredient,
+    addLike,
+    removeLike,
+    addBookmark,
+    removeBookmark,
+    addFriend,
+    removeFriend
   };
 };
