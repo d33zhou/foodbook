@@ -11,8 +11,9 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import { Link } from "react-router-dom";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
+import { Autocomplete, TextField } from "@mui/material";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -39,7 +40,6 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   justifyContent: "center",
 }));
 
-
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
   "& .MuiInputBase-input": {
@@ -57,8 +57,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-
-
 const SearchAppBar = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [query, setQuery] = useState("");
@@ -66,12 +64,15 @@ const SearchAppBar = () => {
 
   useEffect(() => {
     const searchURL = `http://localhost:3001/api/recipes/search`;
-    axios.post(searchURL,{title:query}).then((response) => {
+    axios.post(searchURL, { title: query }).then((response) => {
       setSearchResults([...response.data]);
       console.log(response.data);
     });
   }, [query]);
 
+  console.log(searchResults);
+  let options = [...searchResults];
+  console.log("Options", options);
   return (
     <Box
       sx={{
@@ -93,18 +94,34 @@ const SearchAppBar = () => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            <Link to="/create">+ Create New Recipe</Link>
+            + Create New Recipe
           </Button>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
+          {/* <Search> */}
+
+          {/* <StyledInputBase
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
               onChange={event => setQuery(event.target.value)}
-            />
-          </Search>
+            /> */}
+          <Autocomplete
+            autoHighlight
+            id="combo-box-demo"
+            autoFocus={true}
+            sx={{ width: 300 }}
+            options={searchResults}
+            onChange={(event: any, option: any) => {
+              window.location.href=`recipe/${option.id}`;
+            }}
+            getOptionLabel={option => option.title}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Recipe Name"
+                onChange={(event) => setQuery(event.target.value)}/>
+            )}
+          />
+          <SearchIcon />
+          {/* </Search> */}
         </Toolbar>
       </AppBar>
     </Box>

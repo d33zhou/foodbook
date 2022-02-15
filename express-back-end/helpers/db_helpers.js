@@ -136,7 +136,7 @@ module.exports = (db) => {
   const getRecipeByTitle = (title) => {
 
     const query = {
-      text:`SELECT title FROM recipes WHERE title LIKE '%'||$1||'%' LIMIT 3`,
+      text:`SELECT title,id FROM recipes WHERE title LIKE '%'||$1||'%' LIMIT 3`,
       values: [title]
     };
 
