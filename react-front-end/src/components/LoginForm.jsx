@@ -15,6 +15,7 @@ const LoginForm = () => {
           mb: '20px',
           width: '100%',
         },
+        height: '300px',
       }}
       noValidate
       autoComplete='off'>
