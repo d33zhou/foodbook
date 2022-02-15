@@ -1,4 +1,4 @@
-import { Box, Typography, Container } from '@mui/material';
+import { Container } from '@mui/material';
 import UserFollowList from './UserFollowList';
 import UserFollowerList from './UserFollowerList';
 import UserRecipeList from './UserRecipeList';
@@ -9,7 +9,7 @@ import { useContext } from 'react';
 import { authContext } from '../providers/AuthContext';
 
 const User = (props) => {
-  const { auth, user } = useContext(authContext);
+  const { user } = useContext(authContext);
 
   return (
     <Container>

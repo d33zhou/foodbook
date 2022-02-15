@@ -8,11 +8,11 @@ const UserFollowerList = (props) => {
   const [results, setResults] = useState([]);
   
   // array of users that follow the logged in user
-  const allFollowers = results.length > 0 && results.map(follow => {
+  const allFollowers = results.length > 0 && results.map(follower => {
     return (
       <UserFollowListItem
-        key={follow.id}
-        {...follow}
+        key={follower.id}
+        {...follower}
       />
     );
   });
@@ -30,7 +30,7 @@ const UserFollowerList = (props) => {
   return (
     <Stack direction="row" spacing={4}>
       <Typography variant='h4' color='primary'>
-        Followers: 
+        Followers ({results.length}):
       </Typography>
       <Container sx={{ display: 'grid', gridTemplateColumns: 'repeat(10, 1fr)'}}>
         {allFollowers}

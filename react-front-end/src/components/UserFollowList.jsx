@@ -30,7 +30,7 @@ const UserFollowList = (props) => {
   return (
     <Stack direction="row" spacing={4}>
       <Typography variant='h4' color='primary'>
-        Following: 
+        Following ({results.length}): 
       </Typography>
       <Container sx={{ display: 'grid', gridTemplateColumns: 'repeat(10, 1fr)'}}>
         {allFollows}
