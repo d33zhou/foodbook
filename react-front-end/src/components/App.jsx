@@ -43,28 +43,30 @@ function App() {
                 <ContainerLogin />
               </Container>
             </Route>
+
             <Route path='/feed'>
               <SearchAppBar />
-              <Box
-                maxWidth='lg'
-                mx={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'flex-start',
-                  columnGap: '4rem',
-                  margin: '0 auto',
-                  height: '100vh',
-                }}>
-                <Navigation />
+              <Container>
+                <Box
+                  maxWidth='lg'
+                  mx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-start',
+                    columnGap: '4rem',
+                    margin: '0 auto',
+                  }}>
+                  <Navigation />
 
-                <Box>
-                  <RecipeList />
+                  <Box>
+                    <RecipeList />
+                  </Box>
+                  <RecipeFilters />
                 </Box>
-                <RecipeFilters />
-              </Box>
+              </Container>
             </Route>
+
             <Route path='/create'>
-              {/* Recipe Form */}
               <SearchAppBar />
               <Container maxWidth='lg'>
                 <Box
@@ -78,13 +80,12 @@ function App() {
                     height: '100vh',
                   }}>
                   <Navigation />
-
                   <RecipeForm />
                 </Box>
               </Container>
             </Route>
+
             <Route path='/recipe/:id'>
-              {/* Recipe Item */}
               <Container maxWidth='md'>
                 <h2>Recipe Item Component</h2>
                 <Box
