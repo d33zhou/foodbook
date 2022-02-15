@@ -11,6 +11,8 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import { Link } from "react-router-dom";
+import { useState,useEffect } from "react";
+import axios from "axios";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -37,6 +39,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   justifyContent: "center",
 }));
 
+
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
   "& .MuiInputBase-input": {
@@ -54,7 +57,21 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+
+
 const SearchAppBar = () => {
+  const [searchResults, setSearchResults] = useState([]);
+  const [query, setQuery] = useState("");
+  console.log(query);
+
+  useEffect(() => {
+    const searchURL = `http://localhost:3001/api/recipes/search`;
+    axios.post(searchURL,{title:query}).then((response) => {
+      setSearchResults([...response.data]);
+      console.log(response.data);
+    });
+  }, [query]);
+
   return (
     <Box
       sx={{
@@ -85,6 +102,7 @@ const SearchAppBar = () => {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
+              onChange={event => setQuery(event.target.value)}
             />
           </Search>
         </Toolbar>

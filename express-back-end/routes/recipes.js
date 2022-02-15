@@ -45,21 +45,21 @@ module.exports = (dbHelpers) => {
       );
   });
 
-  //GET /api/recipes/search to search for recipes by their title
-  router.get("/title", function(req, res) {
+  //POST /api/recipes/search to search for recipes by their title
+  router.post("/search", function(req, res) {
     const { title } = req.body;
-    console.log(req.body);
+  
     dbHelpers
       .getRecipeByTitle(title)
       .then((recipe) => {
-        console.log(recipe);
-        res.json(recipe);
+       
+        return res.json(recipe);
       })
-      .catch((err) =>
-        res.json({
+      .catch((err) =>{
+        return res.json({
           error: err.message,
-        })
-      );
+        });
+      });
   });
 
   //POST /api/recipes create a recipe

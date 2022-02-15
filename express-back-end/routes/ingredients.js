@@ -16,16 +16,23 @@ module.exports = (dbHelpers) => {
   });
   
   
-  // GET /api/ingredients/filter filter to get all recipes with an ingredient
-  router.get("/filter", function(req, res) {
+  // POST /api/ingredients/filter filter to get all recipes with an ingredient
+  router.post("/filter", function(req, res) {
     const { ingredient_name } = req.body;
+    console.log(ingredient_name);
     dbHelpers
       .getRecipesByIngredient(ingredient_name)
-      .then((recipe) => res.json(recipe))
-      .catch((err) =>
-        res.json({
+      .then((recipe) => {
+        console.log(recipe);
+        return res.json(recipe);
+      })
+      .catch((err) =>{
+        console.log(err.message);
+        return res.json({
           error: err.message,
-        })
+        });
+      }
+        
       );
   });
 

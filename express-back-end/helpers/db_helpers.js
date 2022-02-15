@@ -136,17 +136,20 @@ module.exports = (db) => {
   const getRecipeByTitle = (title) => {
 
     const query = {
-      text:`SELECT title FROM recipes WHERE title LIKE $1||'%'`,
+      text:`SELECT title FROM recipes WHERE title LIKE '%'||$1||'%' LIMIT 3`,
       values: [title]
     };
 
+    
     return db.query(query)
       .then(result =>{
         console.log(result.rows);
-        result.rows;
+        return result.rows;
       }
       )
-      .catch(err => err);
+      .catch(err => {
+        console.log('Error message',err); err;
+      });
   };
 
   // add a new recipe to the db
@@ -202,11 +205,11 @@ module.exports = (db) => {
   // get all recipes that have an ingredient
   const getRecipesByIngredient = (ingredient_name) => {
     const query = {
-      text: `SELECT recipes.* , ingredients.ingredient_name, ingredients.amount FROM ingredients INNER JOIN recipes ON ingredients.recipe_id = recipes.id WHERE ingredients.ingredient_name LIKE $1`,
+      text: `SELECT recipes.* , ingredients.ingredient_name, ingredients.amount FROM ingredients INNER JOIN recipes ON ingredients.recipe_id = recipes.id WHERE ingredients.ingredient_name = $1`,
       values:[ingredient_name]
     };
     return db.query(query)
-      .then(result => result.rows)
+      .then(result => result.rows[0])
       .catch(err => err);
   };
 
