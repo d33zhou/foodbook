@@ -136,21 +136,35 @@ module.exports = (db) => {
   const getRecipeByTitle = (title) => {
 
     const query = {
-      text:`SELECT title,id FROM recipes WHERE title LIKE '%'||$1||'%' LIMIT 3`,
+      text:`SELECT title,id FROM recipes WHERE title ILIKE '%'||$1||'%' LIMIT 3`,
       values: [title]
     };
 
     
     return db.query(query)
-      .then(result =>{
-        console.log(result.rows);
-        return result.rows;
-      }
+      .then(result =>
+        result.rows
       )
-      .catch(err => {
-        console.log('Error message',err); err;
-      });
+      .catch(err =>
+        err
+      );
   };
+
+  //get a recipe by diificulty
+  const getRecipeByDifficulty = (difficulty) => {
+
+    const query = {
+      text:`SELECT * FROM recipes WHERE difficulty = $1`,
+      values: [difficulty]
+    };
+
+    return db.query(query)
+      .then(result =>
+        result.rows
+      )
+      .catch(err => err);
+  };
+
 
   // add a new recipe to the db
   const createRecipe = (title,instructions,prep_minutes,servings,image_link,difficulty,cuisine,dietary_restriction) => {
@@ -344,6 +358,7 @@ module.exports = (db) => {
     getAllRecipesByFriends,
     getRecipeById,
     getRecipeByTitle,
+    getRecipeByDifficulty,
     createRecipe,
     editRecipe,
     deleteRecipe,
