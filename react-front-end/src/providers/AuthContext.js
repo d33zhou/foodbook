@@ -8,6 +8,7 @@ export const AuthProvider = props => {
     id: 1,
     first_name: 'Test',
     last_name: 'User',
+    email: 'test@user.com',
     avatar: 'https://robohash.org/isterepellendusbeatae.png?size=50x50&set=set1'
   }); // set back to null
 
