@@ -1,4 +1,5 @@
 import { styled, alpha } from '@mui/material/styles';
+import { Link } from 'react-router-dom';
 import {
   AppBar,
   Box,
@@ -72,7 +73,8 @@ const SearchAppBar = () => {
           </IconButton> */}
           <Button
             variant='h6'
-            component='div'
+            component={Link}
+            to='/create'
             sx={{
               flexGrow: 1,
               display: { sm: 'block' },
