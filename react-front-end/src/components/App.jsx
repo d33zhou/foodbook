@@ -100,8 +100,20 @@ function App() {
 
             <Route path='/profile'>
               <Container>
-                <h1>User Profile</h1>
-                <User />
+                <Box
+                  maxWidth='lg'
+                  mx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-start',
+                    columnGap: '4rem',
+                    margin: '0 auto',
+                  }}>
+                  <Navigation />
+                  <Box>
+                    <User />
+                  </Box>
+                </Box>
               </Container>
             </Route>
         
