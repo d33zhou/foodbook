@@ -55,7 +55,7 @@ function App() {
                   height: '100vh',
                 }}>
                 <Navigation />
-                <RecipeForm />
+
                 <Box>
                   <RecipeList />
                 </Box>

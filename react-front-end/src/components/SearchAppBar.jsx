@@ -75,7 +75,7 @@ const SearchAppBar = () => {
             component='div'
             sx={{
               flexGrow: 1,
-              display: { xs: 'none', sm: 'block' },
+              display: { sm: 'block' },
             }}>
             + Create New Recipe
           </Button>
