@@ -58,6 +58,7 @@ const SearchAppBar = () => {
     <Box
       sx={{
         flexGrow: 1,
+        marginBottom: '4rem',
       }}>
       <AppBar position='static'>
         <Toolbar>
@@ -72,7 +73,10 @@ const SearchAppBar = () => {
           <Button
             variant='h6'
             component='div'
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>
+            sx={{
+              flexGrow: 1,
+              display: { xs: 'none', sm: 'block' },
+            }}>
             + Create New Recipe
           </Button>
           <Search>
