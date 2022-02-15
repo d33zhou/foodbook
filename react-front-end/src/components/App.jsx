@@ -52,8 +52,10 @@ function App() {
                   alignItems: 'flex-start',
                   columnGap: '4rem',
                   margin: '0 auto',
+                  height: '100vh',
                 }}>
                 <Navigation />
+                <RecipeForm />
                 <Box>
                   <RecipeList />
                 </Box>
@@ -104,7 +106,7 @@ function App() {
                 <User />
               </Container>
             </Route>
-        
+
             <Route path='/404' render={() => <h2>404 - Not Found</h2>} />
             <Redirect to='/404' />
           </Switch>

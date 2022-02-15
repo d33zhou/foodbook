@@ -5,20 +5,24 @@ const Navigation = () => {
   return (
     <Box
       sx={{
-        flexGrow: 1,
-        marginRight: '4rem',
+        // marginRight: '4rem',
+        display: 'flex',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
         textAlign: 'left',
+        flexDirection: 'column',
+        minWidth: 'content',
       }}>
-      <Button variant='text' size='large' component={Link} to="/feed">
+      <Button variant='text' size='large' component={Link} to='/feed'>
         Home
       </Button>
-      <Button variant='text' size='large' component={Link} to="/feed">
+      <Button variant='text' size='large' component={Link} to='/feed'>
         Explore
       </Button>
-      <Button variant='text' size='large' component={Link} to="/feed">
+      <Button variant='text' size='large' component={Link} to='/feed'>
         Bookmarks
       </Button>
-      <Button variant='text' size='large' component={Link} to="/feed">
+      <Button variant='text' size='large' component={Link} to='/feed'>
         Profile
       </Button>
     </Box>
