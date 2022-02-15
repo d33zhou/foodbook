@@ -23,9 +23,6 @@ const userAPI = [
 
 const User = (props) => {
   const { auth, user } = useContext(authContext);
-  
-  console.log("User Details: ", user); // remove after debugging
-  // user --> id, first/last name, avatar
 
   return (
     <Container>
@@ -34,9 +31,9 @@ const User = (props) => {
       <hr/>
       <UserFollowList id={user.id} />
       <hr/>
-      <UserRecipeList />
+      <UserRecipeList id={user.id} />
       <hr/>
-      <UserBookmarkList />
+      <UserBookmarkList id={user.id} />
     </Container>
   );
 };
