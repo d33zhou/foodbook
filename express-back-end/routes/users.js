@@ -29,6 +29,19 @@ module.exports = (dbhelpers) =>{
       }));
   });
 
+  /* GET /api/users/:id/bookmarks -- get bookmarks of a specific user */
+  router.get("/:id/bookmarks", function(req, res) {
+    const { id } = req.params;
+
+    dbhelpers.getBookmarksByUser(id)
+      .then(bookmarks => {
+        res.json(bookmarks);
+      })
+      .catch(err => res.json({
+        error: err.message
+      }));
+  });
+
   /* GET /api/users/:id get a specific user profile. */
   router.get("/:id", function(req, res) {
     const { id } = req.params;

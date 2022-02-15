@@ -74,6 +74,22 @@ module.exports = (db) => {
       .catch((err) => err.message);
   };
 
+  // get bookmarked recipe details for all recipes bookmarked by a specific user
+  const getBookmarksByUser = (id) => {
+
+    const query = {
+      text: `SELECT recipes.id, title, image_link, creator_id
+        FROM bookmarks JOIN recipes ON bookmarks.recipe_id = recipes.id
+        WHERE bookmarks.user_id = $1
+        `,
+      values: [id]
+    };
+
+    return db.query(query)
+      .then(result => result.rows)
+      .catch((err) => err.message);
+  };
+
 
   //-------> Recipe helpers <------------
   //get all recipes in db
@@ -321,5 +337,6 @@ module.exports = (db) => {
     removeFriend,
     getFollowsByUser,
     getRecipesByUser,
+    getBookmarksByUser,
   };
 };
