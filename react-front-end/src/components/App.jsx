@@ -53,8 +53,10 @@ function App() {
                   alignItems: 'flex-start',
                   columnGap: '4rem',
                   margin: '0 auto',
+                  height: '100vh',
                 }}>
                 <Navigation />
+
                 <Box>
                   <RecipeList />
                 </Box>
@@ -63,8 +65,8 @@ function App() {
             </Route>
             <Route path='/create'>
               {/* Recipe Form */}
-              <Container maxWidth='sm'>
-                <h2>Recipe Form Component</h2>
+              <SearchAppBar />
+              <Container maxWidth='lg'>
                 <Box
                   maxWidth='lg'
                   mx={{
@@ -73,6 +75,7 @@ function App() {
                     alignItems: 'flex-start',
                     columnGap: '4rem',
                     margin: '0 auto',
+                    height: '100vh',
                   }}>
                   <Navigation />
 
@@ -136,7 +139,7 @@ function App() {
                 </Box>
               </Container>
             </Route>
-        
+
             <Route path='/404' render={() => <h2>404 - Not Found</h2>} />
             <Redirect to='/404' />
           </Switch>
