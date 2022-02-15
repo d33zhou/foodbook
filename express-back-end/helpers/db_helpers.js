@@ -139,7 +139,11 @@ module.exports = (db) => {
   const getRecipeById = (id) => {
 
     const query = {
-      text:`SELECT * FROM recipes WHERE recipes.id = $1`,
+      text:`SELECT recipes.*, first_name, last_name, avatar
+      FROM recipes
+      JOIN users ON creator_id = users.id
+      WHERE recipes.id = $1
+      `,
       values: [id]
     };
 
