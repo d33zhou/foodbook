@@ -1,6 +1,5 @@
 import { Typography, Stack, Avatar } from "@mui/material";
 
-
 const UserDetails = (props) => {
   const { avatar, first_name, last_name, email } = props;
   
@@ -11,9 +10,15 @@ const UserDetails = (props) => {
         src={avatar}
         sx={{ width: 100, height: 100 }}
       />
-      <Typography variant='h3' color='primary'>
-        {`${first_name} ${last_name}`}
-      </Typography>
+      <Stack direction="column" alignItems="flex-start" justifyContent="center">
+        <Typography variant='h3' color='primary'>
+          {`${first_name} ${last_name}`}
+        </Typography>
+        <Typography variant='h5' color='primary'>
+          {email}
+        </Typography>
+      </Stack>
+
     </Stack>
   );
 };

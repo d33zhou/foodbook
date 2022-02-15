@@ -29,6 +29,7 @@ const User = (props) => {
 
   return (
     <Container>
+      <hr/>
       <UserDetails {...user} />
       <hr/>
       <UserFollowList id={user.id} />
