@@ -17,9 +17,11 @@ import RecipeForm from './RecipeForm';
 import User from './User';
 import RecipeItem from './RecipeItem';
 
+import { AuthProvider } from '../providers/AuthContext';
+
 function App() {
   return (
-    <>
+    <AuthProvider>
       <CssBaseline />
       <Box
         className='App'
@@ -65,7 +67,7 @@ function App() {
           <RecipeItem />
         </Container>
       </Box>
-    </>
+    </AuthProvider>
   );
 }
 

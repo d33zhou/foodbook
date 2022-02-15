@@ -3,6 +3,9 @@ import UserFollowList from './UserFollowList';
 import UserRecipeList from './UserRecipeList';
 import UserBookmarkList from './UserBookmarkList';
 
+import { useContext } from 'react';
+import { authContext } from '../providers/AuthContext';
+
 const userAPI = [
   {
     id: 1,
@@ -16,7 +19,12 @@ const userAPI = [
 
 
 
+
 const User = (props) => {
+  const { auth, user } = useContext(authContext);
+  
+  console.log("User Details: ", user); // remove after debugging
+
   return (
     <Container>
       <UserFollowList />

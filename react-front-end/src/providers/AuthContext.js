@@ -3,13 +3,28 @@ import { createContext, useState } from 'react';
 export const authContext = createContext();
 
 export const AuthProvider = props => {
-  const [auth, setAuth] = useState(false);
-  const [user, setUser] = useState(null);
+  const [auth, setAuth] = useState(true); // set back to false
+  const [user, setUser] = useState({
+    id: 1,
+    first_name: 'Test',
+    last_name: 'User',
+    avatar: 'https://robohash.org/isterepellendusbeatae.png?size=50x50&set=set1'
+  }); // set back to null
 
   // save user details to state
   const login = (email, password) => {
-    setAuth(true); // to do some authentication
-    const id = "1234"; // set an ID to be returned from the DB
+    if (!email || !password) {
+      return false;
+    }
+
+    // TODO: authentication here
+
+    const id = 1; // set an ID to be returned from the DB
+    const first_name = "Test";
+    const last_name = "User";
+    const avatar = "http://FAKE";
+
+    setAuth(true);
     setUser({ id, first_name, last_name, email, avatar });
   };
 
