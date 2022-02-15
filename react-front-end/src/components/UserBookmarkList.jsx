@@ -33,7 +33,7 @@ const UserBookmarkList = (props) => {
       <Typography variant='h4' color='primary'>
         Bookmarked Recipes
       </Typography>
-      <ImageList cols={5} rowHeight={164}>
+      <ImageList sx={{height: 912}} cols={3} rowHeight={300}>
         {allBookmarks}
       </ImageList>
     </Stack>

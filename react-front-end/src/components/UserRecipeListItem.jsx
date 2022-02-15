@@ -9,7 +9,7 @@ const UserRecipeListItem = (props) => {
       <Box
         component="img"
         sx={{
-          height: 164,
+          height: 1/1,
           width: 1/1
         }}
         src={`${image_link}?w=164&h=164&fit=crop&auto=format`}
