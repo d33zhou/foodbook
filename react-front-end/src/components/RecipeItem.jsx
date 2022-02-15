@@ -6,33 +6,37 @@ import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
 import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
 import BookmarkOutlinedIcon from '@mui/icons-material/BookmarkOutlined';
 import { blue } from '@mui/material/colors';
+import { useParams } from 'react-router-dom';
 
 const RecipeItem = () => {
   const [results, setResults] = useState({});
   const [ingredients, setIngredients] = useState([]);
 
+  // extract the urlParameter with useParams
+  const { id } = useParams();
+
   console.log('results ', results);
   console.log('ingredients', ingredients);
 
   useEffect(() => {
-    const testURL = `http://localhost:3001/api/recipes/1`;
+    const testURL = `http://localhost:3001/api/recipes/${id}`;
     axios
       .get(testURL)
       .then((response) => {
         setResults({ ...response.data });
       })
       .catch((err) => console.log('Error ', err.message));
-  }, []);
+  }, [id]);
 
   useEffect(() => {
-    const ingredientsURL = `http://localhost:3001/api/ingredients/1`;
+    const ingredientsURL = `http://localhost:3001/api/ingredients/${id}`;
     axios
       .get(ingredientsURL)
       .then((response) => {
         setIngredients([...response.data]);
       })
       .catch((err) => console.log('Error ', err.message));
-  }, []);
+  }, [id]);
 
   const parsedIngredients = ingredients.map((ingredient) => (
     <li key={ingredient.id}>
