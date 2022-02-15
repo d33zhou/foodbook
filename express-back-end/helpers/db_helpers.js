@@ -82,6 +82,23 @@ module.exports = (db) => {
       .catch(err => err);
   };
 
+  //get a specific recipe from db
+  const getRecipeByTitle = (title) => {
+
+    const query = {
+      text:`SELECT title FROM recipes WHERE title LIKE $1||'%'`,
+      values: [title]
+    };
+
+    return db.query(query)
+      .then(result =>{
+        console.log(result.rows);
+        result.rows;
+      }
+      )
+      .catch(err => err);
+  };
+
   // add a new recipe to the db
   const createRecipe = (title,instructions,prep_minutes,servings,image_link,difficulty,cuisine,dietary_restriction) => {
     const query = {
@@ -273,6 +290,7 @@ module.exports = (db) => {
     getAllRecipes,
     getAllRecipesByFriends,
     getRecipeById,
+    getRecipeByTitle,
     createRecipe,
     editRecipe,
     deleteRecipe,

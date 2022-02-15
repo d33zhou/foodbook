@@ -30,14 +30,31 @@ module.exports = (dbHelpers) => {
       );
   });
 
-
-
   // GET /api/recipes/:id get one recipe and its ingredients
   router.get("/:id", function(req, res) {
     const { id } = req.params;
     dbHelpers
       .getRecipeById(id)
-      .then((recipe) => res.json(recipe))
+      .then((recipe) =>
+        res.json(recipe)
+      )
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+  });
+
+  //GET /api/recipes/search to search for recipes by their title
+  router.get("/title", function(req, res) {
+    const { title } = req.body;
+    console.log(req.body);
+    dbHelpers
+      .getRecipeByTitle(title)
+      .then((recipe) => {
+        console.log(recipe);
+        res.json(recipe);
+      })
       .catch((err) =>
         res.json({
           error: err.message,
