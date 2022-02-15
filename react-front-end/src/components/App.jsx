@@ -21,6 +21,7 @@ import RecipeList from './RecipeList';
 import RecipeFilters from './RecipeFilters';
 import RecipeForm from './RecipeForm';
 import User from './User';
+import UserPublicProfile from './UserPublicProfile';
 import RecipeItem from './RecipeItem';
 
 import { AuthProvider } from '../providers/AuthContext';
@@ -103,8 +104,39 @@ function App() {
 
             <Route path='/profile'>
               <Container>
-                <h1>User Profile</h1>
-                <User />
+                <Box
+                  maxWidth='lg'
+                  mx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-start',
+                    columnGap: '4rem',
+                    margin: '0 auto',
+                  }}>
+                  <Navigation />
+                  <Box>
+                    <User />
+                  </Box>
+                </Box>
+              </Container>
+            </Route>
+
+            <Route path='/users/:id'>
+              <Container>
+                <Box
+                  maxWidth='lg'
+                  mx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-start',
+                    columnGap: '4rem',
+                    margin: '0 auto',
+                  }}>
+                  <Navigation />
+                  <Box>
+                    <UserPublicProfile />
+                  </Box>
+                </Box>
               </Container>
             </Route>
 
