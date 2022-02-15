@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const UserRecipeList = (props) => {
-  const { id } = props;
+  const { id, first_name } = props;
   const [results, setResults] = useState([]);
   
   // array of recipes that the logged in user created
@@ -30,7 +30,7 @@ const UserRecipeList = (props) => {
   return (
     <Stack>
       <Typography variant='h4' color='primary'>
-        Your Recipes
+        {first_name && `${first_name}'s Cookbook` || 'Your Cookbook'}
       </Typography>
       <ImageList sx={{height: 672}} cols={5} rowHeight={164}>
         {allRecipes}

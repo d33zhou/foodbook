@@ -25,7 +25,7 @@ const UserPublicProfile = (props) => {
       <hr/>
       <UserFollowerList id={id} />
       <hr/>
-      <UserRecipeList id={id} />
+      <UserRecipeList id={id} first_name={user.first_name} />
     </Container>
   );
 };
