@@ -1,4 +1,4 @@
-import { Typography, Stack, Grid } from '@mui/material';
+import { Typography, Stack, Container } from '@mui/material';
 import UserFollowListItem from './UserFollowListItem';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -32,9 +32,9 @@ const UserFollowList = (props) => {
       <Typography variant='h4' color='primary'>
         Following: 
       </Typography>
-      <Grid container direction="row" rowSpacing={5} columnSpacing={5}>
+      <Container sx={{ display: 'grid', gridTemplateColumns: 'repeat(10, 1fr)'}}>
         {allFollows}
-      </Grid>
+      </Container>
     </Stack>
   );
 };
