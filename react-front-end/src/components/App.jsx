@@ -20,46 +20,30 @@ import Navigation from './Navigation';
 import RecipeList from './RecipeList';
 import RecipeFilters from './RecipeFilters';
 import RecipeForm from './RecipeForm';
+import User from './User';
 import RecipeItem from './RecipeItem';
+
+import { AuthProvider } from '../providers/AuthContext';
 
 function App() {
   return (
-    <Router>
-      <CssBaseline />
-      <Box
-        className='App'
-        sx={{
-          backgroundColor: '#f0f2f5',
-          height: '100%',
-        }}>
-        <Switch>
-          <Route exact path='/'>
-            <Container maxWidth='lg'>
-              <ContainerLogin />
-            </Container>
-          </Route>
-          <Route path='/feed'>
-            <SearchAppBar />
-            <Box
-              maxWidth='lg'
-              mx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'flex-start',
-                columnGap: '4rem',
-                margin: '0 auto',
-              }}>
-              <Navigation />
-              <Box>
-                <RecipeList />
-              </Box>
-              <RecipeFilters />
-            </Box>
-          </Route>
-          <Route path='/create'>
-            {/* Recipe Form */}
-            <SearchAppBar />
-            <Container maxWidth='lg'>
+    <AuthProvider>
+      <Router>
+        <CssBaseline />
+        <Box
+          className='App'
+          sx={{
+            backgroundColor: '#f0f2f5',
+            height: '100%',
+          }}>
+          <Switch>
+            <Route exact path='/'>
+              <Container maxWidth='lg'>
+                <ContainerLogin />
+              </Container>
+            </Route>
+            <Route path='/feed'>
+              <SearchAppBar />
               <Box
                 maxWidth='lg'
                 mx={{
@@ -72,33 +56,63 @@ function App() {
                 }}>
                 <Navigation />
                 <RecipeForm />
+                <Box>
+                  <RecipeList />
+                </Box>
+                <RecipeFilters />
               </Box>
-            </Container>
-          </Route>
-          <Route path='/recipe/:id'>
-            {/* Recipe Item */}
-            <Container maxWidth='md'>
-              <h2>Recipe Item Component</h2>
-              <Box
-                maxWidth='lg'
-                mx={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'flex-start',
-                  columnGap: '4rem',
-                  margin: '0 auto',
-                }}>
-                <Navigation />
-                <RecipeItem />
-              </Box>
-            </Container>
-          </Route>
+            </Route>
+            <Route path='/create'>
+              {/* Recipe Form */}
+              <Container maxWidth='sm'>
+                <h2>Recipe Form Component</h2>
+                <Box
+                  maxWidth='lg'
+                  mx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-start',
+                    columnGap: '4rem',
+                    margin: '0 auto',
+                  }}>
+                  <Navigation />
 
-          <Route path='/404' render={() => <h2>404 - Not Found</h2>} />
-          <Redirect to='/404' />
-        </Switch>
-      </Box>
-    </Router>
+                  <RecipeForm />
+                </Box>
+              </Container>
+            </Route>
+            <Route path='/recipe/:id'>
+              {/* Recipe Item */}
+              <Container maxWidth='md'>
+                <h2>Recipe Item Component</h2>
+                <Box
+                  maxWidth='lg'
+                  mx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-start',
+                    columnGap: '4rem',
+                    margin: '0 auto',
+                  }}>
+                  <Navigation />
+                  <RecipeItem />
+                </Box>
+              </Container>
+            </Route>
+
+            <Route path='/profile'>
+              <Container>
+                <h1>User Profile</h1>
+                <User />
+              </Container>
+            </Route>
+
+            <Route path='/404' render={() => <h2>404 - Not Found</h2>} />
+            <Redirect to='/404' />
+          </Switch>
+        </Box>
+      </Router>
+    </AuthProvider>
   );
 }
 
