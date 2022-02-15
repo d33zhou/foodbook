@@ -1,10 +1,10 @@
 module.exports = (db) => {
 
   //-----------> User helpers <--------------
-  // gets the user profile details
+  // gets the user profile details, excluding password
   const getUserById = (id) => {
     const query = {
-      text: 'SELECT * FROM users WHERE id = $1',
+      text: 'SELECT id, first_name, last_name, email, avatar FROM users WHERE id = $1',
       values: [id]
     };
 
