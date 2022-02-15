@@ -5,11 +5,10 @@ import UserRecipeList from './UserRecipeList';
 import UserBookmarkList from './UserBookmarkList';
 import UserDetails from './UserDetails';
 
-import { useContext } from 'react';
-import { authContext } from '../providers/AuthContext';
+import { useAuth } from '../providers/AuthContext';
 
 const User = (props) => {
-  const { user } = useContext(authContext);
+  const { user } = useAuth();
 
   return (
     <Container>
