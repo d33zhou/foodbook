@@ -79,7 +79,7 @@ const UserFollowList = (props) => {
   }, []);
 
   return (
-    <Stack direction="row">
+    <Stack direction="row" spacing={3}>
       <Typography variant='h4' color='primary'>
         Following: 
       </Typography>

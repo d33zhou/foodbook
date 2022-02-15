@@ -2,15 +2,17 @@ import { createContext, useState } from 'react';
 
 export const authContext = createContext();
 
+// TO-DO: remove default user details when login route completed
+
 export const AuthProvider = props => {
   const [auth, setAuth] = useState(true); // set back to false
   const [user, setUser] = useState({
     id: 1,
     first_name: 'Test',
-    last_name: 'User',
-    email: 'test@user.com',
+    last_name: 'McTester',
+    email: 'tester@yetanotheremail.com',
     avatar: 'https://robohash.org/isterepellendusbeatae.png?size=50x50&set=set1'
-  }); // set back to null
+  }); // set back to null after debugging
 
   // save user details to state
   const login = (email, password) => {
