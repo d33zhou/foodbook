@@ -16,6 +16,19 @@ module.exports = (dbhelpers) =>{
       }));
   });
 
+  /* GET /api/users/:id/followers -- get followed users data for a specific user */
+  router.get("/:id/followers", function(req, res) {
+    const { id } = req.params;
+
+    dbhelpers.getFollowersByUser(id)
+      .then(follows => {
+        res.json(follows);
+      })
+      .catch(err => res.json({
+        error: err.message
+      }));
+  });
+
   /* GET /api/users/:id/recipes -- get recipes created by a specific user */
   router.get("/:id/recipes", function(req, res) {
     const { id } = req.params;

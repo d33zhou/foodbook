@@ -3,40 +3,40 @@ import UserFollowListItem from './UserFollowListItem';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const UserFollowList = (props) => {
+const UserFollowerList = (props) => {
   const { id } = props;
   const [results, setResults] = useState([]);
   
-  // array of users that the logged in user follows
-  const allFollows = results.length > 0 && results.map(follow => {
+  // array of users that follow the logged in user
+  const allFollowers = results.length > 0 && results.map(follower => {
     return (
       <UserFollowListItem
-        key={follow.id}
-        {...follow}
+        key={follower.id}
+        {...follower}
       />
     );
   });
 
-  // get the array of followed user objects (incl. name, avatar)
+  // get the array of following user objects (incl. name, avatar)
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/api/users/${id}/follows`)
+      .get(`http://localhost:3001/api/users/${id}/followers`)
       .then(res => {
         setResults([...res.data]);
       });
   }, []);
 
-  // display block for the user icons for all follows by logged in user
+  // display block for the user icons for all followers of the logged in user
   return (
     <Stack direction="row" spacing={4}>
       <Typography variant='h4' color='primary'>
-        Following ({results.length}): 
+        Followers ({results.length}):
       </Typography>
       <Container sx={{ display: 'grid', gridTemplateColumns: 'repeat(10, 1fr)'}}>
-        {allFollows}
+        {allFollowers}
       </Container>
     </Stack>
   );
 };
 
-export default UserFollowList;
+export default UserFollowerList;
