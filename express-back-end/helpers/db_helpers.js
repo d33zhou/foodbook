@@ -78,8 +78,10 @@ module.exports = (db) => {
   const getBookmarksByUser = (id) => {
 
     const query = {
-      text: `SELECT recipes.id, title, image_link, creator_id
-        FROM bookmarks JOIN recipes ON bookmarks.recipe_id = recipes.id
+      text: `SELECT recipes.id, title, image_link, creator_id, first_name, last_name
+        FROM bookmarks
+        JOIN recipes ON bookmarks.recipe_id = recipes.id
+        JOIN users ON recipes.creator_id = users.id
         WHERE bookmarks.user_id = $1
         `,
       values: [id]
