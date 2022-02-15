@@ -5,15 +5,15 @@ const UserFollowListItem = (props) => {
   
   // render followed user avatar icon and name
   return (
-    <Stack direction="column" alignItems="center">
-      <Avatar
-        alt={`${first_name} ${last_name}`}
-        src={avatar}
-        />
-      <Typography variant='body2'>
-        {`${first_name} ${last_name[0]}.`}
-      </Typography>
-    </Stack>
+      <Stack direction="column" alignItems="center">
+        <Avatar
+          alt={`${first_name} ${last_name}`}
+          src={avatar}
+          />
+        <Typography variant='body2'>
+          {`${first_name} ${last_name[0]}.`}
+        </Typography>
+      </Stack>
   );
 };
 

@@ -1,4 +1,4 @@
-import { Typography, Stack } from '@mui/material';
+import { Typography, Stack, Grid } from '@mui/material';
 import UserFollowListItem from './UserFollowListItem';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -28,11 +28,13 @@ const UserFollowList = (props) => {
 
   // display block for the user icons for all follows by logged in user
   return (
-    <Stack direction="row" spacing={3}>
+    <Stack direction="row" spacing={4}>
       <Typography variant='h4' color='primary'>
         Following: 
       </Typography>
-      {allFollows}
+      <Grid container direction="row" rowSpacing={5} columnSpacing={5}>
+        {allFollows}
+      </Grid>
     </Stack>
   );
 };
