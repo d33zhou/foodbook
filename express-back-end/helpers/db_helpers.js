@@ -58,6 +58,22 @@ module.exports = (db) => {
       .catch((err) => err.message);
   };
 
+  // get name/avatar for all people following a user
+  const getFollowersByUser = (id) => {
+
+    const query = {
+      text: `SELECT friends.user_id_1 AS id, first_name, last_name, avatar
+        FROM friends JOIN users ON friends.user_id_1 = users.id
+        WHERE friends.user_id_2 = $1
+        `,
+      values: [id]
+    };
+
+    return db.query(query)
+      .then(result => result.rows)
+      .catch((err) => err.message);
+  };
+
   // get basic recipe details for all recipes created by a specific user
   const getRecipesByUser = (id) => {
 
@@ -338,6 +354,7 @@ module.exports = (db) => {
     addFriend,
     removeFriend,
     getFollowsByUser,
+    getFollowersByUser,
     getRecipesByUser,
     getBookmarksByUser,
   };
