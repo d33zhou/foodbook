@@ -320,5 +320,6 @@ module.exports = (db) => {
     addFriend,
     removeFriend,
     getFollowsByUser,
+    getRecipesByUser,
   };
 };
