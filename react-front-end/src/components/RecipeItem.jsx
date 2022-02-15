@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Box, Chip, Stack, Typography } from '@mui/material';
+import { Avatar, Box, Chip, Stack, Typography } from '@mui/material';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
 import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
@@ -24,6 +24,9 @@ const RecipeItem = () => {
     dietary_restriction,
     difficulty,
     prep_minutes,
+    first_name,
+    last_name,
+    avatar,
   } = results;
 
   // extract the urlParameter with useParams
@@ -93,6 +96,12 @@ const RecipeItem = () => {
               label={dietary_restriction}
             />
           )}
+
+          <Chip
+            avatar={<Avatar alt='Natacha' src={avatar} />}
+            label={`${first_name} ${last_name}`}
+            color='secondary'
+          />
         </Stack>
         <Typography variant='p'>{instructions}</Typography>
       </Box>
