@@ -1,5 +1,7 @@
 import { Box, Typography, Container, Stack } from '@mui/material';
 import UserFollowListItem from './UserFollowListItem';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 // will have user ID to run db query with
 const followAPI = [
@@ -53,16 +55,29 @@ const followsAPI = [
   },
 ];
 
-const allFollows = followsAPI.map(follow => {
-  return (
-    <UserFollowListItem
-      key={follow.id}
-      {...follow}
-    />
-  );
-});
 
 const UserFollowList = (props) => {
+  const { id } = props;
+  const [results, setResults] = useState([]);
+  
+  const allFollows = results.length > 0 && results.map(follow => {
+    return (
+      <UserFollowListItem
+        key={follow.id}
+        {...follow}
+      />
+    );
+  });
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3001/api/users/${id}/follows`)
+      .then(res => {
+        console.log(res.data); // remove after debugging
+        setResults([...res.data]);
+      });
+  }, []);
+
   return (
     <Stack direction="row">
       <Typography variant='h4' color='primary'>

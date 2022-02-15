@@ -24,10 +24,11 @@ const User = (props) => {
   const { auth, user } = useContext(authContext);
   
   console.log("User Details: ", user); // remove after debugging
+  // user --> id, first/last name, avatar
 
   return (
     <Container>
-      <UserFollowList />
+      <UserFollowList id={user.id} />
       <hr/>
       <UserRecipeList />
       <hr/>
