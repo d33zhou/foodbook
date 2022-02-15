@@ -30,7 +30,7 @@ const UserRecipeList = (props) => {
   return (
     <Stack>
       <Typography variant='h4' color='primary'>
-        Created Recipes
+        Your Recipes
       </Typography>
       <ImageList cols={5} rowHeight={164}>
         {allRecipes}

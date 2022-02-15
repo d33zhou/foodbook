@@ -2,7 +2,7 @@ import { IconButton, ImageListItem, ImageListItemBar } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 
 const UserRecipeListItem = (props) => {
-  const { image_link, title, creator_id } = props;
+  const { image_link, title, creator_id, first_name, last_name } = props;
 
   return (
     <ImageListItem>
@@ -12,7 +12,7 @@ const UserRecipeListItem = (props) => {
       />
       <ImageListItemBar
         title={title}
-        subtitle={creator_id || null}
+        subtitle={creator_id && `by ${first_name} ${last_name[0]}.` || null}
         actionIcon={creator_id &&
           <IconButton
             sx={{ color: 'rgba(255, 255, 255, 054)' }}
