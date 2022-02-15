@@ -58,6 +58,22 @@ module.exports = (db) => {
       .catch((err) => err.message);
   };
 
+  // get basic recipe details for all recipes created by a specific user
+  const getRecipesByUser = (id) => {
+
+    const query = {
+      text: `SELECT id, title, image_link
+        FROM recipes
+        WHERE creator_id = $1
+        `,
+      values: [id]
+    };
+
+    return db.query(query)
+      .then(result => result.rows)
+      .catch((err) => err.message);
+  };
+
 
   //-------> Recipe helpers <------------
   //get all recipes in db
