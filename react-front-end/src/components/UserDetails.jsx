@@ -18,7 +18,6 @@ const UserDetails = (props) => {
           {email}
         </Typography>
       </Stack>
-
     </Stack>
   );
 };

@@ -7,20 +7,6 @@ import UserDetails from './UserDetails';
 import { useContext } from 'react';
 import { authContext } from '../providers/AuthContext';
 
-const userAPI = [
-  {
-    id: 1,
-    first_name: 'Test',
-    last_name: 'User',
-    email: 'testuser@test.com',
-    password: '123456',
-    avatar: 'https://robohash.org/isterepellendusbeatae.png?size=50x50&set=set1'
-  }
-];
-
-
-
-
 const User = (props) => {
   const { auth, user } = useContext(authContext);
 
@@ -39,9 +25,3 @@ const User = (props) => {
 };
 
 export default User;
-
-
-// user can see:
-//    people they follow --> dbHelper getFollowsByUser
-//    recipes they've posted --> dbHelper getRecipeByUser
-//    recipes they've bookmarked --> dbHelper getBookmarksByUser
