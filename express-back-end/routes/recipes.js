@@ -15,6 +15,18 @@ module.exports = (dbHelpers) => {
       );
   });
 
+  /* GET /api/recipes/count  */
+  router.get("/count", function(req, res) {
+    dbHelpers
+      .getRecipeCount()
+      .then((result) => res.json(result))
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+  });
+
   /* GET /api/recipes get all recipes by friends and respective ingredients */
   router.get("/friends", function(req, res) {
     const { user_id } = req.body;
