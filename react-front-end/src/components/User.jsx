@@ -11,7 +11,7 @@ const User = (props) => {
   const { user } = useAuth();
 
   return (
-    <Container>
+    user && <Container>
       <hr/>
       <UserDetails {...user} />
       <hr/>
