@@ -40,8 +40,10 @@ module.exports = (dbHelpers) => {
     
     dbHelpers.getUserByEmail(email)
       .then((user) => {
-        return user;
-      }).then((user) => {
+        if (user.password !== password) {
+          return res.status(401).send("Invalid password.");
+        }
+        
         const payload = {
           userID: user.id,
           email: user.email,
