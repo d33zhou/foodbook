@@ -9,15 +9,17 @@ export const useAuth = () => {
 }
 
 export const AuthProvider = props => {
-  const [auth, setAuth] = useState(true); // set back to false
+  const [auth, setAuth] = useState(false); // set back to false
   const [token, setToken] = useState(null);
-  const [user, setUser] = useState({
-    id: 1,
-    first_name: 'Test',
-    last_name: 'McTester',
-    email: 'tester@yetanotheremail.com',
-    avatar: 'https://robohash.org/isterepellendusbeatae.png?size=50x50&set=set1'
-  }); // set back to null after debugging
+  const [user, setUser] = useState(null
+    // {
+    // id: 1,
+    // first_name: 'Test',
+    // last_name: 'McTester',
+    // email: 'tester@yetanotheremail.com',
+    // avatar: 'https://robohash.org/isterepellendusbeatae.png?size=50x50&set=set1'
+  // }
+  ); // set back to null after debugging
 
   useEffect(() => {
     const token = localStorage.getItem('token');

@@ -23,7 +23,7 @@ const LoginForm = () => {
 
     login(email, password)
       .then(res => {
-        if (!res.userID) {
+        if (!res.id) {
           setError('Invalid email and/or password.');
         } else {
           history.push('/feed')
