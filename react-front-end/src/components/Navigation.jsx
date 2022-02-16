@@ -22,7 +22,7 @@ const Navigation = () => {
       <Button variant='text' size='large' component={Link} to='/feed'>
         Bookmarks
       </Button>
-      <Button variant='text' size='large' component={Link} to='/feed'>
+      <Button variant='text' size='large' component={Link} to='/profile'>
         Profile
       </Button>
     </Box>

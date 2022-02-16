@@ -1,6 +1,34 @@
 import { Box, Button, Stack, TextField, Typography } from '@mui/material';
+import { useState } from 'react';
+import { useAuth } from '../providers/AuthContext';
+import { useHistory } from 'react-router-dom';
 
 const LoginForm = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const history = useHistory();
+
+  const { login } = useAuth();
+  
+  const handleLogin = e => {
+    e.preventDefault();
+
+    setError('');
+
+    if (!email || !password) {
+      setError('Invalid email and/or password.');
+      return;
+    }
+
+    login(email, password)
+      .then(res => {
+        console.log(res)
+        history.push('/feed')
+      })
+      .catch(err => err.message);
+  };
+  
   return (
     <Box
       component='form'
@@ -18,12 +46,14 @@ const LoginForm = () => {
         height: '300px',
       }}
       noValidate
-      autoComplete='off'>
+      autoComplete='off'
+      >
       <TextField
         id='standard-basic'
         label='Email'
         variant='standard'
         type='email'
+        onChange={e => setEmail(e.target.value)}
       />
       <TextField
         id='standard-password-input'
@@ -31,12 +61,24 @@ const LoginForm = () => {
         type='password'
         autoComplete='current-password'
         variant='standard'
+        onChange={e => setPassword(e.target.value)}
       />
 
       <Stack direction='column' spacing={2}>
-        <Button variant='contained'>Sign In</Button>
-        <Button variant='contained'>Create New Account</Button>
+        <Button
+          variant='contained'
+          onClick={handleLogin}
+          >
+          Sign In
+        </Button>
+        <Button
+          variant='contained'
+          >
+          Create New Account
+        </Button>
       </Stack>
+
+      {error && <Typography variant='p' color='red'>{error}</Typography>}
     </Box>
   );
 };
