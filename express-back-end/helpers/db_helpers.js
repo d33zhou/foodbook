@@ -122,6 +122,18 @@ module.exports = (db) => {
       .catch(err => err);
   };
 
+  // get recipe count in db
+  const getRecipeCount = () => {
+
+    const query = {
+      text:`SELECT COUNT(*) FROM recipes`
+    };
+
+    return db.query(query)
+      .then(result => result.rows)
+      .catch(err => err);
+  };
+
   //get all recipes by friends in db
   const getAllRecipesByFriends = (user_id) => {
 
@@ -341,6 +353,7 @@ module.exports = (db) => {
     getUserByEmail,
     addUser,
     getAllRecipes,
+    getRecipeCount,
     getAllRecipesByFriends,
     getRecipeById,
     createRecipe,
