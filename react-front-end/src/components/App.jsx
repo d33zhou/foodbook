@@ -28,62 +28,47 @@ import { useState, useEffect } from "react";
 
 function App() {
   const [results, setResults] = useState([]);
-  const difficulties = ["easy", "moderate", "challenging"];
-  const cuisine = [
-    "american",
-    "chinese",
-    "japanese",
-    "italian",
-    "korean",
-    "indian",
-    "greek",
-    "spanish",
-    "mediterranean",
-    "lebanese",
-    "moroccan",
-    "turkish",
-    "thai",
-  ];
-  const restrictions = [
-    "vegetarian",
-    "vegan",
-    "kosher",
-    "keto",
-    "lactose-free",
-    "low-carb",
-  ];
-  const [value, setValue] = useState('');
+  const [fullData, setFullData] = useState([]);
+  const [difficulty, setDifficulty] = useState("");
+  const [cuisine, setCuisine] = useState("");
 
-  const changeInRadio = (event) => {
-    setValue(event.target.value);
+ 
+
+  const handleDifficulty = (event) => {
+    setDifficulty(event.target.value);
+
+    const difficultyResults = [
+      ...fullData.filter((recipe) => {
+        return (
+          recipe.difficulty === event.target.value && recipe.cuisine === (cuisine || "thai")
+        );
+      }),
+    ];
+
+    setResults(difficultyResults);
   };
 
-  const onClick = (event) => {
-    if ( value === 'moderate' || value === 'challenging' || value === 'easy') {
-      const testURL = `http://localhost:3001/api/filter/difficulty`;
-      axios
-        .get(testURL, { params: { difficulty: value}})
-        .then((response) => {
-          
-          setResults([...response.data]);
-        });
-    }
-    if (event.currentTarget.value === 'explore') {
-      const testURL = `http://localhost:3001/api/recipes/`;
-      axios.get(testURL).then((response) => {
-        setResults([...response.data]);
-        // console.log(response.data);
-      });
-    }
+  const handleCuisine = (event) => {
+    setCuisine(event.target.value);
+    const cuisineResults = [
+      ...fullData.filter((recipe) => {
+        return (
+          recipe.cuisine === event.target.value && recipe.difficulty === (difficulty || "easy")
+        );
+      }),
+    ];
+    
+    setResults(cuisineResults);
   };
 
-  // useEffect(() => {
-  //   const testURL = `http://localhost:3001/api/recipes/`;
-  //   axios.get(testURL).then((response) => {
-  //     setResults([...response.data]);
-  //     // console.log(response.data);
-  //   });
-  // }, []);
+  useEffect(() => {
+    const testURL = `http://localhost:3001/api/recipes`;
+    axios.get(testURL).then((response) => {
+      setResults(response.data);
+      setFullData(response.data);
+     
+    });
+  }, []);
 
   return (
     <AuthProvider>
@@ -114,14 +99,16 @@ function App() {
                   margin: "0 auto",
                 }}
               >
-                <Navigation onClick={onClick} />
+                <Navigation />
                 <Box>
+                  <h2>Items {results.length}</h2>
                   <RecipeList results={results} />
                 </Box>
                 <RecipeFilters
-                  onClick={onClick}
-                  value={value}
-                  changeInRadio={changeInRadio}
+                  difficulty={difficulty}
+                  cuisine={cuisine}
+                  handleDifficulty={handleDifficulty}
+                  handleCuisine={handleCuisine}
                 />
               </Box>
             </Route>

@@ -142,26 +142,7 @@ module.exports = (db) => {
 
     
     return db.query(query)
-      .then(result =>
-        result.rows
-      )
-      .catch(err =>
-        err
-      );
-  };
-
-  //get a recipe by diificulty
-  const getRecipeByDifficulty = (difficulty) => {
-
-    const query = {
-      text:`SELECT * FROM recipes WHERE difficulty = $1`,
-      values: [difficulty]
-    };
-
-    return db.query(query)
-      .then(result =>
-        result.rows
-      )
+      .then(result => result.rows)
       .catch(err => err);
   };
 
@@ -358,7 +339,6 @@ module.exports = (db) => {
     getAllRecipesByFriends,
     getRecipeById,
     getRecipeByTitle,
-    getRecipeByDifficulty,
     createRecipe,
     editRecipe,
     deleteRecipe,

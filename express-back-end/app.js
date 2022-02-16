@@ -11,7 +11,6 @@ const ingredientRouter = require('./routes/ingredients');
 const likesRouter = require('./routes/likes');
 const bookmarksRouter = require('./routes/bookmarks');
 const friendsRouter = require('./routes/friends');
-const filterRouter = require('./routes/filters');
 const app = express();
 const db = require('./db'); // making the connection the the database => db
 const dbHelpers = require('./helpers/db_helpers')(db);
@@ -36,7 +35,6 @@ app.use('/api/ingredients',ingredientRouter(dbHelpers));
 app.use('/api',likesRouter(dbHelpers));
 app.use('/api',bookmarksRouter(dbHelpers));
 app.use('/api',friendsRouter(dbHelpers));
-app.use('/api/filter',filterRouter(dbHelpers));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -17,6 +17,7 @@ const RecipeList = ({results}) => {
           title={recipe.title}
           instructions={recipe.instructions}
           image_link={recipe.image_link}
+          cuisine={recipe.cuisine}
         />
       );
     });

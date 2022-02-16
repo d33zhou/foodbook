@@ -1,13 +1,13 @@
-import { Box, Button, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, FormHelperText } from '@mui/material';
+import { Box, Button, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, FormHelperText,FormGroup,Checkbox } from '@mui/material';
 import { flexbox, flexGrow } from '@mui/system';
 import { useEffect,useState } from 'react';
 
 
 const RecipeFilters = (props) => {
   
-  const {onClick ,value,changeInRadio } = props;
+  const {difficulty,handleDifficulty,cuisine,handleCuisine } = props;
   
-  console.log(value);
+  
   return (
     <Box
       sx={{
@@ -25,8 +25,8 @@ const RecipeFilters = (props) => {
         <FormHelperText>Select any one</FormHelperText>
         <RadioGroup
           aria-labelledby="demo-error-radios"
-          value={value}
-          onChange={changeInRadio}
+          value={difficulty}
+          onChange={handleDifficulty}
         >
           <FormControlLabel
             control={
@@ -52,33 +52,38 @@ const RecipeFilters = (props) => {
         </RadioGroup>
       </FormControl>
       </Box>
-      <Button variant='text' size='large' onClick={onClick} value={value}>
-        Apply
-      </Button>
-      <Button variant='text' size='large'>
-        Cuisine
-      </Button>
-      <Button variant='text' size='medium' value='thai' onClick={onClick} >
-        Thai
-      </Button>
-      <Button variant='text' size='medium' value='indian' onClick={onClick}>
-        Indian
-      </Button>
-      <Button variant='text' size='large'>
-        Restrictions
-      </Button>
-      <Button variant='text' size='medium' value='vegan' onClick={onClick}>
-        Vegan
-      </Button>
-      <Button variant='text' size='medium' value='vegetarian' onClick={onClick}>
-        Vegetarian
-      </Button>
-      <Button variant='text' size='medium' value='vegan' onClick={onClick}>
-        Vegetarian
-      </Button>
-      <Button variant='text' size='medium'>
-        Keto
-      </Button>
+      <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
+        <FormLabel component="legend">Cuisines</FormLabel>
+        <FormHelperText>Select any one</FormHelperText>
+        <RadioGroup
+          aria-labelledby="demo-error-radios"
+          value={cuisine}
+          onChange={handleCuisine}
+        >
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='thai' 
+            label="Thai"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='chinese' 
+            label="Chinese"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='japanese' 
+            label="Japanese"
+          />
+        </RadioGroup>
+      </FormControl>
+      
     </Box>
   );
 };

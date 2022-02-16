@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material';
 
 const RecipeListItem = (props) => {
-  const { image_link, title, instructions, id } = props;
+  const { image_link, title, instructions, id, cuisine } = props;
 
   return (
     <Box
@@ -10,10 +10,13 @@ const RecipeListItem = (props) => {
         paddingRight: '4rem',
       }}>
       <img src={image_link} alt='' />
+      <Typography variant='p'>{cuisine}</Typography>
       <Typography variant='h3' color='primary' fontWeight='bold' gutterBottom>
         {title}
       </Typography>
       <Typography variant='p'>{instructions}</Typography>
+      
+      
     </Box>
   );
 };

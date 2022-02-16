@@ -2,12 +2,14 @@ const express = require("express");
 const router = express.Router();
 
 module.exports = (dbHelpers) => {
-
   /* GET /api/recipes get all recipes and respective ingredients */
-  router.get("/", function(req, res) {
+  router.get("/", function (req, res) {
     dbHelpers
       .getAllRecipes()
-      .then((result) => res.json(result))
+      .then((result) => {
+        console.log("All results", result);
+        return res.json(result);
+      })
       .catch((err) =>
         res.json({
           error: err.message,
@@ -16,7 +18,7 @@ module.exports = (dbHelpers) => {
   });
 
   /* GET /api/recipes get all recipes by friends and respective ingredients */
-  router.get("/friends", function(req, res) {
+  router.get("/friends", function (req, res) {
     const { user_id } = req.body;
     dbHelpers
       .getAllRecipesByFriends(user_id)
@@ -31,13 +33,11 @@ module.exports = (dbHelpers) => {
   });
 
   // GET /api/recipes/:id get one recipe and its ingredients
-  router.get("/:id", function(req, res) {
+  router.get("/:id", function (req, res) {
     const { id } = req.params;
     dbHelpers
       .getRecipeById(id)
-      .then((recipe) =>
-        res.json(recipe)
-      )
+      .then((recipe) => res.json(recipe))
       .catch((err) =>
         res.json({
           error: err.message,
@@ -46,16 +46,15 @@ module.exports = (dbHelpers) => {
   });
 
   //POST /api/recipes/search to search for recipes by their title
-  router.post("/search", function(req, res) {
+  router.post("/search", function (req, res) {
     const { title } = req.body;
-  
+
     dbHelpers
       .getRecipeByTitle(title)
       .then((recipe) => {
-       
         return res.json(recipe);
       })
-      .catch((err) =>{
+      .catch((err) => {
         return res.json({
           error: err.message,
         });
@@ -63,7 +62,7 @@ module.exports = (dbHelpers) => {
   });
 
   //POST /api/recipes create a recipe
-  router.post("/", function(req, res) {
+  router.post("/", function (req, res) {
     const {
       title,
       instructions,
@@ -74,7 +73,6 @@ module.exports = (dbHelpers) => {
       cuisine,
       dietary_restriction,
     } = req.body;
-      
 
     dbHelpers
       .createRecipe(
@@ -98,7 +96,7 @@ module.exports = (dbHelpers) => {
   });
 
   //PUT /api/recipes/
-  router.put("/", function(req, res) {
+  router.put("/", function (req, res) {
     const {
       title,
       instructions,
@@ -107,7 +105,7 @@ module.exports = (dbHelpers) => {
       image_link,
       difficulty,
       cuisine,
-      dietary_restriction
+      dietary_restriction,
     } = req.body;
 
     dbHelpers
@@ -132,11 +130,13 @@ module.exports = (dbHelpers) => {
   });
 
   //DELETE api/recipes/:id
-  router.delete("/:id", (req,res) => {
+  router.delete("/:id", (req, res) => {
     const { id } = req.params;
-    dbHelpers.deleteRecipe(id).then(() => {
-      res.send("Deleted!");
-    })
+    dbHelpers
+      .deleteRecipe(id)
+      .then(() => {
+        res.send("Deleted!");
+      })
       .catch((err) =>
         res.json({
           error: err.message,
