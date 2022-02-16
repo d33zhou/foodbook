@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import {
   Box,
   Button,
@@ -15,7 +16,7 @@ const RecipeForm = () => {
   const [recipe, setRecipe] = useState({
     title: '',
     image: '',
-    description: '',
+    // description: '',
     directions: '',
     prepTime: 0,
     difficulty: '',
@@ -24,10 +25,19 @@ const RecipeForm = () => {
     servings: 0,
   });
   const [ingredientFields, setIngredientFields] = useState([
-    { amount: '', ingredientName: '' },
+    { amount: '', ingredientName: '', recipeId: 0 },
   ]);
+  const [recipeId, setRecipeId] = useState([0]);
 
-  console.log(recipe);
+  useEffect(() => {
+    const recipeCount = `http://localhost:3001/api/recipes/count`;
+    axios.get(recipeCount).then((response) => {
+      setRecipeId(Number(response.data[0].count) + 1);
+    });
+  }, []);
+
+  // console.log(recipe);
+  // console.log(recipeId);
   console.log(ingredientFields);
 
   const handleDifficulty = (event) => {
@@ -52,6 +62,7 @@ const RecipeForm = () => {
   const handleChangeInput = (index, event) => {
     const values = [...ingredientFields];
     values[index][event.target.name] = event.target.value;
+    values[index].recipeId = recipeId;
     setIngredientFields(values);
   };
 
@@ -60,6 +71,40 @@ const RecipeForm = () => {
       ...ingredientFields,
       { amount: '', ingredientName: '' },
     ]);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // console.log(JSON.stringify(recipe));
+    // console.log(JSON.stringify(ingredientFields));
+    // console.log('ingredientFields', ingredientFields);
+
+    const requests = [
+      {
+        url: 'http://localhost:3001/api/recipes/',
+        // body: JSON.stringify(recipe),
+        body: recipe,
+      },
+      //   {},
+      // {
+      //   url: 'http://localhost:3001/api/ingredients/',
+      //   // body: JSON.stringify(ingredientFields),
+      //   body: ingredientFields,
+      // },
+    ];
+    for (let i = 0; i < ingredientFields.length; i++) {
+      requests.push({
+        url: 'http://localhost:3001/api/ingredients/',
+        body: ingredientFields[i],
+      });
+    }
+    const promises = requests.map((request) =>
+      axios.post(request.url, request.body)
+    );
+    const result = Promise.all(promises).catch((err) =>
+      console.log('Error: ', err.message)
+    );
+    // console.log(requests);
   };
 
   return (
@@ -111,7 +156,7 @@ const RecipeForm = () => {
             }
           />
 
-          <TextField
+          {/* <TextField
             fullWidth
             multiline
             label='Description'
@@ -122,7 +167,7 @@ const RecipeForm = () => {
                 description: e.target.value,
               })
             }
-          />
+          /> */}
 
           {ingredientFields.map((ingredient, index) => {
             return (
@@ -287,7 +332,10 @@ const RecipeForm = () => {
               </Select>
             </FormControl>
           </Box>
-          <Button variant='contained' sx={{ marginTop: '2rem' }}>
+          <Button
+            onClick={handleSubmit}
+            variant='contained'
+            sx={{ marginTop: '2rem' }}>
             Submit
           </Button>
         </Box>

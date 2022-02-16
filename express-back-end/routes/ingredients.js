@@ -31,10 +31,10 @@ module.exports = (dbHelpers) => {
 
   //POST /api/ingredients create an ingredient
   router.post("/", function(req, res) {
-    const { ingredient_name, amount, recipe_id } = req.body;
+    const { ingredientName, amount, recipeId } = req.body;
 
     dbHelpers
-      .createIngredient(ingredient_name, amount, recipe_id)
+      .createIngredient(ingredientName, amount, recipeId)
       .then((ingredient) => {
         console.log(ingredient);
         return res.json(ingredient);
