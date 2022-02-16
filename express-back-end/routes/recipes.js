@@ -61,26 +61,26 @@ module.exports = (dbHelpers) => {
   router.post("/", function(req, res) {
     const {
       title,
-      instructions,
-      prep_minutes,
+      image,
+      directions,
+      prepTime,
       servings,
-      image_link,
       difficulty,
       cuisine,
-      dietary_restriction,
+      restrictions,
     } = req.body;
       
 
     dbHelpers
       .createRecipe(
         title,
-        instructions,
-        prep_minutes,
+        image,
+        directions,
+        prepTime,
         servings,
-        image_link,
         difficulty,
         cuisine,
-        dietary_restriction
+        restrictions
       )
       .then((recipe) => {
         return res.json(recipe);

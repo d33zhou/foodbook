@@ -16,7 +16,7 @@ const RecipeForm = () => {
   const [recipe, setRecipe] = useState({
     title: '',
     image: '',
-    description: '',
+    // description: '',
     directions: '',
     prepTime: 0,
     difficulty: '',
@@ -78,10 +78,15 @@ const RecipeForm = () => {
     // console.log(JSON.stringify(recipe));
     // console.log(JSON.stringify(ingredientFields));
     const requests = [
-      { url: 'http://localhost:3001/recipe', body: JSON.stringify(recipe) },
       {
-        url: 'http://localhost:3001/ingredients',
-        body: JSON.stringify(ingredientFields),
+        url: 'http://localhost:3001/api/recipes/',
+        // body: JSON.stringify(recipe),
+        body: recipe,
+      },
+      {
+        url: 'http://localhost:3001/api/ingredients/',
+        // body: JSON.stringify(ingredientFields),
+        body: { ...ingredientFields },
       },
     ];
     const promises = requests.map((request) =>
@@ -142,7 +147,7 @@ const RecipeForm = () => {
             }
           />
 
-          <TextField
+          {/* <TextField
             fullWidth
             multiline
             label='Description'
@@ -153,7 +158,7 @@ const RecipeForm = () => {
                 description: e.target.value,
               })
             }
-          />
+          /> */}
 
           {ingredientFields.map((ingredient, index) => {
             return (

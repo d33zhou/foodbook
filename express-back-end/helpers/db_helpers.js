@@ -165,10 +165,24 @@ module.exports = (db) => {
   };
 
   // add a new recipe to the db
-  const createRecipe = (title,instructions,prep_minutes,servings,image_link,difficulty,cuisine,dietary_restriction) => {
+  const createRecipe = (title,
+    image,
+    directions,
+    prepTime,
+    servings,
+    difficulty,
+    cuisine,
+    restrictions) => {
     const query = {
       text:`INSERT INTO recipes (title,instructions,prep_minutes,servings,image_link,difficulty,cuisine,dietary_restriction) VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *`,
-      values: [title,instructions,prep_minutes,servings,image_link,difficulty,cuisine,dietary_restriction]
+      values: [title,
+        image,
+        directions,
+        prepTime,
+        servings,
+        difficulty,
+        cuisine,
+        restrictions]
     };
 
     return db.query(query)
@@ -226,11 +240,11 @@ module.exports = (db) => {
   };
 
   //create ingredient in the db
-  const createIngredient = (ingredient_name,amount,recipe_id) => {
+  const createIngredient = (ingredientId, amount, recipeId) => {
 
     const query = {
       text:` INSERT INTO ingredients (ingredient_name,amount,recipe_id) VALUES ($1,$2,$3) RETURNING *`,
-      values:[ingredient_name,amount,recipe_id]
+      values:[ingredientId, amount, recipeId]
     };
     
     return db.query(query)
