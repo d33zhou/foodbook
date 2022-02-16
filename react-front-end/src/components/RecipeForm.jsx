@@ -38,7 +38,7 @@ const RecipeForm = () => {
 
   // console.log(recipe);
   // console.log(recipeId);
-  // console.log(ingredientFields);
+  console.log(ingredientFields);
 
   const handleDifficulty = (event) => {
     setRecipe({
@@ -77,25 +77,34 @@ const RecipeForm = () => {
     e.preventDefault();
     // console.log(JSON.stringify(recipe));
     // console.log(JSON.stringify(ingredientFields));
+    // console.log('ingredientFields', ingredientFields);
+
     const requests = [
       {
         url: 'http://localhost:3001/api/recipes/',
         // body: JSON.stringify(recipe),
         body: recipe,
       },
-      {
-        url: 'http://localhost:3001/api/ingredients/',
-        // body: JSON.stringify(ingredientFields),
-        body: { ...ingredientFields },
-      },
+      //   {},
+      // {
+      //   url: 'http://localhost:3001/api/ingredients/',
+      //   // body: JSON.stringify(ingredientFields),
+      //   body: ingredientFields,
+      // },
     ];
+    for (let i = 0; i < ingredientFields.length; i++) {
+      requests.push({
+        url: 'http://localhost:3001/api/ingredients/',
+        body: ingredientFields[i],
+      });
+    }
     const promises = requests.map((request) =>
       axios.post(request.url, request.body)
     );
     const result = Promise.all(promises).catch((err) =>
       console.log('Error: ', err.message)
     );
-    console.log(result);
+    // console.log(requests);
   };
 
   return (
