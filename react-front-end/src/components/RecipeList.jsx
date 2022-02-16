@@ -25,13 +25,6 @@ const RecipeList = () => {
       );
     });
 
-  useEffect(() => {
-    const testURL = `http://localhost:3001/api/recipes/`;
-    axios.get(testURL).then((response) => {
-      setResults([...response.data]);
-      // console.log(response.data);
-    });
-  }, []);
 
   return (
     <Box

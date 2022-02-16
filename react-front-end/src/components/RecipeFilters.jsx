@@ -1,7 +1,13 @@
-import { Box, Button } from '@mui/material';
+import { Box, Button, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, FormHelperText,FormGroup,Checkbox } from '@mui/material';
 import { flexbox, flexGrow } from '@mui/system';
+import { useEffect,useState } from 'react';
 
-const RecipeFilters = () => {
+
+const RecipeFilters = (props) => {
+  
+  const {difficulty,handleDifficulty,cuisine,handleCuisine } = props;
+  
+  
   return (
     <Box
       sx={{
@@ -13,36 +19,71 @@ const RecipeFilters = () => {
         width: '100%',
         // textAlign: 'left',
       }}>
-      <Button variant='text' size='large'>
-        Difficulty
-      </Button>
-      <Button variant='text' size='medium'>
-        Easy
-      </Button>
-      <Button variant='text' size='medium'>
-        Medium
-      </Button>
-      <Button variant='text' size='medium'>
-        Difficult
-      </Button>
-      <Button variant='text' size='large'>
-        Cuisine
-      </Button>
-      <Button variant='text' size='medium'>
-        Thai
-      </Button>
-      <Button variant='text' size='medium'>
-        Indian
-      </Button>
-      <Button variant='text' size='large'>
-        Restrictions
-      </Button>
-      <Button variant='text' size='medium'>
-        Vegan/Vegetarian
-      </Button>
-      <Button variant='text' size='medium'>
-        Keto
-      </Button>
+      <Box sx={{ display: 'flex' }}>
+      <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
+        <FormLabel component="legend">Difficulty Level</FormLabel>
+        <FormHelperText>Select any one</FormHelperText>
+        <RadioGroup
+          aria-labelledby="demo-error-radios"
+          value={difficulty}
+          onChange={handleDifficulty}
+        >
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='easy' 
+            label="Easy"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='moderate' 
+            label="Moderate"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='challenging' 
+            label="Challenging"
+          />
+        </RadioGroup>
+      </FormControl>
+      </Box>
+      <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
+        <FormLabel component="legend">Cuisines</FormLabel>
+        <FormHelperText>Select any one</FormHelperText>
+        <RadioGroup
+          aria-labelledby="demo-error-radios"
+          value={cuisine}
+          onChange={handleCuisine}
+        >
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='thai' 
+            label="Thai"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='chinese' 
+            label="Chinese"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='japanese' 
+            label="Japanese"
+          />
+        </RadioGroup>
+      </FormControl>
+      
     </Box>
   );
 };

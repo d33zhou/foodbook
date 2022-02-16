@@ -8,53 +8,71 @@ import {
   IconButton,
   Typography,
   InputBase,
-} from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import SearchIcon from "@mui/icons-material/Search";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { Autocomplete, TextField } from "@mui/material";
 
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
+const Search = styled("div")(({ theme }) => ({
+  position: "relative",
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
+  "&:hover": {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
   marginLeft: 0,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
+  width: "100%",
+  [theme.breakpoints.up("sm")]: {
     marginLeft: theme.spacing(1),
-    width: 'auto',
+    width: "auto",
   },
 }));
 
-const SearchIconWrapper = styled('div')(({ theme }) => ({
+const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
+  color: "inherit",
+  "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: '12ch',
-      '&:focus': {
-        width: '20ch',
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      width: "12ch",
+      "&:focus": {
+        width: "20ch",
       },
     },
   },
 }));
 
 const SearchAppBar = () => {
+  const [searchResults, setSearchResults] = useState([]);
+  const [query, setQuery] = useState("");
+  console.log(query);
+
+  useEffect(() => {
+    const searchURL = `http://localhost:3001/api/recipes/search`;
+    axios.post(searchURL, { title: query }).then((response) => {
+      setSearchResults([...response.data]);
+      console.log(response.data);
+    });
+  }, [query]);
+
+  console.log(searchResults);
+  let options = [...searchResults];
+  console.log("Options", options);
   return (
     <Box
       sx={{
@@ -81,15 +99,32 @@ const SearchAppBar = () => {
             }}>
             + Create New Recipe
           </Button>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder='Search…'
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search>
+          {/* <Search> */}
+
+          {/* <StyledInputBase
+              placeholder="Search…"
+              inputProps={{ "aria-label": "search" }}
+              onChange={event => setQuery(event.target.value)}
+            /> */}
+          <Autocomplete
+            autoHighlight
+            id="combo-box-demo"
+            autoFocus={true}
+            sx={{ width: 300 }}
+            options={searchResults}
+            onChange={(event: any, option: any) => {
+              window.location.href=`recipe/${option.id}`;
+            }}
+            getOptionLabel={option => option.title}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Recipe Name"
+                onChange={(event) => setQuery(event.target.value)}/>
+            )}
+          />
+          <SearchIcon />
+          {/* </Search> */}
         </Toolbar>
       </AppBar>
     </Box>
