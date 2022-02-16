@@ -52,23 +52,23 @@ function App() {
     "lactose-free",
     "low-carb",
   ];
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
 
   const changeInRadio = (event) => {
     setValue(event.target.value);
   };
 
   const onClick = (event) => {
-    if (value === "easy") {
+    if ( value === 'moderate' || value === 'challenging' || value === 'easy') {
       const testURL = `http://localhost:3001/api/filter/difficulty`;
       axios
-        .get(testURL)
+        .get(testURL, { params: { difficulty: value}})
         .then((response) => {
-          console.log(response.data);
-          // setResults([...response.data]);
+          
+          setResults([...response.data]);
         });
     }
-    if (event.currentTarget.value === "explore") {
+    if (event.currentTarget.value === 'explore') {
       const testURL = `http://localhost:3001/api/recipes/`;
       axios.get(testURL).then((response) => {
         setResults([...response.data]);

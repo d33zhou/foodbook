@@ -5,8 +5,8 @@ module.exports = (dbhelpers) =>{
   
   /* GET /api/filter to filter easy recipes */
   router.get("/difficulty", function(req, res) {
-    // const { difficulty } = req.query;
-    const difficulty = 'easy';
+    const { difficulty } = req.query;
+    
     console.log(req.body);
     dbhelpers.getRecipeByDifficulty(difficulty)
       .then((result) => {
