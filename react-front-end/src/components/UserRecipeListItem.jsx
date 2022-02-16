@@ -1,11 +1,13 @@
 import { IconButton, ImageListItem, ImageListItemBar, Box } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
+import { useHistory } from 'react-router-dom';
 
 const UserRecipeListItem = (props) => {
-  const { image_link, title, creator_id, first_name, last_name } = props;
+  const { id, image_link, title, creator_id, first_name, last_name } = props;
+  const history = useHistory();
 
   return (
-    <ImageListItem rows={1}>
+    <ImageListItem rows={1} onClick={() => history.push(`/recipe/${id}`)}>
       <Box
         component="img"
         sx={{
