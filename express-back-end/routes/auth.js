@@ -17,7 +17,7 @@ module.exports = (dbHelpers) => {
             msg: 'Sorry, a user account with this email already exists'
           });
         } else {
-          return dbHelpers.addUser(firstName, lastName, email, password,avatar);
+          return dbHelpers.addUser(firstName, lastName, email, password, avatar);
         }
 
       })
@@ -40,17 +40,22 @@ module.exports = (dbHelpers) => {
     
     dbHelpers.getUserByEmail(email)
       .then((user) => {
-        return user;
-      }).then((user) => {
+        if (user.password !== password) {
+          return res.status(401).send("Invalid password.");
+        }
+        
         const payload = {
           userID: user.id,
           email: user.email,
+          firstName: user.first_name,
+          lastName: user.last_name,
+          avatar: user.avatar
         };
 
         // generate a token with payload
-        const token = jwt.sign(payload,SECRET);
+        const token = jwt.sign(payload, SECRET);
 
-        return res.status(200).send({message:"Welcome!",token});
+        return res.status(200).send({message:"Welcome!", token});
 
       })
       .catch((err) => res.json({ error: err.message }));
