@@ -38,7 +38,7 @@ const RecipeForm = () => {
 
   // console.log(recipe);
   // console.log(recipeId);
-  console.log(ingredientFields);
+  // console.log(ingredientFields);
 
   const handleDifficulty = (event) => {
     setRecipe({
@@ -73,7 +73,25 @@ const RecipeForm = () => {
     ]);
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // console.log(JSON.stringify(recipe));
+    // console.log(JSON.stringify(ingredientFields));
+    const requests = [
+      { url: 'http://localhost:3001/recipe', body: JSON.stringify(recipe) },
+      {
+        url: 'http://localhost:3001/ingredients',
+        body: JSON.stringify(ingredientFields),
+      },
+    ];
+    const promises = requests.map((request) =>
+      axios.post(request.url, request.body)
+    );
+    const result = Promise.all(promises).catch((err) =>
+      console.log('Error: ', err.message)
+    );
+    console.log(result);
+  };
 
   return (
     <Box
