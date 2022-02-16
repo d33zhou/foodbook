@@ -1,4 +1,5 @@
-import { styled, alpha } from "@mui/material/styles";
+import { styled, alpha } from '@mui/material/styles';
+import { Link } from 'react-router-dom';
 import {
   AppBar,
   Box,
@@ -76,9 +77,9 @@ const SearchAppBar = () => {
     <Box
       sx={{
         flexGrow: 1,
-      }}
-    >
-      <AppBar position="static">
+        marginBottom: '4rem',
+      }}>
+      <AppBar position='static'>
         <Toolbar>
           {/* <IconButton
             size='large'
@@ -89,10 +90,13 @@ const SearchAppBar = () => {
             <MenuIcon />
           </IconButton> */}
           <Button
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
-          >
+            variant='h6'
+            component={Link}
+            to='/create'
+            sx={{
+              flexGrow: 1,
+              display: { sm: 'block' },
+            }}>
             + Create New Recipe
           </Button>
           {/* <Search> */}

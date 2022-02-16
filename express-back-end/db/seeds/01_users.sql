@@ -1,7 +1,7 @@
 INSERT INTO
 users(first_name, last_name, email, password, avatar)
 VALUES
-  ('Aharon', 'Hurles', 'ahurles0@liveinternet.ru', 'ahusSEqgS', 'https://robohash.org/isterepellendusbeatae.png?size=50x50&set=set1'),
+  ('Monsieur', 'Alfredo', 'fetacheese@foodbook.ca', 'testuser', 'https://robohash.org/isterepellendusbeatae.png?size=50x50&set=set1'),
   ('Isidor', 'Shillum', 'ishillum1@google.ca', '49F2JFvV', 'https://robohash.org/expeditadebitisaut.png?size=50x50&set=set1'),
   ('Fleur', 'Abarough', 'fabarough2@shutterfly.com', 'XpPzOp', 'https://robohash.org/maximeautqui.png?size=50x50&set=set1'),
   ('Herminia', 'Moden', 'hmoden3@apple.com', 'KMbZr2', 'https://robohash.org/voluptatemrerumcorrupti.png?size=50x50&set=set1'),

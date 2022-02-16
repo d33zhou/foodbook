@@ -1,14 +1,15 @@
-import { Box, Typography, Container } from '@mui/material';
+import { Container } from '@mui/material';
 import UserFollowList from './UserFollowList';
+import UserFollowerList from './UserFollowerList';
 import UserRecipeList from './UserRecipeList';
 import UserBookmarkList from './UserBookmarkList';
 import UserDetails from './UserDetails';
 
-import { useContext } from 'react';
-import { authContext } from '../providers/AuthContext';
+import { useAuth } from '../providers/AuthContext';
 
 const User = (props) => {
-  const { auth, user } = useContext(authContext);
+  const { user } = useAuth();
+  console.log("this is the user: ", user);
 
   return (
     <Container>
@@ -16,6 +17,8 @@ const User = (props) => {
       <UserDetails {...user} />
       <hr/>
       <UserFollowList id={user.id} />
+      <hr/>
+      <UserFollowerList id={user.id} />
       <hr/>
       <UserRecipeList id={user.id} />
       <hr/>

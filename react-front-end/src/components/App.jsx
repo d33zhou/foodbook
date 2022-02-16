@@ -14,14 +14,16 @@ import {
   Redirect,
 } from "react-router-dom";
 
-import ContainerLogin from "./ContainerLogin";
-import SearchAppBar from "./SearchAppBar";
-import Navigation from "./Navigation";
-import RecipeList from "./RecipeList";
-import RecipeFilters from "./RecipeFilters";
-import RecipeForm from "./RecipeForm";
-import User from "./User";
-import RecipeItem from "./RecipeItem";
+import ContainerLogin from './ContainerLogin';
+import SearchAppBar from './SearchAppBar';
+import Navigation from './Navigation';
+import RecipeList from './RecipeList';
+import RecipeFilters from './RecipeFilters';
+import RecipeForm from './RecipeForm';
+import User from './User';
+import UserPublicProfile from './UserPublicProfile';
+import RecipeItem from './RecipeItem';
+import PrivateRoute from './PrivateRoute';
 
 import { AuthProvider } from "../providers/AuthContext";
 import { useState, useEffect } from "react";
@@ -87,7 +89,7 @@ function App() {
                 <ContainerLogin />
               </Container>
             </Route>
-            <Route path="/feed">
+            <PrivateRoute path="/feed">
               <SearchAppBar />
               <Box
                 maxWidth="lg"
@@ -111,56 +113,110 @@ function App() {
                   handleCuisine={handleCuisine}
                 />
               </Box>
-            </Route>
-            <Route path="/create">
-              {/* Recipe Form */}
-              <Container maxWidth="sm">
-                <h2>Recipe Form Component</h2>
+            </PrivateRoute>
+            <PrivateRoute path='/create'>
+              <SearchAppBar />
+              <Container maxWidth='lg'>
                 <Box
-                  maxWidth="lg"
+                  maxWidth='lg'
                   mx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "flex-start",
-                    columnGap: "4rem",
-                    margin: "0 auto",
-                  }}
-                >
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-start',
+                    columnGap: '4rem',
+                    margin: '0 auto',
+                    height: '100vh',
+                  }}>
                   <Navigation />
-
                   <RecipeForm />
                 </Box>
               </Container>
-            </Route>
-            <Route path="/recipe/:id">
+            </PrivateRoute>
+            <PrivateRoute path="/recipe/:id">
               {/* Recipe Item */}
               <Container maxWidth="md">
                 <h2>Recipe Item Component</h2>
+                </Container>
+            </PrivateRoute>
+
+            <PrivateRoute path='/create'>
+              <SearchAppBar />
+              <Container maxWidth='lg'>
                 <Box
                   maxWidth="lg"
                   mx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "flex-start",
-                    columnGap: "4rem",
-                    margin: "0 auto",
-                  }}
-                >
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-start',
+                    columnGap: '4rem',
+                    margin: '0 auto',
+                    height: '100vh',
+                  }}>
+                  <Navigation />
+                  <RecipeForm />
+                </Box>
+              </Container>
+            </PrivateRoute>
+
+            <PrivateRoute path='/recipe/:id'>
+              <SearchAppBar />
+              <Container maxWidth='lg'>
+                <Box
+                  maxWidth='lg'
+                  mx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-start',
+                    columnGap: '4rem',
+                    margin: '0 auto',
+                    height: '100vh',
+                  }}>
                   <Navigation />
                   <RecipeItem />
                 </Box>
               </Container>
-            </Route>
+            </PrivateRoute>
 
-            <Route path="/profile">
+            <PrivateRoute path='/profile'>
               <Container>
-                <h1>User Profile</h1>
-                <User />
+                <Box
+                  maxWidth='lg'
+                  mx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-start',
+                    columnGap: '4rem',
+                    margin: '0 auto',
+                  }}>
+                  <Navigation />
+                  <Box>
+                    <User />
+                  </Box>
+                </Box>
               </Container>
-            </Route>
+            </PrivateRoute>
 
-            <Route path="/404" render={() => <h2>404 - Not Found</h2>} />
-            <Redirect to="/404" />
+            <PrivateRoute path='/users/:id'>
+              <Container>
+                <Box
+                  maxWidth='lg'
+                  mx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-start',
+                    columnGap: '4rem',
+                    margin: '0 auto',
+                  }}>
+                  <Navigation />
+                  <Box>
+                    <UserPublicProfile />
+                  </Box>
+                </Box>
+              </Container>
+            </PrivateRoute>
+
+            <Route path='/404' render={() => <h2>404 - Not Found</h2>} />
+            <Redirect to='/404' />
           </Switch>
         </Box>
       </Router>

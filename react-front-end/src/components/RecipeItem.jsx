@@ -1,16 +1,34 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Box, Typography } from '@mui/material';
+import { Avatar, Box, Chip, Stack, Typography } from '@mui/material';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
 import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
 import BookmarkOutlinedIcon from '@mui/icons-material/BookmarkOutlined';
+import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
+import DinnerDiningOutlinedIcon from '@mui/icons-material/DinnerDiningOutlined';
+import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
 import { blue } from '@mui/material/colors';
 import { useParams } from 'react-router-dom';
 
 const RecipeItem = () => {
   const [results, setResults] = useState({});
   const [ingredients, setIngredients] = useState([]);
+
+  const {
+    title,
+    image_link,
+    instructions,
+    creator_id,
+    cuisine,
+    dietary_restriction,
+    difficulty,
+    prep_minutes,
+    servings,
+    first_name,
+    last_name,
+    avatar,
+  } = results;
 
   // extract the urlParameter with useParams
   const { id } = useParams();
@@ -53,8 +71,8 @@ const RecipeItem = () => {
       }}>
       <Box
         sx={{
-          flexGrow: 2,
-          width: '60%',
+          flexGrow: 3,
+          width: '100%',
           overflow: 'hidden',
           textAlign: 'left',
         }}>
@@ -64,10 +82,29 @@ const RecipeItem = () => {
           color='primary'
           fontWeight='bold'
           gutterBottom>
-          {results.title}
+          {title}
         </Typography>
-        <img src={results.image_link} alt='' />
-        <Typography variant='p'>{results.instructions}</Typography>
+        <img src={image_link} alt='' />
+        <Stack direction='row' spacing={1}>
+          <Chip icon={<DinnerDiningOutlinedIcon />} label={`${cuisine}`} />
+          <Chip
+            icon={<AccessTimeOutlinedIcon />}
+            label={`${prep_minutes} minutes`}
+          />
+          {dietary_restriction && (
+            <Chip
+              icon={<CheckCircleOutlineOutlinedIcon />}
+              label={dietary_restriction}
+            />
+          )}
+
+          <Chip
+            avatar={<Avatar alt='Natacha' src={avatar} />}
+            label={`${first_name} ${last_name}`}
+            color='secondary'
+          />
+        </Stack>
+        <Typography variant='p'>{instructions}</Typography>
       </Box>
       <Box
         sx={{
@@ -102,16 +139,19 @@ const RecipeItem = () => {
           Difficulty:
         </Typography>
         <Typography variant='p' color='primary' fontWeight='bold' gutterBottom>
-          {results.difficulty}
+          {difficulty}
         </Typography>
         <Typography variant='h6' color='primary' fontWeight='bold' gutterBottom>
           Prep Time:
         </Typography>
         <Typography variant='p' color='primary' fontWeight='bold' gutterBottom>
-          {results.prep_minutes} minutes
+          {prep_minutes} minutes
         </Typography>
         <Typography variant='h6' color='primary' fontWeight='bold' gutterBottom>
           Ingredients:
+        </Typography>
+        <Typography variant='p' color='primary' fontWeight='bold' gutterBottom>
+          Makes {servings} servings
         </Typography>
         <Typography variant='p' color='primary' fontWeight='bold' gutterBottom>
           {parsedIngredients}

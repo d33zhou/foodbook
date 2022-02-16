@@ -1,10 +1,10 @@
 module.exports = (db) => {
 
   //-----------> User helpers <--------------
-  // gets the user profile details
+  // gets the user profile details, excluding password
   const getUserById = (id) => {
     const query = {
-      text: 'SELECT * FROM users WHERE id = $1',
+      text: 'SELECT id, first_name, last_name, email, avatar FROM users WHERE id = $1',
       values: [id]
     };
 
@@ -49,6 +49,22 @@ module.exports = (db) => {
       text: `SELECT friends.user_id_2 AS id, first_name, last_name, avatar
         FROM friends JOIN users ON friends.user_id_2 = users.id
         WHERE friends.user_id_1 = $1
+        `,
+      values: [id]
+    };
+
+    return db.query(query)
+      .then(result => result.rows)
+      .catch((err) => err.message);
+  };
+
+  // get name/avatar for all people following a user
+  const getFollowersByUser = (id) => {
+
+    const query = {
+      text: `SELECT friends.user_id_1 AS id, first_name, last_name, avatar
+        FROM friends JOIN users ON friends.user_id_1 = users.id
+        WHERE friends.user_id_2 = $1
         `,
       values: [id]
     };
@@ -106,6 +122,18 @@ module.exports = (db) => {
       .catch(err => err);
   };
 
+  // get recipe count in db
+  const getRecipeCount = () => {
+
+    const query = {
+      text:`SELECT COUNT(*) FROM recipes`
+    };
+
+    return db.query(query)
+      .then(result => result.rows)
+      .catch(err => err);
+  };
+
   //get all recipes by friends in db
   const getAllRecipesByFriends = (user_id) => {
 
@@ -123,7 +151,11 @@ module.exports = (db) => {
   const getRecipeById = (id) => {
 
     const query = {
-      text:`SELECT * FROM recipes WHERE recipes.id = $1`,
+      text:`SELECT recipes.*, first_name, last_name, avatar
+      FROM recipes
+      JOIN users ON creator_id = users.id
+      WHERE recipes.id = $1
+      `,
       values: [id]
     };
 
@@ -148,10 +180,24 @@ module.exports = (db) => {
 
 
   // add a new recipe to the db
-  const createRecipe = (title,instructions,prep_minutes,servings,image_link,difficulty,cuisine,dietary_restriction) => {
+  const createRecipe = (title,
+    image,
+    directions,
+    prepTime,
+    servings,
+    difficulty,
+    cuisine,
+    restrictions) => {
     const query = {
       text:`INSERT INTO recipes (title,instructions,prep_minutes,servings,image_link,difficulty,cuisine,dietary_restriction) VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *`,
-      values: [title,instructions,prep_minutes,servings,image_link,difficulty,cuisine,dietary_restriction]
+      values: [title,
+        directions,
+        prepTime,
+        servings,
+        image,
+        difficulty,
+        cuisine,
+        restrictions]
     };
 
     return db.query(query)
@@ -209,11 +255,11 @@ module.exports = (db) => {
   };
 
   //create ingredient in the db
-  const createIngredient = (ingredient_name,amount,recipe_id) => {
+  const createIngredient = (ingredientId, amount, recipeId) => {
 
     const query = {
       text:` INSERT INTO ingredients (ingredient_name,amount,recipe_id) VALUES ($1,$2,$3) RETURNING *`,
-      values:[ingredient_name,amount,recipe_id]
+      values:[ingredientId, amount, recipeId]
     };
     
     return db.query(query)
@@ -336,6 +382,7 @@ module.exports = (db) => {
     getUserByEmail,
     addUser,
     getAllRecipes,
+    getRecipeCount,
     getAllRecipesByFriends,
     getRecipeById,
     getRecipeByTitle,
@@ -354,6 +401,7 @@ module.exports = (db) => {
     addFriend,
     removeFriend,
     getFollowsByUser,
+    getFollowersByUser,
     getRecipesByUser,
     getBookmarksByUser,
   };
