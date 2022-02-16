@@ -44,7 +44,7 @@ export const AuthProvider = props => {
   // save user details to state
   const login = (email, password) => {
     const loginAPI = 'http://localhost:3001/api/auth/login';
-
+    
     return axios
       .post(loginAPI, { email, password })
       .then(res => {
