@@ -86,8 +86,8 @@ function App() {
             </Route>
 
             <Route path='/recipe/:id'>
-              <Container maxWidth='md'>
-                <h2>Recipe Item Component</h2>
+              <SearchAppBar />
+              <Container maxWidth='lg'>
                 <Box
                   maxWidth='lg'
                   mx={{
@@ -96,6 +96,7 @@ function App() {
                     alignItems: 'flex-start',
                     columnGap: '4rem',
                     margin: '0 auto',
+                    height: '100vh',
                   }}>
                   <Navigation />
                   <RecipeItem />
