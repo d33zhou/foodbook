@@ -21,13 +21,14 @@ const RecipeForm = () => {
     difficulty: '',
     restrictions: '',
     cuisine: '',
+    servings: 0,
   });
   const [ingredientFields, setIngredientFields] = useState([
     { amount: '', ingredientName: '' },
   ]);
 
-  // console.log(recipe);
-  // console.log(ingredientFields);
+  console.log(recipe);
+  console.log(ingredientFields);
 
   const handleDifficulty = (event) => {
     setRecipe({
@@ -88,7 +89,6 @@ const RecipeForm = () => {
           onSubmit={(e) => e.preventDefault()}>
           <TextField
             fullWidth
-            // id='standard-basic'
             label='Recipe Title'
             variant='standard'
             onChange={(e) =>
@@ -101,7 +101,6 @@ const RecipeForm = () => {
 
           <TextField
             fullWidth
-            // id='standard-basic'
             label='Add Image'
             variant='standard'
             onChange={(e) =>
@@ -115,7 +114,6 @@ const RecipeForm = () => {
           <TextField
             fullWidth
             multiline
-            // id='standard-basic'
             label='Description'
             variant='standard'
             onChange={(e) =>
@@ -133,7 +131,6 @@ const RecipeForm = () => {
                   sx={{
                     width: '30%',
                   }}
-                  // id='standard-basic'
                   name='amount'
                   label='Amount'
                   variant='standard'
@@ -145,7 +142,6 @@ const RecipeForm = () => {
                   sx={{
                     width: '70%',
                   }}
-                  // id='standard-basic'
                   name='ingredientName'
                   label='Ingredient'
                   variant='standard'
@@ -168,7 +164,6 @@ const RecipeForm = () => {
           <TextField
             fullWidth
             multiline
-            // id='standard-basic'
             label='Directions'
             variant='standard'
             onChange={(e) =>
@@ -188,10 +183,8 @@ const RecipeForm = () => {
             }}>
             <TextField
               sx={{
-                width: '45%',
-                // flexGrow: 1,
+                flexGrow: 1,
               }}
-              // id='standard-basic'
               label='Prep Time (minutes)'
               variant='standard'
               onChange={(e) =>
@@ -202,6 +195,28 @@ const RecipeForm = () => {
               }
             />
 
+            <TextField
+              sx={{
+                flexGrow: 1,
+              }}
+              label='Number of Servings)'
+              variant='standard'
+              onChange={(e) =>
+                setRecipe({
+                  ...recipe,
+                  servings: e.target.value,
+                })
+              }
+            />
+          </Box>
+
+          <Box
+            sx={{
+              display: 'flex',
+              alignContent: 'center',
+              justifyContent: 'space-between',
+              columnGap: '4rem',
+            }}>
             <FormControl variant='standard' sx={{ flexGrow: 1 }}>
               <InputLabel id='demo-simple-select-standard-label'>
                 Difficulty
@@ -220,16 +235,8 @@ const RecipeForm = () => {
                 <MenuItem value={'hard'}>Hard</MenuItem>
               </Select>
             </FormControl>
-          </Box>
 
-          <Box
-            sx={{
-              display: 'flex',
-              alignContent: 'center',
-              justifyContent: 'space-between',
-              columnGap: '4rem',
-            }}>
-            <FormControl variant='standard' sx={{ width: '45%' }}>
+            <FormControl variant='standard' sx={{ flexGrow: 1 }}>
               <InputLabel id='demo-simple-select-standard-label'>
                 Restrictions
               </InputLabel>
