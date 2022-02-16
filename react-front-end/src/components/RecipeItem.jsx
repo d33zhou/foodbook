@@ -24,6 +24,7 @@ const RecipeItem = () => {
     dietary_restriction,
     difficulty,
     prep_minutes,
+    servings,
     first_name,
     last_name,
     avatar,
@@ -148,6 +149,9 @@ const RecipeItem = () => {
         </Typography>
         <Typography variant='h6' color='primary' fontWeight='bold' gutterBottom>
           Ingredients:
+        </Typography>
+        <Typography variant='p' color='primary' fontWeight='bold' gutterBottom>
+          Makes {servings} servings
         </Typography>
         <Typography variant='p' color='primary' fontWeight='bold' gutterBottom>
           {parsedIngredients}
