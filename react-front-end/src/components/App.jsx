@@ -23,6 +23,7 @@ import RecipeForm from './RecipeForm';
 import User from './User';
 import UserPublicProfile from './UserPublicProfile';
 import RecipeItem from './RecipeItem';
+import PrivateRoute from './PrivateRoute';
 
 import { AuthProvider } from '../providers/AuthContext';
 
@@ -44,7 +45,7 @@ function App() {
               </Container>
             </Route>
 
-            <Route path='/feed'>
+            <PrivateRoute path='/feed'>
               <SearchAppBar />
               <Container>
                 <Box
@@ -64,9 +65,9 @@ function App() {
                   <RecipeFilters />
                 </Box>
               </Container>
-            </Route>
+            </PrivateRoute>
 
-            <Route path='/create'>
+            <PrivateRoute path='/create'>
               <SearchAppBar />
               <Container maxWidth='lg'>
                 <Box
@@ -83,9 +84,9 @@ function App() {
                   <RecipeForm />
                 </Box>
               </Container>
-            </Route>
+            </PrivateRoute>
 
-            <Route path='/recipe/:id'>
+            <PrivateRoute path='/recipe/:id'>
               <SearchAppBar />
               <Container maxWidth='lg'>
                 <Box
@@ -102,9 +103,9 @@ function App() {
                   <RecipeItem />
                 </Box>
               </Container>
-            </Route>
+            </PrivateRoute>
 
-            <Route path='/profile'>
+            <PrivateRoute path='/profile'>
               <Container>
                 <Box
                   maxWidth='lg'
@@ -121,9 +122,9 @@ function App() {
                   </Box>
                 </Box>
               </Container>
-            </Route>
+            </PrivateRoute>
 
-            <Route path='/users/:id'>
+            <PrivateRoute path='/users/:id'>
               <Container>
                 <Box
                   maxWidth='lg'
@@ -140,7 +141,7 @@ function App() {
                   </Box>
                 </Box>
               </Container>
-            </Route>
+            </PrivateRoute>
 
             <Route path='/404' render={() => <h2>404 - Not Found</h2>} />
             <Redirect to='/404' />
