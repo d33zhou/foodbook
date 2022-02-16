@@ -343,7 +343,7 @@ module.exports = (db) => {
     };
 
     return db.query(query)
-      .then(result => result.rows[0])
+      .then(result => console.log(result))
       .catch(err => err);
 
   };
@@ -356,7 +356,7 @@ module.exports = (db) => {
     };
 
     return db.query(query)
-      .then(result => result.rows[0])
+      .then(result => console.log(result))
       .catch(err => err);
 
   };
