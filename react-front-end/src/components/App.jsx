@@ -82,29 +82,30 @@ function App() {
             height: '100%',
           }}>
           <Switch>
-            
             <PrivateRoute path='/feed'>
               <SearchAppBar />
-              <Box
-                maxWidth='lg'
-                mx={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'flex-start',
-                  columnGap: '4rem',
-                  margin: '0 auto',
-                }}>
-                <Navigation />
-                <Box>
-                  <RecipeList results={results} />
+              <Container maxWidth='lg'>
+                <Box
+                  maxWidth='lg'
+                  mx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-start',
+                    columnGap: '4rem',
+                    margin: '0 auto',
+                  }}>
+                  <Navigation />
+                  <Box>
+                    <RecipeList results={results} />
+                  </Box>
+                  <RecipeFilters
+                    difficulty={difficulty}
+                    cuisine={cuisine}
+                    handleDifficulty={handleDifficulty}
+                    handleCuisine={handleCuisine}
+                  />
                 </Box>
-                <RecipeFilters
-                  difficulty={difficulty}
-                  cuisine={cuisine}
-                  handleDifficulty={handleDifficulty}
-                  handleCuisine={handleCuisine}
-                />
-              </Box>
+              </Container>
             </PrivateRoute>
 
             <PrivateRoute path='/create'>
@@ -184,15 +185,14 @@ function App() {
             </PrivateRoute>
 
             <Route path='/404' render={() => <h2>404 - Not Found</h2>} />
-            
+
             <Route exact path='/'>
               <Container maxWidth='lg'>
                 <ContainerLogin />
               </Container>
             </Route>
-            
-            <Redirect to='/404' />
 
+            <Redirect to='/404' />
           </Switch>
         </Box>
       </Router>

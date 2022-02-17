@@ -187,9 +187,10 @@ module.exports = (db) => {
     servings,
     difficulty,
     cuisine,
-    restrictions) => {
+    restrictions,
+    creator_id) => {
     const query = {
-      text:`INSERT INTO recipes (title,instructions,prep_minutes,servings,image_link,difficulty,cuisine,dietary_restriction) VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *`,
+      text:`INSERT INTO recipes (title,instructions,prep_minutes,servings,image_link,difficulty,cuisine,dietary_restriction,creator_id) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING *`,
       values: [title,
         directions,
         prepTime,
@@ -197,7 +198,8 @@ module.exports = (db) => {
         image,
         difficulty,
         cuisine,
-        restrictions]
+        restrictions,
+        creator_id]
     };
 
     return db.query(query)

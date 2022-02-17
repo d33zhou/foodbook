@@ -3,13 +3,10 @@ const router = express.Router();
 
 module.exports = (dbHelpers) => {
   /* GET /api/recipes get all recipes and respective ingredients */
-  router.get("/", function (req, res) {
+  router.get("/", function(req, res) {
     dbHelpers
       .getAllRecipes()
-      .then((result) => {
-        console.log("All results", result);
-        return res.json(result);
-      })
+      .then((result) => res.json(result))
       .catch((err) =>
         res.json({
           error: err.message,
@@ -30,7 +27,7 @@ module.exports = (dbHelpers) => {
   });
 
   /* GET /api/recipes get all recipes by friends and respective ingredients */
-  router.get("/friends", function (req, res) {
+  router.get("/friends", function(req, res) {
     const { user_id } = req.body;
     dbHelpers
       .getAllRecipesByFriends(user_id)
@@ -45,7 +42,7 @@ module.exports = (dbHelpers) => {
   });
 
   // GET /api/recipes/:id get one recipe and its ingredients
-  router.get("/:id", function (req, res) {
+  router.get("/:id", function(req, res) {
     const { id } = req.params;
     dbHelpers
       .getRecipeById(id)
@@ -58,7 +55,7 @@ module.exports = (dbHelpers) => {
   });
 
   //POST /api/recipes/search to search for recipes by their title
-  router.post("/search", function (req, res) {
+  router.post("/search", function(req, res) {
     const { title } = req.body;
 
     dbHelpers
@@ -74,7 +71,8 @@ module.exports = (dbHelpers) => {
   });
 
   //POST /api/recipes create a recipe
-  router.post("/", function (req, res) {
+  router.post("/", function(req, res) {
+    console.log(req.body);
     const {
       title,
       image,
@@ -84,6 +82,7 @@ module.exports = (dbHelpers) => {
       difficulty,
       cuisine,
       restrictions,
+      creator_id,
     } = req.body;
 
     dbHelpers
@@ -95,7 +94,8 @@ module.exports = (dbHelpers) => {
         servings,
         difficulty,
         cuisine,
-        restrictions
+        restrictions,
+        creator_id
       )
       .then((recipe) => {
         return res.json(recipe);
@@ -108,7 +108,7 @@ module.exports = (dbHelpers) => {
   });
 
   //PUT /api/recipes/
-  router.put("/", function (req, res) {
+  router.put("/", function(req, res) {
     const {
       title,
       instructions,
