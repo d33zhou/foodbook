@@ -2,14 +2,14 @@ import { Redirect, Route } from "react-router-dom";
 import { useAuth } from "../providers/AuthContext"
 
 function PrivateRoute({ children, ...rest }) {
-  const { user } = useAuth();
+  const { token } = useAuth();
 
   return (
     <Route
       {...rest}
       render={
         ({location}) =>
-          user ? (
+          token ? (
             children
           ) : (
             <Redirect

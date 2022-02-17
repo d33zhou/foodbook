@@ -9,31 +9,23 @@ export const useAuth = () => {
 }
 
 export const AuthProvider = props => {
-  const [auth, setAuth] = useState(false); // set back to false
-  const [token, setToken] = useState(null);
-  const [user, setUser] = useState(null
-    // {
-    // id: 1,
-    // first_name: 'Test',
-    // last_name: 'McTester',
-    // email: 'tester@yetanotheremail.com',
-    // avatar: 'https://robohash.org/isterepellendusbeatae.png?size=50x50&set=set1'
-  // }
-  ); // set back to null after debugging
+  const [auth, setAuth] = useState(false);
+  const [token, setToken] = useState(localStorage.getItem('token') || null);
+  const [user, setUser] = useState(null);
 
+  // check if token exists in local storage and set token to existing token
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const tokenCookie = localStorage.getItem('token');
     
-    if (!auth && token) {
-      setToken(token);
-      const decoded = decode(token);
-      setUser(decoded);
-      setAuth(true);
-    }
+    setToken(tokenCookie);
+    const decoded = decode(tokenCookie);
+    setUser(decoded);
+    setAuth(true);
 
-    return token;
-  }, [auth]);
+    return tokenCookie;
+  }, []);
 
+  // create new user
   const register = (email, password, firstName, lastName, avatar) => {
     const registerAPI = 'http://localhost:3001/api/auth/register';
 
@@ -68,7 +60,7 @@ export const AuthProvider = props => {
   };
 
   // functions to expose through authContext
-  const userData = { user, login, logout, register, token };
+  const userData = { user, login, logout, register, token, auth };
 
   // to wrap components to share context
   return (
