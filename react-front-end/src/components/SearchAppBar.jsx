@@ -11,6 +11,9 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Autocomplete, TextField } from '@mui/material';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -55,6 +58,21 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const SearchAppBar = () => {
+  const [searchResults, setSearchResults] = useState([]);
+  const [query, setQuery] = useState('');
+  // console.log(query);
+
+  useEffect(() => {
+    const searchURL = `http://localhost:3001/api/recipes/search`;
+    axios.post(searchURL, { title: query }).then((response) => {
+      setSearchResults([...response.data]);
+      // console.log(response.data);
+    });
+  }, [query]);
+
+  // console.log(searchResults);
+  let options = [...searchResults];
+  // console.log("Options", options);
   return (
     <Box
       sx={{
@@ -81,15 +99,33 @@ const SearchAppBar = () => {
             }}>
             + Create New Recipe
           </Button>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder='Search…'
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search>
+          {/* <Search> */}
+
+          {/* <StyledInputBase
+              placeholder="Search…"
+              inputProps={{ "aria-label": "search" }}
+              onChange={event => setQuery(event.target.value)}
+            /> */}
+          <Autocomplete
+            autoHighlight
+            id='combo-box-demo'
+            autoFocus={true}
+            sx={{ width: 300 }}
+            options={searchResults}
+            onChange={(event: any, option: any) => {
+              window.location.href = `recipe/${option.id}`;
+            }}
+            getOptionLabel={(option) => option.title}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label='Recipe Name'
+                onChange={(event) => setQuery(event.target.value)}
+              />
+            )}
+          />
+          <SearchIcon />
+          {/* </Search> */}
         </Toolbar>
       </AppBar>
     </Box>

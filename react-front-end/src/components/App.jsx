@@ -26,8 +26,51 @@ import RecipeItem from './RecipeItem';
 import PrivateRoute from './PrivateRoute';
 
 import { AuthProvider } from '../providers/AuthContext';
+import { useState, useEffect } from 'react';
 
 function App() {
+  const [results, setResults] = useState([]);
+  const [fullData, setFullData] = useState([]);
+  const [difficulty, setDifficulty] = useState('');
+  const [cuisine, setCuisine] = useState('');
+
+  const handleDifficulty = (event) => {
+    setDifficulty(event.target.value);
+
+    const difficultyResults = [
+      ...fullData.filter((recipe) => {
+        return (
+          recipe.difficulty === event.target.value &&
+          recipe.cuisine === (cuisine || 'thai')
+        );
+      }),
+    ];
+
+    setResults(difficultyResults);
+  };
+
+  const handleCuisine = (event) => {
+    setCuisine(event.target.value);
+    const cuisineResults = [
+      ...fullData.filter((recipe) => {
+        return (
+          recipe.cuisine === event.target.value &&
+          recipe.difficulty === (difficulty || 'easy')
+        );
+      }),
+    ];
+
+    setResults(cuisineResults);
+  };
+
+  useEffect(() => {
+    const testURL = `http://localhost:3001/api/recipes`;
+    axios.get(testURL).then((response) => {
+      setResults(response.data);
+      setFullData(response.data);
+    });
+  }, []);
+
   return (
     <AuthProvider>
       <Router>
@@ -42,24 +85,26 @@ function App() {
             
             <PrivateRoute path='/feed'>
               <SearchAppBar />
-              <Container>
-                <Box
-                  maxWidth='lg'
-                  mx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'flex-start',
-                    columnGap: '4rem',
-                    margin: '0 auto',
-                  }}>
-                  <Navigation />
-
-                  <Box>
-                    <RecipeList />
-                  </Box>
-                  <RecipeFilters />
+              <Box
+                maxWidth='lg'
+                mx={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'flex-start',
+                  columnGap: '4rem',
+                  margin: '0 auto',
+                }}>
+                <Navigation />
+                <Box>
+                  <RecipeList results={results} />
                 </Box>
-              </Container>
+                <RecipeFilters
+                  difficulty={difficulty}
+                  cuisine={cuisine}
+                  handleDifficulty={handleDifficulty}
+                  handleCuisine={handleCuisine}
+                />
+              </Box>
             </PrivateRoute>
 
             <PrivateRoute path='/create'>

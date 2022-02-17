@@ -1,7 +1,7 @@
 import { Box, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-const Navigation = () => {
+const Navigation = ({onClick}) => {
   return (
     <Box
       sx={{
@@ -13,16 +13,16 @@ const Navigation = () => {
         flexDirection: 'column',
         minWidth: 'content',
       }}>
-      <Button variant='text' size='large' component={Link} to='/feed'>
+      <Button variant='text' size='large' component={Link} to="/feed" value='home'>
         Home
       </Button>
-      <Button variant='text' size='large' component={Link} to='/feed'>
+      <Button variant='text' size='large' value='explore' onClick={onClick} >
         Explore
       </Button>
       <Button variant='text' size='large' component={Link} to='/feed'>
         Bookmarks
       </Button>
-      <Button variant='text' size='large' component={Link} to='/profile'>
+      <Button variant='text' size='large' component={Link} to="/profile">
         Profile
       </Button>
     </Box>
