@@ -129,6 +129,30 @@ module.exports = (db) => {
       })
       .catch((err) => err.message);
   };
+
+  //get users bookmarks
+  const getUserBookmarks = (user_id,recipe_id) => {
+    const query = {
+      text: `SELECT recipe_id FROM bookmarks WHERE user_id = $1`,
+      values: [user_id],
+    };
+
+    const query2 = {
+      text: `SELECT COUNT(*) FROM bookmarks WHERE recipe_id = $1`,
+      values: [recipe_id],
+    };
+
+    return db
+      .query(query)
+      .then((result) => result.rows)
+      .then((result) => {
+        return db.query(query2).then((result2) => {
+          return { count: result2.rows[0], recipeBookmarks: result };
+        });
+      })
+      .catch((err) => err.message);
+  };
+
   //-------> Recipe helpers <------------
   //get all recipes in db
   const getAllRecipes = () => {
@@ -358,7 +382,7 @@ module.exports = (db) => {
     return db
       .query(query)
       .then((result) => result.rows[0])
-      .then((result) => {
+      .then(() => {
         return db.query(query2).then((result2) => result2.rows[0]);
       })
       .catch((err) => err);
@@ -379,7 +403,7 @@ module.exports = (db) => {
     return db
       .query(query)
       .then((result) => result.rows[0])
-      .then((result) => {
+      .then(() => {
         return db.query(query2).then((result2) => result2.rows[0]);
       })
       .catch((err) => err);
@@ -389,25 +413,45 @@ module.exports = (db) => {
 
   // bookmark a recipe
   const addBookmark = (user_id, recipe_id) => {
+
     const query = {
       text: `INSERT INTO bookmarks (user_id,recipe_id) VALUES ($1,$2)`,
       values: [user_id, recipe_id],
     };
+
+    const query2 = {
+      text: `SELECT COUNT(*) FROM bookmarks WHERE recipe_id = $1`,
+      values: [recipe_id],
+    };
+
     return db
       .query(query)
       .then((result) => result.rows[0])
+      .then(() => {
+        return db.query(query2).then((result2) => result2.rows[0]);
+      })
       .catch((err) => err);
   };
 
   //delete recipe bookmark
   const removeBookmark = (user_id, recipe_id) => {
+
     const query = {
       text: `DELETE FROM bookmarks WHERE user_id = $1 AND recipe_id = $2`,
       values: [user_id, recipe_id],
     };
+
+    const query2 = {
+      text: `SELECT COUNT(*) FROM bookmarks WHERE recipe_id = $1`,
+      values: [recipe_id],
+    };
+
     return db
       .query(query)
       .then((result) => result.rows[0])
+      .then(() => {
+        return db.query(query2).then((result2) => result2.rows[0]);
+      })
       .catch((err) => err);
   };
 
@@ -444,6 +488,7 @@ module.exports = (db) => {
     getUserByEmail,
     addUser,
     getUserLikes,
+    getUserBookmarks,
     getAllRecipes,
     getRecipeCount,
     getAllRecipesByFriends,

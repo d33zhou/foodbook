@@ -26,6 +26,8 @@ const RecipeListItem = (props) => {
   const { user } = useAuth();
   const [like, setLike] = useState(false);
   const [numberOfLikes, setNumberOfLikes] = useState(0);
+  const [bookmark, setBookmark] = useState(false);
+  const [numberOfBookmarks, setNumberOfBookmarks] = useState(0);
 
   const handleLike = () => {
     setLike(!like);
@@ -54,6 +56,31 @@ const RecipeListItem = (props) => {
       setNumberOfLikes(response.count.count)
     }).catch(err => console.log(err.message));
   
+    const handleBookmark = () => {
+      setBookmark(!bookmark);
+      if (!bookmark) {
+        const bookmarkURL = `http://localhost:3001/api/bookmark`;
+        axios.post(bookmarkURL, { user_id: user.id, recipe_id: id }).then((res) => {
+          setNumberOfBookmarks(res.data.count)
+        });
+      } else {
+        const unbookmarkURL = `http://localhost:3001/api/unbookmark`;
+        axios.post(unbookmarkURL, { user_id: user.id, recipe_id: id }).then((res) => {
+          setNumberOfBookmarks(res.data.count)
+        });
+      }
+    };
+
+    const getBookmarksURL = `http://localhost:3001/api/bookmark`;
+    axios.get(getBookmarksURL, {params: {user_id: user.id,recipe_id: id}}).then((res) => {
+      const response = res.data;
+      for(let obj of response.recipeBookmarks){
+        if(obj.recipe_id === id){
+          setBookmark(true);
+        }
+      }
+      setNumberOfBookmarks(response.count.count)
+    }).catch(err => console.log(err.message));
 
   return (
     <Box
@@ -78,6 +105,7 @@ const RecipeListItem = (props) => {
           <FavoriteOutlinedIcon
             fontSize="medium"
             onClick={handleLike}
+            style={{ color: 'red' }}
             sx={{
               "&:hover": {
                 color: "orangered",
@@ -98,15 +126,25 @@ const RecipeListItem = (props) => {
           />
         )}
         <Typography variant="p">{numberOfLikes}</Typography>
-        <BookmarkBorderOutlinedIcon
+        {bookmark && <BookmarkOutlinedIcon
           fontSize="medium"
-          style={{ color: 'red' }}
+          onClick={handleBookmark}
           sx={{
             "&:hover": {
               color: "orangered",
             },
           }}
-        />
+        />}
+        {!bookmark && <BookmarkBorderOutlinedIcon
+          fontSize="medium"
+          onClick={handleBookmark}
+          sx={{
+            "&:hover": {
+              color: "orangered",
+            },
+          }}
+        />}
+        <Typography variant="p">{numberOfBookmarks}</Typography>
       </Stack>
       <Link to={`/recipe/${id}`}></Link>
       <Typography variant="h3" color="primary" fontWeight="bold" gutterBottom>
