@@ -8,26 +8,26 @@ import axios from 'axios';
 
 
 const UserPublicProfile = (props) => {
-  const { id } = useParams();
-  const [user, setUser] = useState({});
+  const { id } = useParams(); // id of user being viewed (not logged in user)
+  const [otherUser, setOtherUser] = useState({});
   const [following, setFollowing] = useState(false);
 
   useEffect(() => {
     axios
       .get(`http://localhost:3001/api/users/${id}`)
       .then(res => {
-        setUser(res.data);
+        setOtherUser(res.data);
       });
   }, [id]);
 
   return (
     <Container>
       <hr/>
-      <UserDetails {...user} following={following} setFollowing={setFollowing} />
+      <UserDetails {...otherUser} following={following} setFollowing={setFollowing} />
       <hr/>
       <UserFollowerList id={id} setFollowing={setFollowing} />
       <hr/>
-      <UserRecipeList id={id} first_name={user.first_name} />
+      <UserRecipeList id={id} first_name={otherUser.first_name} />
     </Container>
   );
 };
