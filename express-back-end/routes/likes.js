@@ -3,14 +3,15 @@ let router = express.Router();
 
 module.exports = (dbhelpers) => {
   // GET /api/like to get the number of likes and the likes by user
-  router.get("/like", function (req, res) {
-    const { user_id } = req.body;
+  router.get("/like", function(req, res) {
+    const { user_id } = req.query;
+    console.log(user_id);
     dbhelpers
       .getUserLikes(user_id)
       .then((response) => res.json(response))
       .catch((err) => res.json(err.message));
   });
-  
+
   /* POST /api/like to like a recipe */
   router.post("/like", function (req, res) {
     const { user_id, recipe_id } = req.body;

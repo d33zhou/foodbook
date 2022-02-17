@@ -24,7 +24,7 @@ const RecipeListItem = (props) => {
   } = props;
   // console.log(id);
   const { user } = useAuth();
-
+  console.log(user.id);
   const [like, setLike] = useState(false);
 
   const handleLike = () => {
@@ -42,9 +42,17 @@ const RecipeListItem = (props) => {
     }
   };
 
-  useEffect(() => {
-    
-  },[user.id])
+  
+    const getLikesURL = `http://localhost:3001/api/like`;
+    axios.get(getLikesURL, {params: {user_id: 1}}).then((res) => {
+      console.log(res.data);
+      for(let obj of res.data){
+        if(obj.recipe_id === id){
+          setLike(true);
+        }
+      }
+    }).catch(err => console.log(err.message));
+  
 
   return (
     <Box
