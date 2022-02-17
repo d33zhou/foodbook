@@ -9,6 +9,9 @@ import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import BookmarkOutlinedIcon from "@mui/icons-material/BookmarkOutlined";
 import { useState } from "react";
+import { useAuth } from "../providers/AuthContext";
+import axios from "axios";
+
 const RecipeListItem = (props) => {
   const {
     image_link,
@@ -20,13 +23,25 @@ const RecipeListItem = (props) => {
     restrictions,
   } = props;
   // console.log(id);
+  const { user } = useAuth();
 
-  const [click, setClick] = useState(false);
-  
-  const onClick = () => {
-    console.log(id);
-    setClick(!click);
-  }
+  const [like, setLike] = useState(false);
+
+  const handleLike = () => {
+    setLike(!like);
+    if (!like) {
+      const likeURL = `http://localhost:3001/api/like`;
+      axios.post(likeURL, { user_id: user.id, recipe_id: id }).then((res) => {
+        console.log(res);
+      });
+    } else {
+      const unlikeURL = `http://localhost:3001/api/unlike`;
+      axios.post(unlikeURL, { user_id: user.id, recipe_id: id }).then((res) => {
+        console.log(res);
+      });
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -46,30 +61,33 @@ const RecipeListItem = (props) => {
             label={restrictions}
           />
         )}
-        {click && <FavoriteOutlinedIcon
-          fontSize="medium"
-          onClick={onClick}
-          sx={{
-            "&:hover": {
-              color: "orangered",
-            },
-            
-          }}
-        /> } 
-        {!click && <FavoriteBorderOutlinedIcon
-        fontSize="medium"
-        onClick={onClick}
-        sx={{
-          "&:hover": {
-            color: "orangered",
-          },
-          
-        }}
-      />}
-        
+        {like && (
+          <FavoriteOutlinedIcon
+            fontSize="medium"
+            onClick={handleLike}
+            sx={{
+              "&:hover": {
+                color: "orangered",
+              },
+            }}
+          />
+        )}
+        {!like && (
+          <FavoriteBorderOutlinedIcon
+            fontSize="medium"
+            onClick={handleLike}
+            color=""
+            sx={{
+              "&:hover": {
+                color: "orangered",
+              },
+            }}
+          />
+        )}
+
         <BookmarkBorderOutlinedIcon
           fontSize="medium"
-          color="primary"
+          color="orangered"
           sx={{
             "&:hover": {
               color: "orangered",
