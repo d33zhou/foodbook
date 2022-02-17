@@ -1,18 +1,18 @@
-import axios from "axios";
+import axios from 'axios';
 import {
   Box,
   Container,
   CssBaseline,
   ScopedCssBaseline,
   Typography,
-} from "@mui/material";
-import "./App.css";
+} from '@mui/material';
+import './App.css';
 import {
   BrowserRouter as Router,
   Route,
   Switch,
   Redirect,
-} from "react-router-dom";
+} from 'react-router-dom';
 
 import ContainerLogin from './ContainerLogin';
 import SearchAppBar from './SearchAppBar';
@@ -25,16 +25,14 @@ import UserPublicProfile from './UserPublicProfile';
 import RecipeItem from './RecipeItem';
 import PrivateRoute from './PrivateRoute';
 
-import { AuthProvider } from "../providers/AuthContext";
-import { useState, useEffect } from "react";
+import { AuthProvider } from '../providers/AuthContext';
+import { useState, useEffect } from 'react';
 
 function App() {
   const [results, setResults] = useState([]);
   const [fullData, setFullData] = useState([]);
-  const [difficulty, setDifficulty] = useState("");
-  const [cuisine, setCuisine] = useState("");
-
- 
+  const [difficulty, setDifficulty] = useState('');
+  const [cuisine, setCuisine] = useState('');
 
   const handleDifficulty = (event) => {
     setDifficulty(event.target.value);
@@ -42,7 +40,8 @@ function App() {
     const difficultyResults = [
       ...fullData.filter((recipe) => {
         return (
-          recipe.difficulty === event.target.value && recipe.cuisine === (cuisine || "thai")
+          recipe.difficulty === event.target.value &&
+          recipe.cuisine === (cuisine || 'thai')
         );
       }),
     ];
@@ -55,11 +54,12 @@ function App() {
     const cuisineResults = [
       ...fullData.filter((recipe) => {
         return (
-          recipe.cuisine === event.target.value && recipe.difficulty === (difficulty || "easy")
+          recipe.cuisine === event.target.value &&
+          recipe.difficulty === (difficulty || 'easy')
         );
       }),
     ];
-    
+
     setResults(cuisineResults);
   };
 
@@ -68,7 +68,6 @@ function App() {
     axios.get(testURL).then((response) => {
       setResults(response.data);
       setFullData(response.data);
-     
     });
   }, []);
 
@@ -77,33 +76,30 @@ function App() {
       <Router>
         <CssBaseline />
         <Box
-          className="App"
+          className='App'
           sx={{
-            backgroundColor: "#f0f2f5",
-            height: "100%",
-          }}
-        >
+            backgroundColor: '#f0f2f5',
+            height: '100%',
+          }}>
           <Switch>
-            <Route exact path="/">
-              <Container maxWidth="lg">
+            <Route exact path='/'>
+              <Container maxWidth='lg'>
                 <ContainerLogin />
               </Container>
             </Route>
-            <PrivateRoute path="/feed">
+            <PrivateRoute path='/feed'>
               <SearchAppBar />
               <Box
-                maxWidth="lg"
+                maxWidth='lg'
                 mx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "flex-start",
-                  columnGap: "4rem",
-                  margin: "0 auto",
-                }}
-              >
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'flex-start',
+                  columnGap: '4rem',
+                  margin: '0 auto',
+                }}>
                 <Navigation />
                 <Box>
-                  <h2>Items {results.length}</h2>
                   <RecipeList results={results} />
                 </Box>
                 <RecipeFilters
@@ -114,18 +110,12 @@ function App() {
                 />
               </Box>
             </PrivateRoute>
-            <PrivateRoute path="/recipe/:id">
-              {/* Recipe Item */}
-              <Container maxWidth="md">
-                <h2>Recipe Item Component</h2>
-                </Container>
-            </PrivateRoute>
 
             <PrivateRoute path='/create'>
               <SearchAppBar />
               <Container maxWidth='lg'>
                 <Box
-                  maxWidth="lg"
+                  maxWidth='lg'
                   mx={{
                     display: 'flex',
                     justifyContent: 'space-between',
