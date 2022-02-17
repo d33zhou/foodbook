@@ -353,13 +353,13 @@ module.exports = (db) => {
   // add a friend
   const addFriend = (user_id_1, user_id_2) => {
     const query = {
-      text:`INSERT INTO friends(user_id_1,user_id_2) VALUES ($1,$2)`,
+      text:`INSERT INTO friends(user_id_1, user_id_2) VALUES ($1, $2)`,
       values: [user_id_1, user_id_2]
     };
 
     return db.query(query)
-      .then(result => console.log(result))
-      .catch(err => err);
+      .then(result => result)
+      .catch(err => err.message);
 
   };
 

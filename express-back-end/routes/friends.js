@@ -1,13 +1,13 @@
-let express = require("express");
-let router = express.Router();
+const express = require("express");
+const router = express.Router();
 
 module.exports = (dbhelpers) =>{
   
-  /* POST /api/friend add a friend */
-  router.post("/friend", function(req, res) {
-    const { user_id_1, user_id_2 } = req.params;
+  /* POST /api/friends/follow add a friend */
+  router.post("/follow", function(req, res) {
+    const { user_id_1, user_id_2 } = req.body;
 
-    dbhelpers.addFriend(user_id_1,user_id_2)
+    dbhelpers.addFriend(user_id_1, user_id_2)
       .then(() => {
         res.send('Added!');
       })
@@ -16,8 +16,8 @@ module.exports = (dbhelpers) =>{
       }));
   });
 
-  /* POST /api/unfriend add a friend */
-  router.post("/unfriend", function(req, res) {
+  /* POST /api/friends/unfollow add a friend */
+  router.post("/unfollow", function(req, res) { // delete by :id (then use params, otherwise body)
     const { user_id_1, user_id_2 } = req.params;
 
     dbhelpers.removeFriend(user_id_1,user_id_2)
