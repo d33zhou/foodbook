@@ -7,9 +7,9 @@ const UserFollowListItem = (props) => {
   const history = useHistory();
   const { user } = useAuth();
 
-  if (setFollowing && user.id === id) {
-    setFollowing(true);
-  }
+  // if (setFollowing && user.id === id) {
+  //   setFollowing(true);
+  // }
 
   // render followed user avatar icon and name
   return (
