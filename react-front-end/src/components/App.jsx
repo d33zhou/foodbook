@@ -114,24 +114,6 @@ function App() {
                 />
               </Box>
             </PrivateRoute>
-            <PrivateRoute path='/create'>
-              <SearchAppBar />
-              <Container maxWidth='lg'>
-                <Box
-                  maxWidth='lg'
-                  mx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'flex-start',
-                    columnGap: '4rem',
-                    margin: '0 auto',
-                    height: '100vh',
-                  }}>
-                  <Navigation />
-                  <RecipeForm />
-                </Box>
-              </Container>
-            </PrivateRoute>
             <PrivateRoute path="/recipe/:id">
               {/* Recipe Item */}
               <Container maxWidth="md">

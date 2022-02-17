@@ -3,10 +3,9 @@ import axios from 'axios';
 import { Box, Button } from '@mui/material';
 import RecipeListItem from './RecipeListItem';
 
-const RecipeList = () => {
-  const [results, setResults] = useState([]);
+const RecipeList = ({results}) => {
 
-  console.log(results[0]);
+  console.log(results);
 
   const parsedRecipes =
     Array.isArray(results) &&
