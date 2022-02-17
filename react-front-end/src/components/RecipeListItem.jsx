@@ -45,11 +45,13 @@ const RecipeListItem = (props) => {
   
     const getLikesURL = `http://localhost:3001/api/like`;
     axios.get(getLikesURL, {params: {user_id: user.id,recipe_id: id}}).then((res) => {
-      for(let obj of res.data){
+      const response = res.data;
+      for(let obj of response.recipeLikes){
         if(obj.recipe_id === id){
           setLike(true);
         }
       }
+      setNumberOfLikes(response.count.count)
     }).catch(err => console.log(err.message));
   
 
@@ -87,7 +89,7 @@ const RecipeListItem = (props) => {
           <FavoriteBorderOutlinedIcon
             fontSize="medium"
             onClick={handleLike}
-            color=""
+            style={{ color: 'red' }}
             sx={{
               "&:hover": {
                 color: "orangered",
@@ -95,10 +97,10 @@ const RecipeListItem = (props) => {
             }}
           />
         )}
-        {numberOfLikes}
+        <Typography variant="p">{numberOfLikes}</Typography>
         <BookmarkBorderOutlinedIcon
           fontSize="medium"
-          color="orangered"
+          style={{ color: 'red' }}
           sx={{
             "&:hover": {
               color: "orangered",
