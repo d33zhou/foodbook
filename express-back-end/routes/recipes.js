@@ -3,13 +3,10 @@ const router = express.Router();
 
 module.exports = (dbHelpers) => {
   /* GET /api/recipes get all recipes and respective ingredients */
-  router.get("/", function (req, res) {
+  router.get("/", function(req, res) {
     dbHelpers
       .getAllRecipes()
-      .then((result) => {
-        console.log("All results", result);
-        return res.json(result);
-      })
+      .then((result) => res.json(result))
       .catch((err) =>
         res.json({
           error: err.message,
@@ -75,6 +72,7 @@ module.exports = (dbHelpers) => {
 
   //POST /api/recipes create a recipe
   router.post("/", function(req, res) {
+    console.log(req.body);
     const {
       title,
       image,
@@ -84,6 +82,7 @@ module.exports = (dbHelpers) => {
       difficulty,
       cuisine,
       restrictions,
+      creator_id,
     } = req.body;
 
     dbHelpers
@@ -95,7 +94,8 @@ module.exports = (dbHelpers) => {
         servings,
         difficulty,
         cuisine,
-        restrictions
+        restrictions,
+        creator_id
       )
       .then((recipe) => {
         return res.json(recipe);

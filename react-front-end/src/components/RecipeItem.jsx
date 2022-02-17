@@ -51,6 +51,7 @@ const RecipeItem = () => {
     axios
       .get(ingredientsURL)
       .then((response) => {
+        console.log(response.data);
         setIngredients([...response.data]);
       })
       .catch((err) => console.log('Error ', err.message));
