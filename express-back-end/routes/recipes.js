@@ -30,7 +30,7 @@ module.exports = (dbHelpers) => {
   });
 
   /* GET /api/recipes get all recipes by friends and respective ingredients */
-  router.get("/friends", function (req, res) {
+  router.get("/friends", function(req, res) {
     const { user_id } = req.body;
     dbHelpers
       .getAllRecipesByFriends(user_id)
@@ -45,7 +45,7 @@ module.exports = (dbHelpers) => {
   });
 
   // GET /api/recipes/:id get one recipe and its ingredients
-  router.get("/:id", function (req, res) {
+  router.get("/:id", function(req, res) {
     const { id } = req.params;
     dbHelpers
       .getRecipeById(id)
@@ -58,7 +58,7 @@ module.exports = (dbHelpers) => {
   });
 
   //POST /api/recipes/search to search for recipes by their title
-  router.post("/search", function (req, res) {
+  router.post("/search", function(req, res) {
     const { title } = req.body;
 
     dbHelpers
@@ -74,7 +74,7 @@ module.exports = (dbHelpers) => {
   });
 
   //POST /api/recipes create a recipe
-  router.post("/", function (req, res) {
+  router.post("/", function(req, res) {
     const {
       title,
       image,
@@ -108,7 +108,7 @@ module.exports = (dbHelpers) => {
   });
 
   //PUT /api/recipes/
-  router.put("/", function (req, res) {
+  router.put("/", function(req, res) {
     const {
       title,
       instructions,

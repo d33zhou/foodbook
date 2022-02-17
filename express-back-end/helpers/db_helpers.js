@@ -108,7 +108,17 @@ module.exports = (db) => {
       .catch((err) => err.message);
   };
 
+  //get users likes
+  const getUserLikes = (user_id) => {
+    const query = {
+      text: `SELECT recipe_id FROM likes WHERE user_id = $1`,
+      values: [user_id]
+    };
 
+    return db.query(query)
+      .then(result => result.rows)
+      .catch((err) => err.message);
+  }
   //-------> Recipe helpers <------------
   //get all recipes in db
   const getAllRecipes = () => {
@@ -381,6 +391,7 @@ module.exports = (db) => {
     getUserById,
     getUserByEmail,
     addUser,
+    getUserLikes,
     getAllRecipes,
     getRecipeCount,
     getAllRecipesByFriends,
