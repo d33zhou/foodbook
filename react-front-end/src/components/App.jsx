@@ -82,11 +82,7 @@ function App() {
             height: '100%',
           }}>
           <Switch>
-            <Route exact path='/'>
-              <Container maxWidth='lg'>
-                <ContainerLogin />
-              </Container>
-            </Route>
+            
             <PrivateRoute path='/feed'>
               <SearchAppBar />
               <Box
@@ -188,7 +184,15 @@ function App() {
             </PrivateRoute>
 
             <Route path='/404' render={() => <h2>404 - Not Found</h2>} />
+            
+            <Route exact path='/'>
+              <Container maxWidth='lg'>
+                <ContainerLogin />
+              </Container>
+            </Route>
+            
             <Redirect to='/404' />
+
           </Switch>
         </Box>
       </Router>

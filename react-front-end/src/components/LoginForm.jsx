@@ -17,17 +17,12 @@ const LoginForm = () => {
     setError('');
 
     if (!email || !password) {
-      setError('Blank email and/or password.');
-      return;
+      return setError('Blank email and/or password.');
     }
 
     login(email, password)
       .then(res => {
-        if (!res.id) {
-          setError('Invalid email and/or password.');
-        } else {
-          history.push('/feed')
-        }
+        !res.id ? setError('Invalid email and/or password.') : history.push('/feed');
       })
       .catch(err => err.message);
   };

@@ -7,7 +7,7 @@ const RecipeList = ({ results }) => {
   console.log('results', results);
 
   const parsedRecipes =
-    Array.isArray(results) &&
+    results.length > 0 &&
     results.map((recipe) => {
       return (
         <RecipeListItem

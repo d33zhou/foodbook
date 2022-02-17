@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const UserFollowerList = (props) => {
-  const { id } = props;
+  const { id, setFollowing } = props;
   const [results, setResults] = useState([]);
   
   // array of users that follow the logged in user
@@ -13,6 +13,7 @@ const UserFollowerList = (props) => {
       <UserFollowListItem
         key={follower.id}
         {...follower}
+        setFollowing={setFollowing}
       />
     );
   });

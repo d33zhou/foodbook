@@ -6,9 +6,11 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
+
 const UserPublicProfile = (props) => {
   const { id } = useParams();
   const [user, setUser] = useState({});
+  const [following, setFollowing] = useState(false);
 
   useEffect(() => {
     axios
@@ -21,9 +23,9 @@ const UserPublicProfile = (props) => {
   return (
     <Container>
       <hr/>
-      <UserDetails {...user} />
+      <UserDetails {...user} following={following} />
       <hr/>
-      <UserFollowerList id={id} />
+      <UserFollowerList id={id} setFollowing={setFollowing} />
       <hr/>
       <UserRecipeList id={id} first_name={user.first_name} />
     </Container>

@@ -9,10 +9,9 @@ import { useAuth } from '../providers/AuthContext';
 
 const User = (props) => {
   const { user } = useAuth();
-  console.log("this is the user: ", user);
 
   return (
-    <Container>
+    user && <Container>
       <hr/>
       <UserDetails {...user} />
       <hr/>
