@@ -25,7 +25,7 @@ const UserFollowerList = (props) => {
       .then(res => {
         setResults([...res.data]);
       });
-  }, []);
+  }, [id]);
 
   // display block for the user icons for all followers of the logged in user
   return (
