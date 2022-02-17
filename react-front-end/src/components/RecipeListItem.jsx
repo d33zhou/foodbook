@@ -40,8 +40,6 @@ const RecipeListItem = (props) => {
         {title}
       </Typography>
       <Typography variant='p'>{instructions}</Typography>
-      
-      
     </Box>
   );
 };

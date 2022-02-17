@@ -110,12 +110,6 @@ function App() {
                 />
               </Box>
             </PrivateRoute>
-            <PrivateRoute path='/recipe/:id'>
-              {/* Recipe Item */}
-              <Container maxWidth='md'>
-                <h2>Recipe Item Component</h2>
-              </Container>
-            </PrivateRoute>
 
             <PrivateRoute path='/create'>
               <SearchAppBar />
