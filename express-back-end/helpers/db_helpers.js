@@ -115,10 +115,15 @@ module.exports = (db) => {
       values: [user_id]
     };
 
+    const query2 = {
+      text: `SELECT COUNT(*) FROM likes WHERE recipe_id = $1`,
+      values: [recipe_id]
+    };
+
     return db.query(query)
       .then(result => result.rows)
       .catch((err) => err.message);
-  }
+  };
   //-------> Recipe helpers <------------
   //get all recipes in db
   const getAllRecipes = () => {
@@ -314,8 +319,18 @@ module.exports = (db) => {
       text:`INSERT INTO likes (user_id,recipe_id) VALUES ($1,$2)`,
       values: [user_id,recipe_id]
     };
+
+    const query2 = {
+      text: `SELECT COUNT(*) FROM likes WHERE recipe_id = $1`,
+      values: [recipe_id]
+    };
+
     return db.query(query)
       .then(result => result.rows[0])
+      .then(result => {
+        return db.query(query2)
+          .then(result2 => result2.rows[0]);
+      })
       .catch(err => err);
 
   };
@@ -326,8 +341,18 @@ module.exports = (db) => {
       text:`DELETE FROM likes WHERE user_id = $1 AND recipe_id = $2`,
       values: [user_id,recipe_id]
     };
+
+    const query2 = {
+      text: `SELECT COUNT(*) FROM likes WHERE recipe_id = $1`,
+      values: [recipe_id]
+    };
+
     return db.query(query)
       .then(result => result.rows[0])
+      .then(result => {
+        return db.query(query2)
+          .then(result2 => result2.rows[0]);
+      })
       .catch(err => err);
 
   };

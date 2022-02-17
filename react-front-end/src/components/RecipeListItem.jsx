@@ -24,28 +24,27 @@ const RecipeListItem = (props) => {
   } = props;
   // console.log(id);
   const { user } = useAuth();
-  console.log(user.id);
   const [like, setLike] = useState(false);
+  const [numberOfLikes, setNumberOfLikes] = useState(0);
 
   const handleLike = () => {
     setLike(!like);
     if (!like) {
       const likeURL = `http://localhost:3001/api/like`;
       axios.post(likeURL, { user_id: user.id, recipe_id: id }).then((res) => {
-        console.log(res);
+        setNumberOfLikes(res.data.count)
       });
     } else {
       const unlikeURL = `http://localhost:3001/api/unlike`;
       axios.post(unlikeURL, { user_id: user.id, recipe_id: id }).then((res) => {
-        console.log(res);
+        setNumberOfLikes(res.data.count)
       });
     }
   };
 
   
     const getLikesURL = `http://localhost:3001/api/like`;
-    axios.get(getLikesURL, {params: {user_id: 1}}).then((res) => {
-      console.log(res.data);
+    axios.get(getLikesURL, {params: {user_id: user.id,recipe_id: id}}).then((res) => {
       for(let obj of res.data){
         if(obj.recipe_id === id){
           setLike(true);
@@ -96,7 +95,7 @@ const RecipeListItem = (props) => {
             }}
           />
         )}
-
+        {numberOfLikes}
         <BookmarkBorderOutlinedIcon
           fontSize="medium"
           color="orangered"
