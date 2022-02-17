@@ -19,18 +19,23 @@ const UserDetails = (props) => {
 
     axios
       .post(addFollowURL, friendPairing)
-      .then(res => {
-        console.log("resolved axios request: ", res.data);
-        setFollowing(true);
-      })
+      .then(() => setFollowing(true))
       .catch(err => err.message);
   };
 
   // unfollow the currently viewed user (only from UserPublicProfile)
   const handleUnfollow = () => {
-    console.log("Unfollowed!");
+    const removeFollowURL = 'http://localhost:3001/api/friends/unfollow';
+    const friendPairing = {
+      user_id_1: user.id, // the user to follow another user
+      user_id_2: id, // the user that will be followed
+    };
 
-    setFollowing(false);
+    axios
+      .delete(removeFollowURL, { data: friendPairing})
+      .then(() => setFollowing(false))
+      .catch(err => err.message);
+    
   }
 
   return (
