@@ -25,7 +25,7 @@ import UserPublicProfile from './UserPublicProfile';
 import RecipeItem from './RecipeItem';
 import PrivateRoute from './PrivateRoute';
 
-import { AuthProvider } from '../providers/AuthContext';
+import { AuthProvider,useAuth } from '../providers/AuthContext';
 import { useState, useEffect } from 'react';
 
 function App() {
@@ -33,6 +33,7 @@ function App() {
   const [fullData, setFullData] = useState([]);
   const [difficulty, setDifficulty] = useState('');
   const [cuisine, setCuisine] = useState('');
+  
 
   const handleDifficulty = (event) => {
     setDifficulty(event.target.value);
@@ -69,6 +70,7 @@ function App() {
       setResults(response.data);
       setFullData(response.data);
     });
+    
   }, []);
 
   return (
