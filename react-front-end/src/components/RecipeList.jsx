@@ -3,10 +3,8 @@ import axios from 'axios';
 import { Box, Button } from '@mui/material';
 import RecipeListItem from './RecipeListItem';
 
-const RecipeList = () => {
-  const [results, setResults] = useState([]);
-
-  console.log(results[0]);
+const RecipeList = ({ results }) => {
+  console.log(results);
 
   const parsedRecipes =
     Array.isArray(results) &&
@@ -24,7 +22,6 @@ const RecipeList = () => {
         />
       );
     });
-
 
   return (
     <Box
