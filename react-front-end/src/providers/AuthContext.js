@@ -9,10 +9,11 @@ export const useAuth = () => {
 }
 
 export const AuthProvider = props => {
-  const [auth, setAuth] = useState(false); // set back to false
+  const [auth, setAuth] = useState(false);
   const [token, setToken] = useState(localStorage.getItem('token') || null);
   const [user, setUser] = useState(null);
 
+  // check if token exists in local storage and set token to existing token
   useEffect(() => {
     const tokenCookie = localStorage.getItem('token');
     
@@ -24,6 +25,7 @@ export const AuthProvider = props => {
     return tokenCookie;
   }, []);
 
+  // create new user
   const register = (email, password, firstName, lastName, avatar) => {
     const registerAPI = 'http://localhost:3001/api/auth/register';
 

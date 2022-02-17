@@ -2,9 +2,7 @@ import { Redirect, Route } from "react-router-dom";
 import { useAuth } from "../providers/AuthContext"
 
 function PrivateRoute({ children, ...rest }) {
-  const { user, token } = useAuth();
-  console.log("in private route: ", user);
-  console.log("in private route: ", token);
+  const { token } = useAuth();
 
   return (
     <Route
