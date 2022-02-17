@@ -8,7 +8,7 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import BookmarkOutlinedIcon from "@mui/icons-material/BookmarkOutlined";
-
+import { useState } from "react";
 const RecipeListItem = (props) => {
   const {
     image_link,
@@ -20,10 +20,12 @@ const RecipeListItem = (props) => {
     restrictions,
   } = props;
   // console.log(id);
+
+  const [click, setClick] = useState(false);
   
   const onClick = () => {
     console.log(id);
-
+    setClick(!click);
   }
   return (
     <Box
@@ -44,7 +46,7 @@ const RecipeListItem = (props) => {
             label={restrictions}
           />
         )}
-        <FavoriteBorderOutlinedIcon
+        {click && <FavoriteOutlinedIcon
           fontSize="medium"
           onClick={onClick}
           sx={{
@@ -53,7 +55,18 @@ const RecipeListItem = (props) => {
             },
             
           }}
-        />
+        /> } 
+        {!click && <FavoriteBorderOutlinedIcon
+        fontSize="medium"
+        onClick={onClick}
+        sx={{
+          "&:hover": {
+            color: "orangered",
+          },
+          
+        }}
+      />}
+        
         <BookmarkBorderOutlinedIcon
           fontSize="medium"
           color="primary"
