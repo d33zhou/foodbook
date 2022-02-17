@@ -17,10 +17,10 @@ module.exports = (dbhelpers) =>{
   });
 
   /* POST /api/friends/unfollow add a friend */
-  router.post("/unfollow", function(req, res) { // delete by :id (then use params, otherwise body)
-    const { user_id_1, user_id_2 } = req.params;
+  router.delete("/unfollow", function(req, res) { // delete by :id (then use params, otherwise body)
+    const { user_id_1, user_id_2 } = req.body;
 
-    dbhelpers.removeFriend(user_id_1,user_id_2)
+    dbhelpers.removeFriend(user_id_1, user_id_2)
       .then(() => {
         res.send('Removed!');
       })

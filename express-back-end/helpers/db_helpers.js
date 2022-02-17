@@ -371,8 +371,8 @@ module.exports = (db) => {
     };
 
     return db.query(query)
-      .then(result => console.log(result))
-      .catch(err => err);
+      .then(result => result)
+      .catch(err => err.message);
 
   };
 
