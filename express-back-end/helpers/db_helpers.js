@@ -107,6 +107,18 @@ module.exports = (db) => {
       .catch((err) => err.message);
   };
 
+  // get true or false if user is followed by the logged in user
+  const getFollowStatus = (auth_user, target_user) => {
+    const query = {
+      text: `SELECT * FROM friends WHERE user_id_1 = $1 AND user_id_2 = $2`,
+      values: [auth_user, target_user]
+    };
+
+    return db.query(query)
+      .then(result => result.rowCount)
+      .catch(err => err.message);
+  };
+
   //get users likes
   const getUserLikes = (user_id,recipe_id) => {
     const query = {
@@ -461,14 +473,15 @@ module.exports = (db) => {
   // add a friend
   const addFriend = (user_id_1, user_id_2) => {
     const query = {
-      text: `INSERT INTO friends(user_id_1,user_id_2) VALUES ($1,$2)`,
-      values: [user_id_1, user_id_2],
+      text:`INSERT INTO friends(user_id_1, user_id_2) VALUES ($1, $2)`,
+      values: [user_id_1, user_id_2]
     };
 
     return db
       .query(query)
-      .then((result) => console.log(result))
-      .catch((err) => err);
+      .then(result => result)
+      .catch(err => err.message);
+
   };
 
   // remove a friend
@@ -480,8 +493,9 @@ module.exports = (db) => {
 
     return db
       .query(query)
-      .then((result) => console.log(result))
-      .catch((err) => err);
+      .then(result => result)
+      .catch(err => err.message);
+
   };
 
   return {
@@ -513,5 +527,6 @@ module.exports = (db) => {
     getFollowersByUser,
     getRecipesByUser,
     getBookmarksByUser,
+    getFollowStatus,
   };
 };

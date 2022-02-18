@@ -32,9 +32,9 @@ app.use('/api/users', usersRouter(dbHelpers));
 app.use('/api/recipes', recipesRouter(dbHelpers));
 app.use('/api/auth',authRouter(dbHelpers));
 app.use('/api/ingredients',ingredientRouter(dbHelpers));
+app.use('/api/friends',friendsRouter(dbHelpers));
 app.use('/api',likesRouter(dbHelpers));
 app.use('/api',bookmarksRouter(dbHelpers));
-app.use('/api',friendsRouter(dbHelpers));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
