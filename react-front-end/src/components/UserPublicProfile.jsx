@@ -46,9 +46,9 @@ const UserPublicProfile = (props) => {
   return (
     <Container>
       <hr/>
-      <UserDetails {...otherUser} following={following} />
+      <UserDetails {...otherUser} following={following} setFollowing={setFollowing} />
       <hr/>
-      <UserFollowerList id={id} />
+      <UserFollowerList id={id} following={following} />
       <hr/>
       <UserRecipeList id={id} first_name={otherUser.first_name} />
     </Container>

@@ -20,7 +20,7 @@ const UserDetails = (props) => {
 
     axios
       .post(addFollowURL, friendPairing)
-      .then(() => console.log('added new follow')) //setFollowing(true)
+      .then(() => setFollowing(true))
       .catch(err => err.message);
   };
 
@@ -34,13 +34,9 @@ const UserDetails = (props) => {
 
     axios
       .delete(removeFollowURL, { data: friendPairing})
-      .then(() => console.log('removed the follow')) //setFollowing(false)
+      .then(() => setFollowing(false))
       .catch(err => err.message);
   };
-
-  useEffect(() => {
-    
-  }, [following]);
 
   return (
     <Stack direction="row" justifyContent="space-between" alignItems="center">
