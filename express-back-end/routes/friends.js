@@ -1,13 +1,24 @@
-let express = require("express");
-let router = express.Router();
+const express = require("express");
+const router = express.Router();
 
 module.exports = (dbhelpers) =>{
   
-  /* POST /api/friend add a friend */
-  router.post("/friend", function(req, res) {
-    const { user_id_1, user_id_2 } = req.params;
+  /* GET /api/friends/status check if following a user */
+  router.get("/status", function(req, res) {
+    const { auth_user, target_user } = req.query;
 
-    dbhelpers.addFriend(user_id_1,user_id_2)
+    dbhelpers.getFollowStatus(auth_user, target_user)
+      .then(result => {
+        res.json(result);
+      })
+      .catch(err => err.message);
+  });
+
+  /* POST /api/friends/follow add a friend */
+  router.post("/follow", function(req, res) {
+    const { user_id_1, user_id_2 } = req.body;
+
+    dbhelpers.addFriend(user_id_1, user_id_2)
       .then(() => {
         res.send('Added!');
       })
@@ -16,11 +27,11 @@ module.exports = (dbhelpers) =>{
       }));
   });
 
-  /* POST /api/unfriend add a friend */
-  router.post("/unfriend", function(req, res) {
-    const { user_id_1, user_id_2 } = req.params;
+  /* POST /api/friends/unfollow add a friend */
+  router.delete("/unfollow", function(req, res) {
+    const { user_id_1, user_id_2 } = req.body;
 
-    dbhelpers.removeFriend(user_id_1,user_id_2)
+    dbhelpers.removeFriend(user_id_1, user_id_2)
       .then(() => {
         res.send('Removed!');
       })
