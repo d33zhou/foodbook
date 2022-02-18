@@ -110,12 +110,12 @@ module.exports = (db) => {
   //get users likes
   const getUserLikes = (user_id,recipe_id) => {
     const query = {
-      text: `SELECT recipe_id FROM likes WHERE user_id = $1`,
+      text: `SELECT recipe_id  FROM likes  WHERE user_id = $1`,
       values: [user_id],
     };
 
     const query2 = {
-      text: `SELECT COUNT(*) FROM likes WHERE recipe_id = $1`,
+      text: `SELECT COUNT(*) FROM likes  WHERE recipe_id = $1`,
       values: [recipe_id],
     };
 

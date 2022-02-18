@@ -74,7 +74,7 @@ function App() {
   }, []);
 
   return (
-    <AuthProvider>
+    
       <Router>
         <CssBaseline />
         <Box
@@ -198,7 +198,7 @@ function App() {
           </Switch>
         </Box>
       </Router>
-    </AuthProvider>
+   
   );
 }
 

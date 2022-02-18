@@ -4,8 +4,7 @@ import { Box, Button } from '@mui/material';
 import RecipeListItem from './RecipeListItem';
 
 const RecipeList = ({ results }) => {
-  console.log('results', results);
-
+  
   const parsedRecipes =
     results.length > 0 &&
     results.map((recipe) => {
