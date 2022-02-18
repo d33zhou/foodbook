@@ -110,6 +110,7 @@ const SearchAppBar = () => {
             /> */}
           <Autocomplete
             autoHighlight
+            freeSolo
             id='combo-box-demo'
             autoFocus={true}
             sx={{ width: 300 }}

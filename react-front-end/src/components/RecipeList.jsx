@@ -18,6 +18,7 @@ const RecipeList = ({ results }) => {
           cuisine={recipe.cuisine}
           restrictions={recipe.dietary_restriction}
           prepTime={recipe.prep_minutes}
+          difficulty={recipe.difficulty}
         />
       );
     });

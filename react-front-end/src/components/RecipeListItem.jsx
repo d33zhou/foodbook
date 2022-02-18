@@ -21,8 +21,9 @@ const RecipeListItem = (props) => {
     cuisine,
     prepTime,
     restrictions,
+    difficulty
   } = props;
-  // console.log(id);
+  
   const { user } = useAuth();
   const [like, setLike] = useState(false);
   const [numberOfLikes, setNumberOfLikes] = useState(0);
@@ -119,6 +120,7 @@ const RecipeListItem = (props) => {
             label={restrictions}
           />
         )}
+        {difficulty}
         {like && (
           <FavoriteOutlinedIcon
             fontSize='medium'

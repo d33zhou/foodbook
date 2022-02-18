@@ -78,8 +78,8 @@ const RecipeFilters = (props) => {
             control={
               <Radio />
             }
-            value='lebanese' 
-            label="Lebanese"
+            value='spanish' 
+            label="Spanish"
           />
           <FormControlLabel
             control={
@@ -92,8 +92,8 @@ const RecipeFilters = (props) => {
             control={
               <Radio />
             }
-            value='japanese' 
-            label="Japanese"
+            value='italian' 
+            label="Italian"
           />
         </RadioGroup>
       </FormControl>
