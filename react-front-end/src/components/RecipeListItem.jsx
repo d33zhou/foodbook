@@ -98,8 +98,18 @@ const RecipeListItem = (props) => {
         paddingRight: '4rem',
       }}>
       <Link to={`/recipe/${id}`}>
-        <img src={image_link} alt='' />
+        <Box
+          component='div'
+          sx={{
+            display: 'block',
+            backgroundImage: `url(${image_link})`,
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            maxWidth: '100%',
+            height: '400px',
+          }}></Box>
       </Link>
+
       <Stack direction='row' spacing={1}>
         <Chip icon={<DinnerDiningOutlinedIcon />} label={`${cuisine}`} />
         <Chip icon={<AccessTimeOutlinedIcon />} label={`${prepTime} minutes`} />

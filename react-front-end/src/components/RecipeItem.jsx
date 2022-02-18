@@ -86,7 +86,16 @@ const RecipeItem = () => {
           gutterBottom>
           {title}
         </Typography>
-        <img src={image_link} alt='' />
+        <Box
+          component='div'
+          sx={{
+            display: 'block',
+            backgroundImage: `url(${image_link})`,
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            maxWidth: '100%',
+            height: '400px',
+          }}></Box>
         <Stack direction='row' spacing={1}>
           <Chip icon={<DinnerDiningOutlinedIcon />} label={`${cuisine}`} />
           <Chip
