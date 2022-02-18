@@ -32,6 +32,13 @@ const RecipeFilters = (props) => {
             control={
               <Radio />
             }
+            value='all' 
+            label="All"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
             value='easy' 
             label="Easy"
           />
@@ -64,8 +71,15 @@ const RecipeFilters = (props) => {
             control={
               <Radio />
             }
-            value='thai' 
-            label="Thai"
+            value='all' 
+            label="All"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='lebanese' 
+            label="Lebanese"
           />
           <FormControlLabel
             control={

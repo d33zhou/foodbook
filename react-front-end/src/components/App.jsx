@@ -31,23 +31,36 @@ import { useState, useEffect } from 'react';
 function App() {
   const [results, setResults] = useState([]);
   const [fullData, setFullData] = useState([]);
-  const [difficulty, setDifficulty] = useState('');
-  const [cuisine, setCuisine] = useState('');
+  const [difficulty, setDifficulty] = useState('all');
+  const [cuisine, setCuisine] = useState('all');
   
 
   const handleDifficulty = (event) => {
     setDifficulty(event.target.value);
+    if(event.target.value === 'all'){
+      const difficultyResults = [
+        ...fullData.filter((recipe) => {
+          return (
+            recipe.difficulty === 'easy' && recipe.difficulty === 'moderate' && recipe.difficulty === 'challenging' &&
+            recipe.cuisine === (cuisine || 'thai')
+          );
+        }),
+      ];
+      setResults(difficultyResults);
+    } else {
+      const difficultyResults = [
+        ...fullData.filter((recipe) => {
+          return (
+            recipe.difficulty === event.target.value &&
+            recipe.cuisine === (cuisine || 'thai')
+          );
+        }),
+      ];
+      setResults(difficultyResults);
+    }
+    
 
-    const difficultyResults = [
-      ...fullData.filter((recipe) => {
-        return (
-          recipe.difficulty === event.target.value &&
-          recipe.cuisine === (cuisine || 'thai')
-        );
-      }),
-    ];
-
-    setResults(difficultyResults);
+    
   };
 
   const handleCuisine = (event) => {
