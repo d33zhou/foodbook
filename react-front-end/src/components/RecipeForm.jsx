@@ -21,7 +21,7 @@ const RecipeForm = () => {
   const [recipe, setRecipe] = useState({
     title: '',
     image: '',
-    // description: '',
+    description: '',
     directions: '',
     prepTime: 0,
     difficulty: '',
@@ -80,7 +80,7 @@ const RecipeForm = () => {
       .post('http://localhost:3001/api/recipes/', recipeBody)
       .then((response) => response.data)
       .then((recipeObj) => {
-        console.log(recipeObj);
+        console.log('recipeObj', recipeObj);
         const ingredientsBody = ingredientFields.map((ingredient) => ({
           ...ingredient,
           recipeId: recipeObj.id,
@@ -100,7 +100,7 @@ const RecipeForm = () => {
       })
       .catch((err) => console.log('Error: ', err.message));
   };
-
+  // .then(history.push(`/recipe/${recipeObj.id}`))
   return (
     <Box
       sx={{
@@ -150,7 +150,7 @@ const RecipeForm = () => {
             }
           />
 
-          {/* <TextField
+          <TextField
             fullWidth
             multiline
             label='Description'
@@ -161,7 +161,7 @@ const RecipeForm = () => {
                 description: e.target.value,
               })
             }
-          /> */}
+          />
 
           {ingredientFields.map((ingredient, index) => {
             return (

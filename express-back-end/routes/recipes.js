@@ -76,6 +76,7 @@ module.exports = (dbHelpers) => {
     const {
       title,
       image,
+      description,
       directions,
       prepTime,
       servings,
@@ -89,6 +90,7 @@ module.exports = (dbHelpers) => {
       .createRecipe(
         title,
         image,
+        description,
         directions,
         prepTime,
         servings,
