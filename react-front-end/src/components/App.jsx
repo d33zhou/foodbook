@@ -24,6 +24,7 @@ import User from './User';
 import UserPublicProfile from './UserPublicProfile';
 import RecipeItem from './RecipeItem';
 import PrivateRoute from './PrivateRoute';
+import BookmarkList from './BookmarkList';
 
 import { AuthProvider,useAuth } from '../providers/AuthContext';
 import { useState, useEffect } from 'react';
@@ -108,6 +109,52 @@ function App() {
                   />
                 </Box>
               </Container>
+            </PrivateRoute>
+
+            <PrivateRoute path='/explore'>
+              <SearchAppBar />
+              
+              <Container maxWidth='lg'>
+                <Box
+                  maxWidth='lg'
+                  mx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-start',
+                    columnGap: '4rem',
+                    margin: '0 auto',
+                  }}>
+                  <Navigation />
+                  <Box>
+                    <RecipeList results={results} />
+                  </Box>
+                  <RecipeFilters
+                    difficulty={difficulty}
+                    cuisine={cuisine}
+                    handleDifficulty={handleDifficulty}
+                    handleCuisine={handleCuisine}
+                  />
+                </Box>
+              </Container>
+            </PrivateRoute>
+
+            <PrivateRoute path='/bookmarks'>
+              <Container>
+                  <Box
+                    maxWidth='lg'
+                    mx={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'flex-start',
+                      columnGap: '4rem',
+                      margin: '0 auto',
+                    }}>
+                    <Navigation />
+                    <Box>
+                      <BookmarkList fullData={fullData} />
+                    </Box>
+                  </Box>
+                </Container>
             </PrivateRoute>
 
             <PrivateRoute path='/create'>
