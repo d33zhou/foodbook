@@ -37,59 +37,89 @@ function App() {
 
   const handleDifficulty = (event) => {
     setDifficulty(event.target.value);
-    console.log(cuisine);
-    console.log(event.target.value);
     if (cuisine === "all" && event.target.value === "all" && diet === "all") {
-      console.log("inside difficulty all statement")
       setResults(fullData);
-    } else if(cuisine !== "all" && event.target.value === "all" && diet === "all"){
+    } else if (
+      cuisine !== "all" &&
+      event.target.value === "all" &&
+      diet === "all"
+    ) {
       const difficultyResults = [
         ...fullData.filter((recipe) => {
           return recipe.cuisine === cuisine;
-        })
+        }),
       ];
       setResults(difficultyResults);
-    }else if (cuisine === "all" && diet === "all" && event.target.value !== "all") {
+    } else if (
+      cuisine === "all" &&
+      diet === "all" &&
+      event.target.value !== "all"
+    ) {
       const difficultyResults = [
         ...fullData.filter((recipe) => {
           return recipe.difficulty === event.target.value;
         }),
       ];
       setResults(difficultyResults);
-    } else if(cuisine === "all" && diet !== "all" && event.target.value !== "all"){
+    } else if (
+      cuisine === "all" &&
+      diet !== "all" &&
+      event.target.value !== "all"
+    ) {
       const difficultyResults = [
         ...fullData.filter((recipe) => {
-          return recipe.difficulty === event.target.value && recipe.dietary_restriction === diet;
+          return (
+            recipe.difficulty === event.target.value &&
+            recipe.dietary_restriction === diet
+          );
         }),
       ];
       setResults(difficultyResults);
-    }else if (cuisine === "all" && diet !== "all" && event.target.value === "all") {
+    } else if (
+      cuisine === "all" &&
+      diet !== "all" &&
+      event.target.value === "all"
+    ) {
       const difficultyResults = [
         ...fullData.filter((recipe) => {
           return recipe.dietary_restriction === diet;
         }),
       ];
       setResults(difficultyResults);
-    } else if(cuisine !== "all" && diet !== "all" && event.target.value === "all"){
+    } else if (
+      cuisine !== "all" &&
+      diet !== "all" &&
+      event.target.value === "all"
+    ) {
       const difficultyResults = [
         ...fullData.filter((recipe) => {
-          return recipe.dietary_restriction === diet && recipe.cuisine === cuisine;
+          return (
+            recipe.dietary_restriction === diet && recipe.cuisine === cuisine
+          );
         }),
       ];
       setResults(difficultyResults);
-    } else if(cuisine !== "all" && diet === "all" && event.target.value !== "all"){
-      const difficultyResults = [
-        ...fullData.filter((recipe) => {
-          return recipe.difficulty === event.target.value && recipe.cuisine === cuisine;
-        }),
-      ];
-      setResults(difficultyResults);
-    }else {
+    } else if (
+      cuisine !== "all" &&
+      diet === "all" &&
+      event.target.value !== "all"
+    ) {
       const difficultyResults = [
         ...fullData.filter((recipe) => {
           return (
             recipe.difficulty === event.target.value &&
-            recipe.cuisine === cuisine && recipe.dietary_restriction === diet
+            recipe.cuisine === cuisine
+          );
+        }),
+      ];
+      setResults(difficultyResults);
+    } else {
+      const difficultyResults = [
+        ...fullData.filter((recipe) => {
+          return (
+            recipe.difficulty === event.target.value &&
+            recipe.cuisine === cuisine &&
+            recipe.dietary_restriction === diet
           );
         }),
       ];
@@ -99,59 +129,94 @@ function App() {
 
   const handleCuisine = (event) => {
     setCuisine(event.target.value);
-    console.log(difficulty);
-    console.log(event.target.value);
-    if (difficulty === "all" && event.target.value === "all" && diet === "all") {
-      console.log("inside cuisine all statement")
+    if (
+      difficulty === "all" &&
+      event.target.value === "all" &&
+      diet === "all"
+    ) {
       setResults(fullData);
-    } else if(difficulty !== "all" && event.target.value === "all" && diet === "all"){
+    } else if (
+      difficulty !== "all" &&
+      event.target.value === "all" &&
+      diet === "all"
+    ) {
       const cuisineResults = [
         ...fullData.filter((recipe) => {
           return recipe.difficulty === difficulty;
-        })
+        }),
       ];
       setResults(cuisineResults);
-    }else if (difficulty === "all" && event.target.value !== "all" && diet === "all") {
+    } else if (
+      difficulty === "all" &&
+      event.target.value !== "all" &&
+      diet === "all"
+    ) {
       const cuisineResults = [
         ...fullData.filter((recipe) => {
           return recipe.cuisine === event.target.value;
         }),
       ];
       setResults(cuisineResults);
-    } else if(difficulty === "all" && diet !== "all" && event.target.value === "all"){
+    } else if (
+      difficulty === "all" &&
+      diet !== "all" &&
+      event.target.value === "all"
+    ) {
       const cuisineResults = [
         ...fullData.filter((recipe) => {
           return recipe.dietary_restriction === diet;
         }),
       ];
       setResults(cuisineResults);
-    }else if (difficulty === "all" && diet !== "all" && event.target.value !== "all"){
+    } else if (
+      difficulty === "all" &&
+      diet !== "all" &&
+      event.target.value !== "all"
+    ) {
       const cuisineResults = [
         ...fullData.filter((recipe) => {
-          return recipe.dietary_restriction === diet && recipe.cuisine === event.target.value;
+          return (
+            recipe.dietary_restriction === diet &&
+            recipe.cuisine === event.target.value
+          );
         }),
       ];
       setResults(cuisineResults);
-    } else if (difficulty !== "all" && diet !== "all" && event.target.value === "all"){
+    } else if (
+      difficulty !== "all" &&
+      diet !== "all" &&
+      event.target.value === "all"
+    ) {
       const cuisineResults = [
         ...fullData.filter((recipe) => {
-          return recipe.dietary_restriction === diet && recipe.difficulty === difficulty;
+          return (
+            recipe.dietary_restriction === diet &&
+            recipe.difficulty === difficulty
+          );
         }),
       ];
       setResults(cuisineResults);
-    } else if(difficulty !== "all" && diet === "all" && event.target.value !== "all"){
-      const cuisineResults = [
-        ...fullData.filter((recipe) => {
-          return recipe.cuisine === event.target.value && recipe.difficulty === difficulty;
-        }),
-      ];
-      setResults(cuisineResults);
-    }else {
+    } else if (
+      difficulty !== "all" &&
+      diet === "all" &&
+      event.target.value !== "all"
+    ) {
       const cuisineResults = [
         ...fullData.filter((recipe) => {
           return (
             recipe.cuisine === event.target.value &&
-            recipe.difficulty === (difficulty) && recipe.dietary_restriction === diet
+            recipe.difficulty === difficulty
+          );
+        }),
+      ];
+      setResults(cuisineResults);
+    } else {
+      const cuisineResults = [
+        ...fullData.filter((recipe) => {
+          return (
+            recipe.cuisine === event.target.value &&
+            recipe.difficulty === difficulty &&
+            recipe.dietary_restriction === diet
           );
         }),
       ];
@@ -160,65 +225,98 @@ function App() {
   };
 
   const handleDiet = (event) => {
-    console.log(event.target.value);
     setDiet(event.target.value);
-    if (difficulty === "all" && event.target.value === "all" && cuisine === "all") {
-      console.log("inside diet all statement")
+    if (
+      difficulty === "all" &&
+      event.target.value === "all" &&
+      cuisine === "all"
+    ) {
       setResults(fullData);
-    } else if(difficulty !== "all" && event.target.value === "all" && cuisine === "all"){
+    } else if (
+      difficulty !== "all" &&
+      event.target.value === "all" &&
+      cuisine === "all"
+    ) {
       const dietResults = [
         ...fullData.filter((recipe) => {
           return recipe.difficulty === difficulty;
-        })
+        }),
       ];
       setResults(dietResults);
-    }else if (difficulty === "all" && event.target.value !== "all" && cuisine === "all") {
+    } else if (
+      difficulty === "all" &&
+      event.target.value !== "all" &&
+      cuisine === "all"
+    ) {
       const dietResults = [
         ...fullData.filter((recipe) => {
           return recipe.dietary_restriction === event.target.value;
         }),
       ];
       setResults(dietResults);
-    } else if(difficulty === "all" && cuisine !== "all" && event.target.value === "all"){
+    } else if (
+      difficulty === "all" &&
+      cuisine !== "all" &&
+      event.target.value === "all"
+    ) {
       const dietResults = [
         ...fullData.filter((recipe) => {
           return recipe.cuisine === cuisine;
         }),
       ];
       setResults(dietResults);
-    }else if (difficulty === "all" && cuisine !== "all" && event.target.value !== "all"){
+    } else if (
+      difficulty === "all" &&
+      cuisine !== "all" &&
+      event.target.value !== "all"
+    ) {
       const dietResults = [
         ...fullData.filter((recipe) => {
-          return recipe.dietary_restriction === event.target.value && recipe.cuisine === cuisine;
+          return (
+            recipe.dietary_restriction === event.target.value &&
+            recipe.cuisine === cuisine
+          );
         }),
       ];
       setResults(dietResults);
-    } else if (difficulty !== "all" && cuisine !== "all" && event.target.value === "all"){
+    } else if (
+      difficulty !== "all" &&
+      cuisine !== "all" &&
+      event.target.value === "all"
+    ) {
       const dietResults = [
         ...fullData.filter((recipe) => {
           return recipe.cuisine === cuisine && recipe.difficulty === difficulty;
         }),
       ];
       setResults(dietResults);
-    } else if(difficulty !== "all" && cuisine === "all" && event.target.value !== "all"){
-      const dietResults = [
-        ...fullData.filter((recipe) => {
-          return recipe.dietary_restriction === event.target.value && recipe.difficulty === difficulty;
-        }),
-      ];
-      setResults(dietResults);
-    }else {
+    } else if (
+      difficulty !== "all" &&
+      cuisine === "all" &&
+      event.target.value !== "all"
+    ) {
       const dietResults = [
         ...fullData.filter((recipe) => {
           return (
             recipe.dietary_restriction === event.target.value &&
-            recipe.difficulty === (difficulty ) && recipe.cuisine === cuisine
+            recipe.difficulty === difficulty
+          );
+        }),
+      ];
+      setResults(dietResults);
+    } else {
+      const dietResults = [
+        ...fullData.filter((recipe) => {
+          return (
+            recipe.dietary_restriction === event.target.value &&
+            recipe.difficulty === difficulty &&
+            recipe.cuisine === cuisine
           );
         }),
       ];
       setResults(dietResults);
     }
-  }
+  };
 
   useEffect(() => {
     const testURL = `http://localhost:3001/api/recipes`;
@@ -254,6 +352,18 @@ function App() {
               >
                 <Navigation />
                 <Box>
+                  {results.length === 0 && (
+                    <Typography
+                      variant="h3"
+                      component="h1"
+                      color="primary"
+                      fontWeight="bold"
+                      gutterBottom
+                      width="700px"
+                    >
+                      Sorry! There are no results. Please try another filter.
+                    </Typography>
+                  )}
                   <RecipeList results={results} />
                 </Box>
                 <RecipeFilters
