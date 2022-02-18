@@ -5,7 +5,7 @@ import { useEffect,useState } from 'react';
 
 const RecipeFilters = (props) => {
   
-  const {difficulty,handleDifficulty,cuisine,handleCuisine } = props;
+  const {difficulty,handleDifficulty,cuisine,handleCuisine,diet,handleDiet } = props;
   
   
   return (
@@ -94,6 +94,44 @@ const RecipeFilters = (props) => {
             }
             value='italian' 
             label="Italian"
+          />
+        </RadioGroup>
+      </FormControl>
+      <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
+        <FormLabel component="legend">Dietary Restrictions</FormLabel>
+        <FormHelperText>Select any one</FormHelperText>
+        <RadioGroup
+          aria-labelledby="demo-error-radios"
+          value={diet}
+          onChange={handleDiet}
+        >
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='all' 
+            label="All"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='keto' 
+            label="Keto"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='vegan' 
+            label="Vegan"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='vegetarian' 
+            label="Vegetarian"
           />
         </RadioGroup>
       </FormControl>
