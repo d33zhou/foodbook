@@ -63,11 +63,13 @@ const SearchAppBar = () => {
   // console.log(query);
 
   useEffect(() => {
-    const searchURL = `http://localhost:3001/api/recipes/search`;
+    if(query){
+      const searchURL = `http://localhost:3001/api/recipes/search`;
     axios.post(searchURL, { title: query }).then((response) => {
       setSearchResults([...response.data]);
       // console.log(response.data);
     });
+    }
   }, [query]);
 
   // console.log(searchResults);
