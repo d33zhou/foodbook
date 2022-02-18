@@ -44,8 +44,9 @@ const RecipeListItem = (props) => {
       });
     }
   };
-
-  const getLikesURL = `http://localhost:3001/api/like`;
+  
+  const handleUserLikes = () => {
+    const getLikesURL = `http://localhost:3001/api/like`;
   axios
     .get(getLikesURL, { params: { user_id: user.id, recipe_id: id } })
     .then((res) => {
@@ -58,6 +59,9 @@ const RecipeListItem = (props) => {
       setNumberOfLikes(response.count.count);
     })
     .catch((err) => console.log(err.message));
+  }
+  
+  
 
   const handleBookmark = () => {
     setBookmark(!bookmark);
@@ -78,7 +82,8 @@ const RecipeListItem = (props) => {
     }
   };
 
-  const getBookmarksURL = `http://localhost:3001/api/bookmark`;
+  const handleUserBookmarks = () => {
+    const getBookmarksURL = `http://localhost:3001/api/bookmark`;
   axios
     .get(getBookmarksURL, { params: { user_id: user.id, recipe_id: id } })
     .then((res) => {
@@ -91,6 +96,11 @@ const RecipeListItem = (props) => {
       setNumberOfBookmarks(response.count.count);
     })
     .catch((err) => console.log(err.message));
+  }
+  
+
+    useEffect(() => handleUserLikes());
+    useEffect(() => handleUserBookmarks());
 
   return (
     <Box

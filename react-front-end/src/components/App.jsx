@@ -5,6 +5,7 @@ import {
   CssBaseline,
   ScopedCssBaseline,
   Typography,
+  CircularProgress
 } from "@mui/material";
 import "./App.css";
 import {
@@ -27,6 +28,7 @@ import PrivateRoute from "./PrivateRoute";
 
 import { AuthProvider, useAuth } from "../providers/AuthContext";
 import { useState, useEffect } from "react";
+import loadingGif from '../loading.gif';
 
 function App() {
   const [results, setResults] = useState([]);
@@ -34,38 +36,30 @@ function App() {
   const [difficulty, setDifficulty] = useState("all");
   const [cuisine, setCuisine] = useState("all");
   const [diet, setDiet] = useState("all");
+  const [loading,setLoading] = useState(false);
 
   const handleDifficulty = (event) => {
+    const allCuisinesSelected = cuisine === "all";
+    const allDifficultiesSelected = event.target.value === "all";
+    const allDietsSelected = diet === "all";
+
     setDifficulty(event.target.value);
-    if (cuisine === "all" && event.target.value === "all" && diet === "all") {
+    if (allCuisinesSelected && allDifficultiesSelected && allDietsSelected) {
       setResults(fullData);
-    } else if (
-      cuisine !== "all" &&
-      event.target.value === "all" &&
-      diet === "all"
-    ) {
-      const difficultyResults = [
-        ...fullData.filter((recipe) => {
-          return recipe.cuisine === cuisine;
-        }),
-      ];
+
+    } else if (!allCuisinesSelected && allDifficultiesSelected && allDietsSelected) {
+      const difficultyResults = [...fullData.filter(recipe => recipe.cuisine === cuisine)];
       setResults(difficultyResults);
-    } else if (
-      cuisine === "all" &&
-      diet === "all" &&
-      event.target.value !== "all"
-    ) {
-      const difficultyResults = [
-        ...fullData.filter((recipe) => {
-          return recipe.difficulty === event.target.value;
-        }),
-      ];
+
+    } else if (allCuisinesSelected && !allDietsSelected && allDifficultiesSelected) {
+      const difficultyResults = [...fullData.filter(recipe => recipe.dietary_restriction === diet)];
       setResults(difficultyResults);
-    } else if (
-      cuisine === "all" &&
-      diet !== "all" &&
-      event.target.value !== "all"
-    ) {
+
+    } else if (allCuisinesSelected && allDietsSelected && !allDifficultiesSelected) {
+      const difficultyResults = [...fullData.filter(recipe => recipe.difficulty === event.target.value)];
+      setResults(difficultyResults);
+
+    } else if (allCuisinesSelected && !allDietsSelected && !allDifficultiesSelected) {
       const difficultyResults = [
         ...fullData.filter((recipe) => {
           return (
@@ -75,35 +69,8 @@ function App() {
         }),
       ];
       setResults(difficultyResults);
-    } else if (
-      cuisine === "all" &&
-      diet !== "all" &&
-      event.target.value === "all"
-    ) {
-      const difficultyResults = [
-        ...fullData.filter((recipe) => {
-          return recipe.dietary_restriction === diet;
-        }),
-      ];
-      setResults(difficultyResults);
-    } else if (
-      cuisine !== "all" &&
-      diet !== "all" &&
-      event.target.value === "all"
-    ) {
-      const difficultyResults = [
-        ...fullData.filter((recipe) => {
-          return (
-            recipe.dietary_restriction === diet && recipe.cuisine === cuisine
-          );
-        }),
-      ];
-      setResults(difficultyResults);
-    } else if (
-      cuisine !== "all" &&
-      diet === "all" &&
-      event.target.value !== "all"
-    ) {
+
+    } else if (!allCuisinesSelected && allDietsSelected && !allDifficultiesSelected) {
       const difficultyResults = [
         ...fullData.filter((recipe) => {
           return (
@@ -113,6 +80,18 @@ function App() {
         }),
       ];
       setResults(difficultyResults);
+
+    } else if (!allCuisinesSelected && !allDietsSelected && allDifficultiesSelected) {
+      const difficultyResults = [
+        ...fullData.filter((recipe) => {
+          return (
+            recipe.dietary_restriction === diet && 
+            recipe.cuisine === cuisine
+          );
+        }),
+      ];
+      setResults(difficultyResults);
+    
     } else {
       const difficultyResults = [
         ...fullData.filter((recipe) => {
@@ -319,13 +298,26 @@ function App() {
   };
 
   useEffect(() => {
-    const testURL = `http://localhost:3001/api/recipes`;
-    axios.get(testURL).then((response) => {
-      setResults(response.data);
-      setFullData(response.data);
-    });
+    setLoading(true);
+    setTimeout(() => {
+      const testURL = `http://localhost:3001/api/recipes`;
+      axios.get(testURL).then((response) => {
+        setResults(response.data);
+        setFullData(response.data);
+        setLoading(false);
+      });
+    },5000)
+    
   }, []);
 
+  if(loading) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent:'center' , alignItems:'center', width:'100vw', height:'100vh'}}>
+        {/* <CircularProgress /> */}
+        <img src={loadingGif} alt="Loading recipe GIF" />
+      </Box>
+    );
+  }
   return (
     <Router>
       <CssBaseline />
