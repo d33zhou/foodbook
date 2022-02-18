@@ -6,17 +6,19 @@ import axios from 'axios';
 const UserFollowerList = (props) => {
   const { id, setFollowing } = props;
   const [results, setResults] = useState([]);
-  
+
   // array of users that follow the logged in user
-  const allFollowers = results.length > 0 && results.map(follower => {
+  let allFollowers = results.length > 0 && results.map(follower => {
     return (
       <UserFollowListItem
         key={follower.id}
         {...follower}
-        setFollowing={setFollowing}
+        
       />
     );
   });
+
+//setFollowing={setFollowing}
 
   // get the array of following user objects (incl. name, avatar)
   useEffect(() => {
@@ -25,6 +27,16 @@ const UserFollowerList = (props) => {
       .then(res => {
         setResults([...res.data]);
       });
+
+      // allFollowers = results.length > 0 && results.map(follower => {
+      //   return (
+      //     <UserFollowListItem
+      //       key={follower.id}
+      //       {...follower}
+      //       setFollowing={setFollowing}
+      //     />
+      //   );
+      // });
   }, [id]);
 
   // display block for the user icons for all followers of the logged in user

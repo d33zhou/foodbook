@@ -8,11 +8,11 @@ const UserFollowListItem = (props) => {
   const history = useHistory();
   const { user } = useAuth();
 
-  useEffect(() => {
-    if (setFollowing && user.id === id) {
-      setFollowing(true);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (setFollowing && user.id !== id) {
+  //     setFollowing(true);
+  //   }
+  // }, [id]);
 
   // render followed user avatar icon and name
   return (

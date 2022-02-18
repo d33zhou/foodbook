@@ -4,6 +4,7 @@ import AddReactionOutlinedIcon from '@mui/icons-material/AddReactionOutlined';
 import axios from "axios";
 
 import { useAuth } from '../providers/AuthContext';
+import { useEffect } from "react";
 
 const UserDetails = (props) => {
   const { id, avatar, first_name, last_name, email, following, setFollowing } = props; // represents either the logged in user or user profile being viewed, depending on if called from User component or UserPublicProfile compoennt, respectively
@@ -19,7 +20,7 @@ const UserDetails = (props) => {
 
     axios
       .post(addFollowURL, friendPairing)
-      .then(() => setFollowing(true))
+      .then(() => console.log('added new follow')) //setFollowing(true)
       .catch(err => err.message);
   };
 
@@ -33,10 +34,13 @@ const UserDetails = (props) => {
 
     axios
       .delete(removeFollowURL, { data: friendPairing})
-      .then(() => setFollowing(false))
+      .then(() => console.log('removed the follow')) //setFollowing(false)
       .catch(err => err.message);
+  };
+
+  useEffect(() => {
     
-  }
+  }, [following]);
 
   return (
     <Stack direction="row" justifyContent="space-between" alignItems="center">
