@@ -108,6 +108,24 @@ module.exports = (db) => {
       .catch((err) => err.message);
   };
 
+  // get true or false if user is followed by the logged in user
+  const getFollowStatus = (auth_user, target_user) => {
+    
+    console.log("GET DB QUERY IS HIT with: ", auth_user, ' and ', target_user) //-----------------
+    
+    const query = {
+      text: `SELECT * FROM friends WHERE user_id_1 = $1 AND user_id_2 = $2`,
+      values: [auth_user, target_user]
+    };
+
+    return db.query(query)
+      .then(result => {
+        console.log("#rows returned: ", result.rowCount);
+        return result.rowCount;
+      })
+      .catch(err => err.message);
+  };
+
 
   //-------> Recipe helpers <------------
   //get all recipes in db
@@ -404,5 +422,6 @@ module.exports = (db) => {
     getFollowersByUser,
     getRecipesByUser,
     getBookmarksByUser,
+    getFollowStatus,
   };
 };

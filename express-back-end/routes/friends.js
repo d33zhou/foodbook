@@ -3,6 +3,20 @@ const router = express.Router();
 
 module.exports = (dbhelpers) =>{
   
+  /* GET /api/friends/status check if following a user */
+  router.get("/status", function(req, res) {
+    const { auth_user, target_user } = req.query;
+    
+    console.log('auth: ', auth_user, ' and target: ', target_user) //-----------------------
+
+    dbhelpers.getFollowStatus(auth_user, target_user)
+      .then(result => {
+        console.log("success in friends router: ", result)
+        res.json(result);
+      })
+      .catch(err => err.message);
+  });
+
   /* POST /api/friends/follow add a friend */
   router.post("/follow", function(req, res) {
     const { user_id_1, user_id_2 } = req.body;
