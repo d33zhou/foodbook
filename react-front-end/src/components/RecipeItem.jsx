@@ -18,7 +18,8 @@ const RecipeItem = () => {
   const {
     title,
     image_link,
-    instructions,
+    description,
+    directions,
     creator_id,
     cuisine,
     dietary_restriction,
@@ -105,7 +106,10 @@ const RecipeItem = () => {
             color='secondary'
           />
         </Stack>
-        <Typography variant='p'>{instructions}</Typography>
+        <Typography variant='h4'>Description</Typography>
+        <Typography variant='p'>{description}</Typography>
+        <Typography variant='h4'>Directions</Typography>
+        <Typography variant='p'>{directions}</Typography>
       </Box>
       <Box
         sx={{

@@ -1,16 +1,50 @@
-INSERT INTO
-bookmarks(user_id, recipe_id)
-VALUES
-  (35, 1),
-  (12, 2),
-  (50, 3),
-  (14, 4),
-  (55, 5),
-  (41, 1),
-  (46, 1),
-  (11, 5),
-  (57, 5),
-  (48, 4),
-  (100, 3),
-  (48, 2)
-;
+insert into bookmarks (user_id, recipe_id) values (16, 20);
+insert into bookmarks (user_id, recipe_id) values (10, 1);
+insert into bookmarks (user_id, recipe_id) values (10, 4);
+insert into bookmarks (user_id, recipe_id) values (5, 18);
+insert into bookmarks (user_id, recipe_id) values (13, 22);
+insert into bookmarks (user_id, recipe_id) values (20, 21);
+insert into bookmarks (user_id, recipe_id) values (2, 9);
+insert into bookmarks (user_id, recipe_id) values (13, 11);
+insert into bookmarks (user_id, recipe_id) values (7, 4);
+insert into bookmarks (user_id, recipe_id) values (27, 14);
+insert into bookmarks (user_id, recipe_id) values (8, 4);
+insert into bookmarks (user_id, recipe_id) values (7, 8);
+insert into bookmarks (user_id, recipe_id) values (30, 17);
+insert into bookmarks (user_id, recipe_id) values (6, 16);
+insert into bookmarks (user_id, recipe_id) values (19, 10);
+insert into bookmarks (user_id, recipe_id) values (14, 11);
+insert into bookmarks (user_id, recipe_id) values (14, 21);
+insert into bookmarks (user_id, recipe_id) values (5, 13);
+insert into bookmarks (user_id, recipe_id) values (26, 25);
+insert into bookmarks (user_id, recipe_id) values (26, 16);
+insert into bookmarks (user_id, recipe_id) values (13, 7);
+insert into bookmarks (user_id, recipe_id) values (3, 16);
+insert into bookmarks (user_id, recipe_id) values (30, 8);
+insert into bookmarks (user_id, recipe_id) values (19, 12);
+insert into bookmarks (user_id, recipe_id) values (29, 21);
+insert into bookmarks (user_id, recipe_id) values (12, 20);
+insert into bookmarks (user_id, recipe_id) values (12, 13);
+insert into bookmarks (user_id, recipe_id) values (25, 15);
+insert into bookmarks (user_id, recipe_id) values (27, 8);
+insert into bookmarks (user_id, recipe_id) values (6, 25);
+insert into bookmarks (user_id, recipe_id) values (7, 7);
+insert into bookmarks (user_id, recipe_id) values (8, 25);
+insert into bookmarks (user_id, recipe_id) values (2, 25);
+insert into bookmarks (user_id, recipe_id) values (11, 1);
+insert into bookmarks (user_id, recipe_id) values (21, 19);
+insert into bookmarks (user_id, recipe_id) values (1, 13);
+insert into bookmarks (user_id, recipe_id) values (17, 20);
+insert into bookmarks (user_id, recipe_id) values (15, 5);
+insert into bookmarks (user_id, recipe_id) values (5, 16);
+insert into bookmarks (user_id, recipe_id) values (17, 10);
+insert into bookmarks (user_id, recipe_id) values (29, 19);
+insert into bookmarks (user_id, recipe_id) values (25, 24);
+insert into bookmarks (user_id, recipe_id) values (15, 21);
+insert into bookmarks (user_id, recipe_id) values (28, 25);
+insert into bookmarks (user_id, recipe_id) values (30, 19);
+insert into bookmarks (user_id, recipe_id) values (30, 2);
+insert into bookmarks (user_id, recipe_id) values (9, 15);
+insert into bookmarks (user_id, recipe_id) values (20, 23);
+insert into bookmarks (user_id, recipe_id) values (20, 21);
+insert into bookmarks (user_id, recipe_id) values (27, 10);
