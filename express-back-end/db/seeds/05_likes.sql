@@ -1,23 +1,50 @@
-INSERT INTO
-likes(user_id, recipe_id)
-VALUES
-  (4, 1),
-  (20, 2),
-  (30, 3),
-  (87, 4),
-  (64, 5),
-  (30, 1),
-  (94, 2),
-  (73, 3),
-  (80, 4),
-  (65, 5),
-  (52, 1),
-  (26, 2),
-  (3, 3),
-  (28, 4),
-  (40,5),
-  (82, 5),
-  (16, 5),
-  (1, 5),
-  (100, 3)
-;
+insert into likes (user_id, recipe_id) values (6, 2);
+insert into likes (user_id, recipe_id) values (30, 8);
+insert into likes (user_id, recipe_id) values (15, 6);
+insert into likes (user_id, recipe_id) values (7, 24);
+insert into likes (user_id, recipe_id) values (8, 3);
+insert into likes (user_id, recipe_id) values (19, 20);
+insert into likes (user_id, recipe_id) values (27, 23);
+insert into likes (user_id, recipe_id) values (7, 21);
+insert into likes (user_id, recipe_id) values (26, 6);
+insert into likes (user_id, recipe_id) values (10, 24);
+insert into likes (user_id, recipe_id) values (30, 6);
+insert into likes (user_id, recipe_id) values (18, 20);
+insert into likes (user_id, recipe_id) values (6, 13);
+insert into likes (user_id, recipe_id) values (8, 14);
+insert into likes (user_id, recipe_id) values (21, 24);
+insert into likes (user_id, recipe_id) values (19, 14);
+insert into likes (user_id, recipe_id) values (19, 14);
+insert into likes (user_id, recipe_id) values (22, 10);
+insert into likes (user_id, recipe_id) values (20, 23);
+insert into likes (user_id, recipe_id) values (2, 21);
+insert into likes (user_id, recipe_id) values (28, 6);
+insert into likes (user_id, recipe_id) values (3, 6);
+insert into likes (user_id, recipe_id) values (14, 6);
+insert into likes (user_id, recipe_id) values (19, 22);
+insert into likes (user_id, recipe_id) values (26, 12);
+insert into likes (user_id, recipe_id) values (20, 10);
+insert into likes (user_id, recipe_id) values (23, 4);
+insert into likes (user_id, recipe_id) values (30, 16);
+insert into likes (user_id, recipe_id) values (20, 1);
+insert into likes (user_id, recipe_id) values (1, 6);
+insert into likes (user_id, recipe_id) values (11, 8);
+insert into likes (user_id, recipe_id) values (28, 11);
+insert into likes (user_id, recipe_id) values (1, 22);
+insert into likes (user_id, recipe_id) values (7, 18);
+insert into likes (user_id, recipe_id) values (10, 7);
+insert into likes (user_id, recipe_id) values (14, 14);
+insert into likes (user_id, recipe_id) values (6, 21);
+insert into likes (user_id, recipe_id) values (23, 22);
+insert into likes (user_id, recipe_id) values (23, 9);
+insert into likes (user_id, recipe_id) values (10, 15);
+insert into likes (user_id, recipe_id) values (8, 10);
+insert into likes (user_id, recipe_id) values (20, 12);
+insert into likes (user_id, recipe_id) values (11, 20);
+insert into likes (user_id, recipe_id) values (30, 18);
+insert into likes (user_id, recipe_id) values (22, 24);
+insert into likes (user_id, recipe_id) values (4, 13);
+insert into likes (user_id, recipe_id) values (20, 16);
+insert into likes (user_id, recipe_id) values (17, 12);
+insert into likes (user_id, recipe_id) values (30, 17);
+insert into likes (user_id, recipe_id) values (25, 12);

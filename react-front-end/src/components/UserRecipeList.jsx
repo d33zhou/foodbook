@@ -24,7 +24,7 @@ const UserRecipeList = (props) => {
       .then(res => {
         setResults([...res.data]);
       });
-  }, []);
+  }, [id]);
 
   // display image grid for all recipes created by the user
   return (

@@ -21,7 +21,8 @@ const RecipeItem = () => {
   const {
     title,
     image_link,
-    instructions,
+    description,
+    directions,
     creator_id,
     cuisine,
     dietary_restriction,
@@ -156,8 +157,17 @@ const RecipeItem = () => {
         >
           {title}
         </Typography>
-        <img src={image_link} alt="" />
-        <Stack direction="row" spacing={1}>
+        <Box
+          component='div'
+          sx={{
+            display: 'block',
+            backgroundImage: `url(${image_link})`,
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            maxWidth: '100%',
+            height: '400px',
+          }}></Box>
+        <Stack direction='row' spacing={1}>
           <Chip icon={<DinnerDiningOutlinedIcon />} label={`${cuisine}`} />
           <Chip
             icon={<AccessTimeOutlinedIcon />}
@@ -176,7 +186,10 @@ const RecipeItem = () => {
             color="secondary"
           />
         </Stack>
-        <Typography variant="p">{instructions}</Typography>
+        <Typography variant='h4'>Description</Typography>
+        <Typography variant='p'>{description}</Typography>
+        <Typography variant='h4'>Directions</Typography>
+        <Typography variant='p'>{directions}</Typography>
       </Box>
       <Box
         sx={{
