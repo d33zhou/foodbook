@@ -6,13 +6,6 @@ import { useEffect } from 'react';
 const UserFollowListItem = (props) => {
   const { id, avatar, first_name, last_name, setFollowing } = props;
   const history = useHistory();
-  const { user } = useAuth();
-
-  // useEffect(() => {
-  //   if (setFollowing && user.id !== id) {
-  //     setFollowing(true);
-  //   }
-  // }, [id]);
 
   // render followed user avatar icon and name
   return (

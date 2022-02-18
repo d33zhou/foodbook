@@ -1,123 +1,50 @@
-INSERT INTO
-friends(user_id_1, user_id_2)
-VALUES
-  (51, 29),
-  (49, 97),
-  (62, 7),
-  (21, 65),
-  (89, 92),
-  (24, 56),
-  (5, 86),
-  (69, 79),
-  (57, 39),
-  (62, 49),
-  (46, 38),
-  (41, 30),
-  (28, 20),
-  (21, 3),
-  (85, 18),
-  (62, 59),
-  (76, 83),
-  (56, 59),
-  (93, 30),
-  (75, 57),
-  (32, 36),
-  (26, 76),
-  (79, 47),
-  (43, 83),
-  (84, 22),
-  (88, 87),
-  (63, 96),
-  (52, 29),
-  (44, 56),
-  (50, 63),
-  (73, 2),
-  (53, 75),
-  (21, 92),
-  (8, 83),
-  (38, 67),
-  (31, 10),
-  (57, 21),
-  (28, 52),
-  (69, 20),
-  (7, 86),
-  (18, 51),
-  (86, 9),
-  (45, 28),
-  (62, 25),
-  (84, 95),
-  (41, 98),
-  (77, 95),
-  (50, 49),
-  (57, 5),
-  (78, 64),
-  (97, 30),
-  (33, 6),
-  (90, 41),
-  (36, 65),
-  (35, 17),
-  (33, 1),
-  (45, 32),
-  (89, 58),
-  (22, 1),
-  (1, 9),
-  (98, 40),
-  (88, 64),
-  (36, 97),
-  (44, 63),
-  (12, 12),
-  (44, 65),
-  (58, 23),
-  (43, 57),
-  (94, 79),
-  (20, 18),
-  (40, 46),
-  (18, 72),
-  (61, 18),
-  (89, 39),
-  (90, 88),
-  (92, 57),
-  (73, 64),
-  (34, 32),
-  (14, 43),
-  (81, 40),
-  (9, 2),
-  (38, 4),
-  (34, 76),
-  (31, 82),
-  (28, 81),
-  (16, 14),
-  (91, 83),
-  (1, 50),
-  (20, 61),
-  (37, 15),
-  (68, 31),
-  (19, 2),
-  (74, 10),
-  (10, 5),
-  (41, 91),
-  (3, 18),
-  (24, 8),
-  (21, 99),
-  (91, 95),
-  (1, 39),
-  (1, 28),
-  (1, 37),
-  (1, 88),
-  (1, 57),
-  (1, 64),
-  (1, 32),
-  (1, 43),
-  (1, 40),
-  (1, 11),
-  (1, 12),
-  (1, 13),
-  (1, 14),
-  (1, 15),
-  (1, 16),
-  (1, 17),
-  (1, 18),
-  (1, 2),
-  (1, 4),
-  (1, 76)
-;
+insert into friends (user_id_1, user_id_2) values (23, 15);
+insert into friends (user_id_1, user_id_2) values (1, 8);
+insert into friends (user_id_1, user_id_2) values (11, 14);
+insert into friends (user_id_1, user_id_2) values (7, 20);
+insert into friends (user_id_1, user_id_2) values (15, 8);
+insert into friends (user_id_1, user_id_2) values (1, 24);
+insert into friends (user_id_1, user_id_2) values (10, 6);
+insert into friends (user_id_1, user_id_2) values (22, 10);
+insert into friends (user_id_1, user_id_2) values (2, 25);
+insert into friends (user_id_1, user_id_2) values (21, 21);
+insert into friends (user_id_1, user_id_2) values (28, 1);
+insert into friends (user_id_1, user_id_2) values (1, 2);
+insert into friends (user_id_1, user_id_2) values (5, 28);
+insert into friends (user_id_1, user_id_2) values (11, 24);
+insert into friends (user_id_1, user_id_2) values (20, 30);
+insert into friends (user_id_1, user_id_2) values (13, 22);
+insert into friends (user_id_1, user_id_2) values (21, 29);
+insert into friends (user_id_1, user_id_2) values (27, 15);
+insert into friends (user_id_1, user_id_2) values (15, 10);
+insert into friends (user_id_1, user_id_2) values (20, 15);
+insert into friends (user_id_1, user_id_2) values (17, 16);
+insert into friends (user_id_1, user_id_2) values (25, 17);
+insert into friends (user_id_1, user_id_2) values (19, 19);
+insert into friends (user_id_1, user_id_2) values (24, 24);
+insert into friends (user_id_1, user_id_2) values (23, 23);
+insert into friends (user_id_1, user_id_2) values (2, 9);
+insert into friends (user_id_1, user_id_2) values (10, 16);
+insert into friends (user_id_1, user_id_2) values (23, 2);
+insert into friends (user_id_1, user_id_2) values (11, 6);
+insert into friends (user_id_1, user_id_2) values (6, 27);
+insert into friends (user_id_1, user_id_2) values (15, 15);
+insert into friends (user_id_1, user_id_2) values (28, 23);
+insert into friends (user_id_1, user_id_2) values (9, 9);
+insert into friends (user_id_1, user_id_2) values (13, 27);
+insert into friends (user_id_1, user_id_2) values (5, 9);
+insert into friends (user_id_1, user_id_2) values (22, 28);
+insert into friends (user_id_1, user_id_2) values (6, 28);
+insert into friends (user_id_1, user_id_2) values (30, 18);
+insert into friends (user_id_1, user_id_2) values (22, 16);
+insert into friends (user_id_1, user_id_2) values (7, 3);
+insert into friends (user_id_1, user_id_2) values (21, 28);
+insert into friends (user_id_1, user_id_2) values (18, 18);
+insert into friends (user_id_1, user_id_2) values (27, 14);
+insert into friends (user_id_1, user_id_2) values (29, 9);
+insert into friends (user_id_1, user_id_2) values (16, 14);
+insert into friends (user_id_1, user_id_2) values (29, 28);
+insert into friends (user_id_1, user_id_2) values (15, 8);
+insert into friends (user_id_1, user_id_2) values (25, 6);
+insert into friends (user_id_1, user_id_2) values (14, 4);
+insert into friends (user_id_1, user_id_2) values (11, 8);

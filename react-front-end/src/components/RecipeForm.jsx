@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import {
   Box,
@@ -11,12 +12,16 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import { useAuth } from '../providers/AuthContext';
 
 const RecipeForm = () => {
+  const history = useHistory();
+  const { user } = useAuth();
+
   const [recipe, setRecipe] = useState({
     title: '',
     image: '',
-    // description: '',
+    description: '',
     directions: '',
     prepTime: 0,
     difficulty: '',
@@ -25,20 +30,12 @@ const RecipeForm = () => {
     servings: 0,
   });
   const [ingredientFields, setIngredientFields] = useState([
-    { amount: '', ingredientName: '', recipeId: 0 },
+    { amount: '', ingredientName: '' },
   ]);
-  const [recipeId, setRecipeId] = useState([0]);
-
-  useEffect(() => {
-    const recipeCount = `http://localhost:3001/api/recipes/count`;
-    axios.get(recipeCount).then((response) => {
-      setRecipeId(Number(response.data[0].count) + 1);
-    });
-  }, []);
 
   // console.log(recipe);
   // console.log(recipeId);
-  console.log(ingredientFields);
+  // console.log(ingredientFields);
 
   const handleDifficulty = (event) => {
     setRecipe({
@@ -62,7 +59,7 @@ const RecipeForm = () => {
   const handleChangeInput = (index, event) => {
     const values = [...ingredientFields];
     values[index][event.target.name] = event.target.value;
-    values[index].recipeId = recipeId;
+    // values[index].recipeId = recipeId;
     setIngredientFields(values);
   };
 
@@ -78,35 +75,32 @@ const RecipeForm = () => {
     // console.log(JSON.stringify(recipe));
     // console.log(JSON.stringify(ingredientFields));
     // console.log('ingredientFields', ingredientFields);
-
-    const requests = [
-      {
-        url: 'http://localhost:3001/api/recipes/',
-        // body: JSON.stringify(recipe),
-        body: recipe,
-      },
-      //   {},
-      // {
-      //   url: 'http://localhost:3001/api/ingredients/',
-      //   // body: JSON.stringify(ingredientFields),
-      //   body: ingredientFields,
-      // },
-    ];
-    for (let i = 0; i < ingredientFields.length; i++) {
-      requests.push({
-        url: 'http://localhost:3001/api/ingredients/',
-        body: ingredientFields[i],
-      });
-    }
-    const promises = requests.map((request) =>
-      axios.post(request.url, request.body)
-    );
-    const result = Promise.all(promises).catch((err) =>
-      console.log('Error: ', err.message)
-    );
-    // console.log(requests);
+    const recipeBody = { ...recipe, creator_id: user.id };
+    axios
+      .post('http://localhost:3001/api/recipes/', recipeBody)
+      .then((response) => response.data)
+      .then((recipeObj) => {
+        console.log('recipeObj', recipeObj);
+        const ingredientsBody = ingredientFields.map((ingredient) => ({
+          ...ingredient,
+          recipeId: recipeObj.id,
+        }));
+        console.log(ingredientsBody);
+        const requests = [];
+        for (let i = 0; i < ingredientsBody.length; i++) {
+          requests.push({
+            url: 'http://localhost:3001/api/ingredients/',
+            body: ingredientsBody[i],
+          });
+        }
+        const promises = requests.map((request) =>
+          axios.post(request.url, request.body)
+        );
+        Promise.all(promises).then(history.push(`/recipe/${recipeObj.id}`));
+      })
+      .catch((err) => console.log('Error: ', err.message));
   };
-
+  // .then(history.push(`/recipe/${recipeObj.id}`))
   return (
     <Box
       sx={{
@@ -156,7 +150,7 @@ const RecipeForm = () => {
             }
           />
 
-          {/* <TextField
+          <TextField
             fullWidth
             multiline
             label='Description'
@@ -167,7 +161,7 @@ const RecipeForm = () => {
                 description: e.target.value,
               })
             }
-          /> */}
+          />
 
           {ingredientFields.map((ingredient, index) => {
             return (

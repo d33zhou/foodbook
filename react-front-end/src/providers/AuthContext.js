@@ -17,10 +17,12 @@ export const AuthProvider = props => {
   useEffect(() => {
     const tokenCookie = localStorage.getItem('token');
     
-    setToken(tokenCookie);
-    const decoded = decode(tokenCookie);
-    setUser(decoded);
-    setAuth(true);
+    if (tokenCookie) {
+      setToken(tokenCookie);
+      const decoded = decode(tokenCookie);
+      setUser(decoded);
+      setAuth(true);
+    }
 
     return tokenCookie;
   }, []);
