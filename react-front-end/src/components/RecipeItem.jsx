@@ -33,8 +33,8 @@ const RecipeItem = () => {
   // extract the urlParameter with useParams
   const { id } = useParams();
 
-  console.log('results ', results);
-  console.log('ingredients', ingredients);
+  // console.log('results ', results);
+  // console.log('ingredients', ingredients);
 
   useEffect(() => {
     const testURL = `http://localhost:3001/api/recipes/${id}`;
@@ -51,7 +51,7 @@ const RecipeItem = () => {
     axios
       .get(ingredientsURL)
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setIngredients([...response.data]);
       })
       .catch((err) => console.log('Error ', err.message));
