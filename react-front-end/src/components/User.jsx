@@ -13,7 +13,7 @@ const User = (props) => {
   return (
     user && <Container>
       <hr/>
-      <UserDetails {...user} />
+      <UserDetails {...user} self={true} />
       <hr/>
       <UserFollowList id={user.id} />
       <hr/>

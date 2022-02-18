@@ -7,7 +7,7 @@ import { useAuth } from '../providers/AuthContext';
 import { useEffect } from "react";
 
 const UserDetails = (props) => {
-  const { id, avatar, first_name, last_name, email, following, setFollowing } = props; // represents either the logged in user or user profile being viewed, depending on if called from User component or UserPublicProfile compoennt, respectively
+  const { id, avatar, first_name, last_name, email, following, setFollowing, self } = props; // represents either the logged in user or user profile being viewed, depending on if called from User component or UserPublicProfile compoennt, respectively
   const { user } = useAuth(); // logged in user state
   
   // follow the currently viewed user (only from UserPublicProfile)
@@ -57,13 +57,13 @@ const UserDetails = (props) => {
         </Stack>
       </Stack>
 
-      {following && 
+      {!self && following &&
         <IconButton onClick={handleUnfollow}>
           <AddReactionIcon fontSize="large" />
         </IconButton>
       }
       
-      {!following && 
+      {!self && !following &&
         <IconButton onClick={handleFollow}>
           <AddReactionOutlinedIcon fontSize="large" />
         </IconButton>
