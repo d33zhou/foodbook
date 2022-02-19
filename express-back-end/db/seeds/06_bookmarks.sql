@@ -1,3 +1,7 @@
+insert into bookmarks (user_id, recipe_id) values (1, 22);
+insert into bookmarks (user_id, recipe_id) values (1, 20);
+insert into bookmarks (user_id, recipe_id) values (1, 18);
+insert into bookmarks (user_id, recipe_id) values (1, 13);
 insert into bookmarks (user_id, recipe_id) values (16, 20);
 insert into bookmarks (user_id, recipe_id) values (10, 1);
 insert into bookmarks (user_id, recipe_id) values (10, 4);
@@ -33,7 +37,6 @@ insert into bookmarks (user_id, recipe_id) values (8, 25);
 insert into bookmarks (user_id, recipe_id) values (2, 25);
 insert into bookmarks (user_id, recipe_id) values (11, 1);
 insert into bookmarks (user_id, recipe_id) values (21, 19);
-insert into bookmarks (user_id, recipe_id) values (1, 13);
 insert into bookmarks (user_id, recipe_id) values (17, 20);
 insert into bookmarks (user_id, recipe_id) values (15, 5);
 insert into bookmarks (user_id, recipe_id) values (5, 16);

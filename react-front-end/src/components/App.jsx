@@ -25,6 +25,8 @@ import User from "./User";
 import UserPublicProfile from "./UserPublicProfile";
 import RecipeItem from "./RecipeItem";
 import PrivateRoute from "./PrivateRoute";
+import BookmarkList from './BookmarkList';
+import HomeList from './HomeList';
 
 import { AuthProvider, useAuth } from "../providers/AuthContext";
 import { useState, useEffect } from "react";
@@ -356,7 +358,7 @@ function App() {
                       Sorry! There are no results. Please try another filter.
                     </Typography>
                   )}
-                  <RecipeList results={results} />
+                  <HomeList fullData={fullData} />
                 </Box>
                 <RecipeFilters
                   difficulty={difficulty}
@@ -370,25 +372,77 @@ function App() {
             </Container>
           </PrivateRoute>
 
-          <PrivateRoute path="/create">
-            <SearchAppBar />
-            <Container maxWidth="lg">
-              <Box
-                maxWidth="lg"
-                mx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "flex-start",
-                  columnGap: "4rem",
-                  margin: "0 auto",
-                  height: "100vh",
-                }}
-              >
-                <Navigation />
-                <RecipeForm />
-              </Box>
-            </Container>
-          </PrivateRoute>
+          <PrivateRoute path='/explore'>
+              <SearchAppBar />
+
+              <Container maxWidth='lg'>
+                <Box
+                  maxWidth='lg'
+                  mx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-start',
+                    columnGap: '4rem',
+                    margin: '0 auto',
+                  }}>
+                  <Navigation />
+                  <Box>
+                    <RecipeList results={results} />
+                  </Box>
+                  <RecipeFilters
+                    difficulty={difficulty}
+                    cuisine={cuisine}
+                    handleDifficulty={handleDifficulty}
+                    handleCuisine={handleCuisine}
+                  />
+                </Box>
+              </Container>
+            </PrivateRoute>
+
+            <PrivateRoute path='/bookmarks'>
+              <SearchAppBar />
+              <Container>
+                <Box
+                  maxWidth='lg'
+                  mx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-start',
+                    columnGap: '4rem',
+                    margin: '0 auto',
+                  }}>
+                  <Navigation />
+                  <Box>
+                    <BookmarkList fullData={fullData} />
+                  </Box>
+                  <RecipeFilters
+                    difficulty={difficulty}
+                    cuisine={cuisine}
+                    handleDifficulty={handleDifficulty}
+                    handleCuisine={handleCuisine}
+                  />
+                </Box>
+              </Container>
+            </PrivateRoute>
+
+            <PrivateRoute path='/create'>
+              <SearchAppBar />
+              <Container maxWidth='lg'>
+                <Box
+                  maxWidth='lg'
+                  mx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-start',
+                    columnGap: '4rem',
+                    margin: '0 auto',
+                    height: '100vh',
+                  }}>
+                  <Navigation />
+                  <RecipeForm />
+                </Box>
+              </Container>
+            </PrivateRoute>
 
           <PrivateRoute path="/recipe/:id">
             <SearchAppBar />
@@ -410,26 +464,26 @@ function App() {
             </Container>
           </PrivateRoute>
 
-          <PrivateRoute path="/profile">
-            <Container>
-              <Box
-                maxWidth="lg"
-                mx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "flex-start",
-                  columnGap: "4rem",
-                  margin: "0 auto",
-                }}
-              >
-                <Navigation />
-                <Box>
-                  <User />
+          <PrivateRoute path='/profile'>
+              <SearchAppBar />
+              <Container>
+                <Box
+                  maxWidth='lg'
+                  mx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-start',
+                    columnGap: '4rem',
+                    margin: '0 auto',
+                  }}>
+                  <Navigation />
+                  <Box>
+                    <User />
+                  </Box>
                 </Box>
-              </Box>
-            </Container>
-          </PrivateRoute>
-
+              </Container>
+            </PrivateRoute>
+            
           <PrivateRoute path="/users/:id">
             <Container>
               <Box

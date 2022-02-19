@@ -106,7 +106,12 @@ const RecipeListItem = (props) => {
     <Box
       sx={{
         textAlign: 'left',
-        paddingRight: '4rem',
+        marginRight: '4rem',
+        marginBottom: '2rem',
+        backgroundColor: '#fff',
+        boxShadow: '0 3px 10px rgb(0 0 0 / 0.2)',
+        transition: 'all .2s',
+        overflow: 'hidden',
       }}>
       <Link to={`/recipe/${id}`}>
         <Box
@@ -118,73 +123,138 @@ const RecipeListItem = (props) => {
             backgroundSize: 'cover',
             maxWidth: '100%',
             height: '400px',
+            transition: 'all .2s',
+            '&:hover': { transform: 'scale(1.05)' },
           }}></Box>
       </Link>
-
-      <Stack direction='row' spacing={1}>
-        <Chip icon={<DinnerDiningOutlinedIcon />} label={`${cuisine}`} />
-        <Chip icon={<AccessTimeOutlinedIcon />} label={`${prepTime} minutes`} />
-        {restrictions && (
-          <Chip
-            icon={<CheckCircleOutlineOutlinedIcon />}
-            label={restrictions}
-          />
-        )}
-        {difficulty}
-        {like && (
-          <FavoriteOutlinedIcon
-            fontSize='medium'
-            onClick={handleLike}
-            style={{ color: 'red' }}
-            sx={{
-              '&:hover': {
-                color: 'orangered',
-              },
-            }}
-          />
-        )}
-        {!like && (
-          <FavoriteBorderOutlinedIcon
-            fontSize='medium'
-            onClick={handleLike}
-            style={{ color: 'red' }}
-            sx={{
-              '&:hover': {
-                color: 'orangered',
-              },
-            }}
-          />
-        )}
-        <Typography variant='p'>{numberOfLikes}</Typography>
-        {bookmark && (
-          <BookmarkOutlinedIcon
-            fontSize='medium'
-            onClick={handleBookmark}
-            sx={{
-              '&:hover': {
-                color: 'orangered',
-              },
-            }}
-          />
-        )}
-        {!bookmark && (
-          <BookmarkBorderOutlinedIcon
-            fontSize='medium'
-            onClick={handleBookmark}
-            sx={{
-              '&:hover': {
-                color: 'orangered',
-              },
-            }}
-          />
-        )}
-        <Typography variant='p'>{numberOfBookmarks}</Typography>
-      </Stack>
-      <Link to={`/recipe/${id}`}></Link>
-      <Typography variant='h3' color='primary' fontWeight='bold' gutterBottom>
-        {title}
-      </Typography>
-      <Typography variant='p'>{description}</Typography>
+      <Box
+        sx={{
+          padding: '2rem',
+        }}>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            marginBottom: '1rem',
+          }}>
+          <Box>
+            <Stack direction='row' spacing={1}>
+              <Chip icon={<DinnerDiningOutlinedIcon />} label={`${cuisine}`} />
+              <Chip
+                icon={<AccessTimeOutlinedIcon />}
+                label={`${prepTime} minutes`}
+              />
+              {restrictions && (
+                <Chip
+                  icon={<CheckCircleOutlineOutlinedIcon />}
+                  label={restrictions}
+                />
+              )}
+            </Stack>
+          </Box>
+          <Box sx={{ display: 'flex' }}>
+            <Box sx={{ position: 'relative', padding: '.1rem .5rem' }}>
+              {like && (
+                <FavoriteOutlinedIcon
+                  fontSize='medium'
+                  onClick={handleLike}
+                  style={{ color: 'red' }}
+                  sx={{
+                    '&:hover': {
+                      color: 'orangered',
+                    },
+                  }}
+                />
+              )}
+              {!like && (
+                <FavoriteBorderOutlinedIcon
+                  fontSize='medium'
+                  onClick={handleLike}
+                  style={{ color: 'red' }}
+                  sx={{
+                    '&:hover': {
+                      color: 'orangered',
+                    },
+                  }}
+                />
+              )}
+              <Typography
+                variant='p'
+                sx={{
+                  display: 'flex',
+                  zIndex: '500',
+                  width: '15px',
+                  height: '15px',
+                  backgroundColor: 'rgba(25, 118, 210, 0.90)',
+                  color: '#fff',
+                  fontWeight: 'bold',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  padding: '1px',
+                  borderRadius: '50%',
+                  fontSize: '10px',
+                  position: 'absolute',
+                  maxHeight: 'content',
+                  top: 0,
+                  right: 0,
+                }}>
+                {numberOfLikes}
+              </Typography>
+            </Box>
+            <Box sx={{ position: 'relative', padding: '.1rem .5rem' }}>
+              {bookmark && (
+                <BookmarkOutlinedIcon
+                  fontSize='medium'
+                  onClick={handleBookmark}
+                  sx={{
+                    '&:hover': {
+                      color: 'orangered',
+                    },
+                  }}
+                />
+              )}
+              {!bookmark && (
+                <BookmarkBorderOutlinedIcon
+                  fontSize='medium'
+                  onClick={handleBookmark}
+                  sx={{
+                    '&:hover': {
+                      color: 'orangered',
+                    },
+                  }}
+                />
+              )}
+              <Typography
+                variant='p'
+                sx={{
+                  display: 'flex',
+                  zIndex: '500',
+                  width: '15px',
+                  height: '15px',
+                  backgroundColor: 'rgba(25, 118, 210, 0.90)',
+                  color: '#fff',
+                  fontWeight: 'bold',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  padding: '1px',
+                  borderRadius: '50%',
+                  fontSize: '10px',
+                  position: 'absolute',
+                  maxHeight: 'content',
+                  top: 0,
+                  right: 0,
+                }}>
+                {numberOfBookmarks}
+              </Typography>
+            </Box>
+          </Box>
+        </Box>
+        <Link to={`/recipe/${id}`}></Link>
+        <Typography variant='h3' color='primary' fontWeight='bold' gutterBottom>
+          {title}
+        </Typography>
+        <Typography variant='p'>{description}</Typography>
+      </Box>
     </Box>
   );
 };
