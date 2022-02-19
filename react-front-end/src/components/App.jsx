@@ -272,17 +272,17 @@ function App() {
 
   useEffect(() => {
     setLoading(true);
-    // setTimeout(() => {
+    setTimeout(() => {
       const testURL = `http://localhost:3001/api/recipes`;
       axios.get(testURL).then((response) => {
         setResults(response.data);
         setFullData(response.data);
         setLoading(false);
       });
-    // },5000)
+    },5000)
     
   }, []);
-  console.log(results);
+  
   if(loading) {
     return (
       <Box sx={{ display: 'flex', justifyContent:'center' , alignItems:'center', width:'100vw', height:'100vh'}}>

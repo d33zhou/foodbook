@@ -3,13 +3,16 @@ import axios from 'axios';
 import { Box, Typography } from '@mui/material';
 import RecipeListItem from './RecipeListItem';
 import { useAuth } from '../providers/AuthContext';
+import loadingGif from '../loading.gif';
 
 const BookmarkList = props => {
   const { results } = props; // array of all recipe objects in DB
   const [ bookmarks, setBookmarks ] = useState([]);
   const { user } = useAuth();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     if (user) {
       axios
         .get(`http://localhost:3001/api/users/${user.id}/bookmarks`)
@@ -17,10 +20,19 @@ const BookmarkList = props => {
           const bookmarksIdArray = res.data.map(recipe => recipe.id);
           const bookmarksArray = results.filter(recipe => bookmarksIdArray.includes(recipe.id));
           setBookmarks([...bookmarksArray]);
+          setLoading(false);
         })
         .catch(err => err.message);
     }
-  }, [user, bookmarks, results]);
+  }, [user, results]);
+
+  if(loading) {
+    return (
+      <Box sx={{ display: 'block', justifyContent:'center' , alignItems:'center', width:'100%', height:'100%'}}>
+        <img src={loadingGif} alt="Loading recipe GIF" />
+      </Box>
+    );
+  }
 
   const parsedRecipes =
     bookmarks.length > 0 &&

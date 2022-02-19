@@ -3,27 +3,40 @@ import axios from "axios";
 import { Box, Typography } from "@mui/material";
 import RecipeListItem from "./RecipeListItem";
 import { useAuth } from "../providers/AuthContext";
+import loadingGif from '../loading.gif';
 
 const HomeList = (props) => {
   const { results } = props; // array of all recipe objects in DB
   const [home, setHome] = useState([]);
   const { user } = useAuth();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (user) {
+    setLoading(true);
+    setTimeout(() => {if (user) {
       axios
-        .get(`http://localhost:3001/api/users/${user.id}/follows`)
-        .then((res) => {
-          const followsIdArray = res.data.map((follow) => follow.id);
-          const homeArray = results.filter((recipe) =>
-            followsIdArray.includes(recipe.creator_id)
-          );
-          setHome([...homeArray]);
-        })
-        .catch((err) => err.message);
-    }
-  }, [user, home, results]);
+       .get(`http://localhost:3001/api/users/${user.id}/follows`)
+       .then((res) => {
+         const followsIdArray = res.data.map((follow) => follow.id);
+         const homeArray = results.filter((recipe) =>
+           followsIdArray.includes(recipe.creator_id)
+         );
+         
+         setHome([...homeArray]);
+         setLoading(false);
+       })
+       .catch((err) => err.message);
+   }} , 2000)
+    
+  }, [user, results]);
 
+  if(loading) {
+    return (
+      <Box sx={{ display: 'block', justifyContent:'center' , alignItems:'center', width:'100%', height:'100%'}}>
+        <img src={loadingGif} alt="Loading recipe GIF" />
+      </Box>
+    );
+  }
   const parsedRecipes =
     home.length > 0 &&
     home.map((recipe) => {
