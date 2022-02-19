@@ -11,12 +11,14 @@ import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutli
 import { blue } from '@mui/material/colors';
 import { useParams } from 'react-router-dom';
 import { useAuth } from '../providers/AuthContext';
+import loadingGif from '../loading.gif';
 
 const RecipeItem = () => {
   const [results, setResults] = useState({});
   const [ingredients, setIngredients] = useState([]);
   const [like, setLike] = useState(false);
   const [bookmark, setBookmark] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const {
     title,
@@ -105,11 +107,13 @@ const RecipeItem = () => {
   }, [id, user, like]);
 
   useEffect(() => {
+    setLoading(true);
     const testURL = `http://localhost:3001/api/recipes/${id}`;
     axios
       .get(testURL)
       .then((response) => {
         setResults({ ...response.data });
+        setLoading(false);
       })
       .catch((err) => console.log('Error ', err.message));
   }, [id]);
@@ -129,6 +133,21 @@ const RecipeItem = () => {
       {ingredient.amount} - {ingredient.ingredient_name}
     </li>
   ));
+
+  // if (loading) {
+  //   return (
+  //     <Box
+  //       sx={{
+  //         display: 'flex',
+  //         justifyContent: 'center',
+  //         alignItems: 'center',
+  //         width: '100vw',
+  //         height: '100vh',
+  //       }}>
+  //       <img src={loadingGif} alt='Loading recipe GIF' />
+  //     </Box>
+  //   );
+  // }
 
   return (
     <Box
@@ -215,7 +234,9 @@ const RecipeItem = () => {
           padding: '2rem',
           textAlign: 'left',
           height: 'auto',
-          backgroundColor: blue[50],
+          background: 'rgb(227,242,253)',
+          background:
+            'linear-gradient(0deg, rgba(227,242,253,0) 0%, rgba(227,242,253,1) 40%)',
         }}>
         <Box>
           {like && (
