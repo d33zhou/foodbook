@@ -4,7 +4,6 @@ import { Box, Button } from '@mui/material';
 import RecipeListItem from './RecipeListItem';
 
 const RecipeList = ({ results }) => {
-
   const parsedRecipes =
     results.length > 0 &&
     results.map((recipe) => {
@@ -18,9 +17,12 @@ const RecipeList = ({ results }) => {
           cuisine={recipe.cuisine}
           restrictions={recipe.dietary_restriction}
           prepTime={recipe.prep_minutes}
+          difficulty={recipe.difficulty}
+          
         />
       );
     });
+
 
   return (
     <Box

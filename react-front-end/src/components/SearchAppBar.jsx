@@ -14,6 +14,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Autocomplete, TextField } from '@mui/material';
+import { useHistory } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -60,19 +61,21 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const SearchAppBar = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [query, setQuery] = useState('');
-  // console.log(query);
+  const history = useHistory();
 
   useEffect(() => {
-    const searchURL = `http://localhost:3001/api/recipes/search`;
+    if(query){
+      const searchURL = `http://localhost:3001/api/recipes/search`;
     axios.post(searchURL, { title: query }).then((response) => {
       setSearchResults([...response.data]);
       // console.log(response.data);
     });
+    }
   }, [query]);
 
-  // console.log(searchResults);
+  
   let options = [...searchResults];
-  // console.log("Options", options);
+  
   return (
     <Box
       sx={{
@@ -108,12 +111,13 @@ const SearchAppBar = () => {
             /> */}
           <Autocomplete
             autoHighlight
+            freeSolo
             id='combo-box-demo'
             autoFocus={true}
             sx={{ width: 300 }}
             options={searchResults}
             onChange={(event: any, option: any) => {
-              window.location.href = `recipe/${option.id}`;
+              history.push(`/recipe/${option.id}`)
             }}
             getOptionLabel={(option) => option.title}
             renderInput={(params) => (

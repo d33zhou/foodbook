@@ -5,7 +5,7 @@ import { useEffect,useState } from 'react';
 
 const RecipeFilters = (props) => {
   
-  const {difficulty,handleDifficulty,cuisine,handleCuisine } = props;
+  const {difficulty,handleDifficulty,cuisine,handleCuisine,diet,handleDiet } = props;
   
   
   return (
@@ -28,6 +28,13 @@ const RecipeFilters = (props) => {
           value={difficulty}
           onChange={handleDifficulty}
         >
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='all' 
+            label="All"
+          />
           <FormControlLabel
             control={
               <Radio />
@@ -64,6 +71,90 @@ const RecipeFilters = (props) => {
             control={
               <Radio />
             }
+            value='all' 
+            label="All"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='spanish' 
+            label="Spanish"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='mediterranean' 
+            label="Mediterranean"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='american' 
+            label="American"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='japanese' 
+            label="Japanese"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='italian' 
+            label="Italian"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='korean' 
+            label="Korean"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='indian' 
+            label="Indian"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='greek' 
+            label="Greek"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='lebanese' 
+            label="Lebanese"
+          />
+           <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='moroccan' 
+            label="Moroccan"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='turkish' 
+            label="Turkish"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
             value='thai' 
             label="Thai"
           />
@@ -74,12 +165,64 @@ const RecipeFilters = (props) => {
             value='chinese' 
             label="Chinese"
           />
+        </RadioGroup>
+      </FormControl>
+      <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
+        <FormLabel component="legend">Dietary Restrictions</FormLabel>
+        <FormHelperText>Select any one</FormHelperText>
+        <RadioGroup
+          aria-labelledby="demo-error-radios"
+          value={diet}
+          onChange={handleDiet}
+        >
           <FormControlLabel
             control={
               <Radio />
             }
-            value='japanese' 
-            label="Japanese"
+            value='all' 
+            label="All"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='keto' 
+            label="Keto"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='vegan' 
+            label="Vegan"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='vegetarian' 
+            label="Vegetarian"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='lactose-free' 
+            label="Lactose-free"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='low-carb' 
+            label="Low-carb"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='kosher' 
+            label="Kosher"
           />
         </RadioGroup>
       </FormControl>
