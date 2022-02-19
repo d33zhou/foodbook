@@ -455,44 +455,14 @@ function App() {
                   )}
                   <BookmarkList results={results} />
                 </Box>
-                </Box>
-              </Container>
-            </PrivateRoute>
-
-          <PrivateRoute path='/create'>
-            <SearchAppBar />
-            <Container maxWidth='lg'>
-              <Box
-                maxWidth='lg'
-                mx={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'flex-start',
-                  columnGap: '4rem',
-                  margin: '0 auto',
-                  height: '100vh',
-                }}>
-                <Navigation />
-                <RecipeForm />
-              </Box>
-            </Container>
-          </PrivateRoute>
-
-          <PrivateRoute path='/recipe/:id'>
-            <SearchAppBar />
-            <Container maxWidth='lg'>
-              <Box
-                maxWidth='lg'
-                mx={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'flex-start',
-                  columnGap: '4rem',
-                  margin: '0 auto',
-                  height: '100vh',
-                }}>
-                <Navigation />
-                <RecipeItem />
+                <RecipeFilters
+                  difficulty={difficulty}
+                  cuisine={cuisine}
+                  diet={diet}
+                  handleDifficulty={handleDifficulty}
+                  handleCuisine={handleCuisine}
+                  handleDiet={handleDiet}
+                />
               </Box>
             </Container>
           </PrivateRoute>
@@ -527,7 +497,7 @@ function App() {
                   alignItems: 'flex-start',
                   columnGap: '4rem',
                   margin: '0 auto',
-                  minHeight: '100vh',
+                  height: '100vh',
                 }}>
                 <Navigation />
                 <RecipeItem />
