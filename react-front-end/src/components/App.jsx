@@ -25,6 +25,7 @@ import UserPublicProfile from './UserPublicProfile';
 import RecipeItem from './RecipeItem';
 import PrivateRoute from './PrivateRoute';
 import BookmarkList from './BookmarkList';
+import HomeList from './HomeList';
 
 import { AuthProvider,useAuth } from '../providers/AuthContext';
 import { useState, useEffect } from 'react';
@@ -99,14 +100,8 @@ function App() {
                   }}>
                   <Navigation />
                   <Box>
-                    <RecipeList results={results} />
+                    <HomeList fullData={fullData} />
                   </Box>
-                  <RecipeFilters
-                    difficulty={difficulty}
-                    cuisine={cuisine}
-                    handleDifficulty={handleDifficulty}
-                    handleCuisine={handleCuisine}
-                  />
                 </Box>
               </Container>
             </PrivateRoute>

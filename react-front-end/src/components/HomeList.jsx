@@ -4,27 +4,27 @@ import { Box } from '@mui/material';
 import RecipeListItem from './RecipeListItem';
 import { useAuth } from '../providers/AuthContext';
 
-const BookmarkList = props => {
+const HomeList = props => {
   const { fullData } = props; // array of all recipe objects in DB
-  const [ bookmarks, setBookmarks ] = useState([]);
+  const [ home, setHome ] = useState([]);
   const { user } = useAuth();
 
   useEffect(() => {
-    if (user && bookmarks.length <= 0) {
+    if (user && home.length <= 0) {
       axios
-        .get(`http://localhost:3001/api/users/${user.id}/bookmarks`)
+        .get(`http://localhost:3001/api/users/${user.id}/follows`)
         .then(res => {
-          const bookmarksIdArray = res.data.map(recipe => recipe.id);
-          const bookmarksArray = fullData.filter(recipe => bookmarksIdArray.includes(recipe.id));
-          setBookmarks([...bookmarksArray]);
+          const followsIdArray = res.data.map(follow => follow.id);
+          const homeArray = fullData.filter(recipe => followsIdArray.includes(recipe.creator_id));
+          setHome([...homeArray]);
         })
         .catch(err => err.message);
     }
-  }, [user, bookmarks]);
+  }, [user, home]);
 
   const parsedRecipes =
-    bookmarks.length > 0 &&
-    bookmarks.map((recipe) => {
+    home.length > 0 &&
+    home.map((recipe) => {
       return (
         <RecipeListItem
           key={recipe.id}
@@ -49,4 +49,4 @@ const BookmarkList = props => {
   );
 };
 
-export default BookmarkList;
+export default HomeList;
