@@ -24,6 +24,8 @@ import User from './User';
 import UserPublicProfile from './UserPublicProfile';
 import RecipeItem from './RecipeItem';
 import PrivateRoute from './PrivateRoute';
+import BookmarkList from './BookmarkList';
+import HomeList from './HomeList';
 
 import { AuthProvider,useAuth } from '../providers/AuthContext';
 import { useState, useEffect } from 'react';
@@ -98,6 +100,27 @@ function App() {
                   }}>
                   <Navigation />
                   <Box>
+                    <HomeList fullData={fullData} />
+                  </Box>
+                </Box>
+              </Container>
+            </PrivateRoute>
+
+            <PrivateRoute path='/explore'>
+              <SearchAppBar />
+              
+              <Container maxWidth='lg'>
+                <Box
+                  maxWidth='lg'
+                  mx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-start',
+                    columnGap: '4rem',
+                    margin: '0 auto',
+                  }}>
+                  <Navigation />
+                  <Box>
                     <RecipeList results={results} />
                   </Box>
                   <RecipeFilters
@@ -108,6 +131,25 @@ function App() {
                   />
                 </Box>
               </Container>
+            </PrivateRoute>
+
+            <PrivateRoute path='/bookmarks'>
+              <Container>
+                  <Box
+                    maxWidth='lg'
+                    mx={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'flex-start',
+                      columnGap: '4rem',
+                      margin: '0 auto',
+                    }}>
+                    <Navigation />
+                    <Box>
+                      <BookmarkList fullData={fullData} />
+                    </Box>
+                  </Box>
+                </Container>
             </PrivateRoute>
 
             <PrivateRoute path='/create'>

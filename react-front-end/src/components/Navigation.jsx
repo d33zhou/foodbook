@@ -13,13 +13,13 @@ const Navigation = ({onClick}) => {
         flexDirection: 'column',
         minWidth: 'content',
       }}>
-      <Button variant='text' size='large' component={Link} to="/feed" value='home'>
+      <Button variant='text' size='large' component={Link} to="/feed">
         Home
       </Button>
-      <Button variant='text' size='large' value='explore' onClick={onClick} >
+      <Button variant='text' size='large' component={Link} to="/explore" >
         Explore
       </Button>
-      <Button variant='text' size='large' component={Link} to='/feed'>
+      <Button variant='text' size='large' component={Link} to='/bookmarks'>
         Bookmarks
       </Button>
       <Button variant='text' size='large' component={Link} to="/profile">
