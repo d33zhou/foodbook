@@ -439,33 +439,24 @@ function App() {
               </Container>
             </PrivateRoute>
 
-          <PrivateRoute path="/recipe/:id">
-            <SearchAppBar />
-            <Container>
-              <Box
-                maxWidth='lg'
-                mx={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'flex-start',
-                  columnGap: '4rem',
-                  margin: '0 auto',
-                }}>
-                <Navigation />
-                <Box>
-                  <BookmarkList fullData={fullData} />
+            <PrivateRoute path='/users/:id'>
+              <Container>
+                <Box
+                  maxWidth='lg'
+                  mx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-start',
+                    columnGap: '4rem',
+                    margin: '0 auto',
+                  }}>
+                  <Navigation />
+                  <Box>
+                    <UserPublicProfile />
+                  </Box>
                 </Box>
-                <RecipeFilters
-                  difficulty={difficulty}
-                  cuisine={cuisine}
-                  diet={diet}
-                  handleDifficulty={handleDifficulty}
-                  handleCuisine={handleCuisine}
-                  handleDiet={handleDiet}
-                />
-              </Box>
-            </Container>
-          </PrivateRoute>
+              </Container>
+            </PrivateRoute>
 
           <PrivateRoute path='/create'>
             <SearchAppBar />
