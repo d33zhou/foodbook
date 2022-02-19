@@ -201,53 +201,29 @@ function App() {
   };
 
   const handleDiet = (event) => {
+    const allCuisinesSelected = cuisine === "all";
+    const allDifficultiesSelected = difficulty === "all";
+    const allDietsSelected = event.target.value === "all";
+
     setDiet(event.target.value);
-    if (
-      difficulty === 'all' &&
-      event.target.value === 'all' &&
-      cuisine === 'all'
-    ) {
+    if (allDifficultiesSelected && allDietsSelected && allCuisinesSelected) {
       setResults(fullData);
-    } else if (
-      difficulty !== 'all' &&
-      event.target.value === 'all' &&
-      cuisine === 'all'
-    ) {
-      const dietResults = [
-        ...fullData.filter((recipe) => {
-          return recipe.difficulty === difficulty;
-        }),
-      ];
+
+    } else if (!allDifficultiesSelected && allDietsSelected && allCuisinesSelected) {
+      const dietResults = [...fullData.filter(recipe => recipe.difficulty === difficulty)];
       setResults(dietResults);
-    } else if (
-      difficulty === 'all' &&
-      event.target.value !== 'all' &&
-      cuisine === 'all'
-    ) {
-      const dietResults = [
-        ...fullData.filter((recipe) => {
-          return recipe.dietary_restriction === event.target.value;
-        }),
-      ];
+
+    } else if (allDifficultiesSelected && !allDietsSelected && allCuisinesSelected) {
+      const dietResults = [...fullData.filter(recipe => recipe.dietary_restriction === event.target.value)];
       setResults(dietResults);
-    } else if (
-      difficulty === 'all' &&
-      cuisine !== 'all' &&
-      event.target.value === 'all'
-    ) {
-      const dietResults = [
-        ...fullData.filter((recipe) => {
-          return recipe.cuisine === cuisine;
-        }),
-      ];
+
+    } else if (allDifficultiesSelected && !allCuisinesSelected && allDietsSelected) {
+      const dietResults = [...fullData.filter(recipe => recipe.cuisine === cuisine)];
       setResults(dietResults);
-    } else if (
-      difficulty === 'all' &&
-      cuisine !== 'all' &&
-      event.target.value !== 'all'
-    ) {
+
+    } else if (allDifficultiesSelected && !allCuisinesSelected && !allDietsSelected) {
       const dietResults = [
-        ...fullData.filter((recipe) => {
+        ...fullData.filter(recipe => {
           return (
             recipe.dietary_restriction === event.target.value &&
             recipe.cuisine === cuisine
@@ -255,24 +231,18 @@ function App() {
         }),
       ];
       setResults(dietResults);
-    } else if (
-      difficulty !== 'all' &&
-      cuisine !== 'all' &&
-      event.target.value === 'all'
-    ) {
+
+    } else if (!allDifficultiesSelected && !allCuisinesSelected && allDietsSelected) {
       const dietResults = [
-        ...fullData.filter((recipe) => {
+        ...fullData.filter(recipe => {
           return recipe.cuisine === cuisine && recipe.difficulty === difficulty;
         }),
       ];
       setResults(dietResults);
-    } else if (
-      difficulty !== 'all' &&
-      cuisine === 'all' &&
-      event.target.value !== 'all'
-    ) {
+
+    } else if (!allDifficultiesSelected && allCuisinesSelected && !allDietsSelected) {
       const dietResults = [
-        ...fullData.filter((recipe) => {
+        ...fullData.filter(recipe => {
           return (
             recipe.dietary_restriction === event.target.value &&
             recipe.difficulty === difficulty
@@ -280,6 +250,7 @@ function App() {
         }),
       ];
       setResults(dietResults);
+      
     } else {
       const dietResults = [
         ...fullData.filter((recipe) => {
