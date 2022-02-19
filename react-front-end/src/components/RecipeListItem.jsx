@@ -1,4 +1,4 @@
-import { Box, Chip, Stack, Typography } from '@mui/material';
+import { Box, Button, Chip, Stack, Typography } from '@mui/material';
 import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
 import DinnerDiningOutlinedIcon from '@mui/icons-material/DinnerDiningOutlined';
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
@@ -242,7 +242,19 @@ const RecipeListItem = (props) => {
         <Typography variant='h3' color='primary' fontWeight='bold' gutterBottom>
           {title}
         </Typography>
-        <Typography variant='p'>{description}</Typography>
+        <Typography variant='p' sx={{ display: 'block' }}>
+          {description}
+        </Typography>
+        <Button
+          component={Link}
+          variant='contained'
+          to={`/recipe/${id}`}
+          sx={{
+            display: 'inline-block',
+            marginTop: '2rem',
+          }}>
+          See Recipe &raquo;
+        </Button>
       </Box>
     </Box>
   );
