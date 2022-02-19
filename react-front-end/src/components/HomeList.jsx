@@ -13,7 +13,7 @@ const HomeList = (props) => {
 
   useEffect(() => {
     setLoading(true);
-    setTimeout(() => {if (user) {
+    if (user) {
       axios
        .get(`http://localhost:3001/api/users/${user.id}/follows`)
        .then((res) => {
@@ -26,7 +26,7 @@ const HomeList = (props) => {
          setLoading(false);
        })
        .catch((err) => err.message);
-   }} , 2000)
+   }
     
   }, [user, results]);
 
