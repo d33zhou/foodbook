@@ -222,7 +222,7 @@ VALUES
   'easy',
   'greek',
   'vegan',
-  5),
+  1),
 
   ('Channa Masala',
   'Chana masala, also called chole masala, is believed to have originated in northern India. "Chana" means chickpea and "masala" refers to a blend of spices used in Indian cooking. Its a popular dish throughout India and Pakistan, with recipes varying by region. And its also gained popularity around the world. The following is our inspired version resembling what weve tasted in restaurants. Our version is made with green chilies, onion, garlic, fresh cilantro, a blend of spices, chickpeas, and tomatoes. It can be prepared a number of different ways, but I chose the simple route: 1 pot and about 30 minutes required.',
