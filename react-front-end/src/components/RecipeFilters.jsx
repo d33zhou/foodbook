@@ -85,8 +85,22 @@ const RecipeFilters = (props) => {
             control={
               <Radio />
             }
-            value='chinese' 
-            label="Chinese"
+            value='mediterranean' 
+            label="Mediterranean"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='american' 
+            label="American"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='japanese' 
+            label="Japanese"
           />
           <FormControlLabel
             control={
@@ -94,6 +108,62 @@ const RecipeFilters = (props) => {
             }
             value='italian' 
             label="Italian"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='korean' 
+            label="Korean"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='indian' 
+            label="Indian"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='greek' 
+            label="Greek"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='lebanese' 
+            label="Lebanese"
+          />
+           <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='moroccan' 
+            label="Moroccan"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='turkish' 
+            label="Turkish"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='thai' 
+            label="Thai"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='chinese' 
+            label="Chinese"
           />
         </RadioGroup>
       </FormControl>
@@ -132,6 +202,27 @@ const RecipeFilters = (props) => {
             }
             value='vegetarian' 
             label="Vegetarian"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='lactose-free' 
+            label="Lactose-free"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='low-carb' 
+            label="Low-carb"
+          />
+          <FormControlLabel
+            control={
+              <Radio />
+            }
+            value='kosher' 
+            label="Kosher"
           />
         </RadioGroup>
       </FormControl>
