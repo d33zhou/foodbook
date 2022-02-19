@@ -64,23 +64,25 @@ const SearchAppBar = () => {
   const history = useHistory();
 
   useEffect(() => {
-    if(query){
+    if (query) {
       const searchURL = `http://localhost:3001/api/recipes/search`;
-    axios.post(searchURL, { title: query }).then((response) => {
-      setSearchResults([...response.data]);
-      // console.log(response.data);
-    });
+      axios.post(searchURL, { title: query }).then((response) => {
+        setSearchResults([...response.data]);
+        // console.log(response.data);
+      });
     }
   }, [query]);
 
-  
   let options = [...searchResults];
-  
+
   return (
     <Box
       sx={{
         flexGrow: 1,
         marginBottom: '4rem',
+        position: 'sticky',
+        top: 0,
+        zIndex: 1000,
       }}>
       <AppBar position='static'>
         <Toolbar>
@@ -117,7 +119,7 @@ const SearchAppBar = () => {
             sx={{ width: 300 }}
             options={searchResults}
             onChange={(event: any, option: any) => {
-              history.push(`/recipe/${option.id}`)
+              history.push(`/recipe/${option.id}`);
             }}
             getOptionLabel={(option) => option.title}
             renderInput={(params) => (

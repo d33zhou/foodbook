@@ -22,7 +22,7 @@ const BookmarkList = props => {
           setBookmarks([...bookmarksArray]);
           setLoading(false);
         })
-        .catch(err => err.message);
+        .catch((err) => err.message);
     }
   }, [user, results]);
 
@@ -47,6 +47,7 @@ const BookmarkList = props => {
           cuisine={recipe.cuisine}
           restrictions={recipe.dietary_restriction}
           prepTime={recipe.prep_minutes}
+          difficulty={recipe.difficulty}
         />
       );
     });
