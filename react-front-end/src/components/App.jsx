@@ -387,13 +387,27 @@ function App() {
                   }}>
                   <Navigation />
                   <Box>
+                  {results.length === 0 && (
+                    <Typography
+                      variant="h3"
+                      component="h1"
+                      color="primary"
+                      fontWeight="bold"
+                      gutterBottom
+                      width="700px"
+                    >
+                      Sorry! There are no results. Please try another filter.
+                    </Typography>
+                  )}
                     <RecipeList results={results} />
                   </Box>
                   <RecipeFilters
                     difficulty={difficulty}
                     cuisine={cuisine}
+                    diet={diet}
                     handleDifficulty={handleDifficulty}
                     handleCuisine={handleCuisine}
+                    handleDiet={handleDiet}
                   />
                 </Box>
               </Container>
@@ -418,8 +432,10 @@ function App() {
                   <RecipeFilters
                     difficulty={difficulty}
                     cuisine={cuisine}
+                    diet={diet}
                     handleDifficulty={handleDifficulty}
                     handleCuisine={handleCuisine}
+                    handleDiet={handleDiet}
                   />
                 </Box>
               </Container>
