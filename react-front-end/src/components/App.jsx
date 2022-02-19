@@ -133,27 +133,45 @@ function App() {
   };
 
   const handleCuisine = (event) => {
-    const allCuisinesSelected = event.target.value === "all";
-    const allDifficultiesSelected = difficulty === "all";
-    const allDietsSelected = diet === "all";
+    const allCuisinesSelected = event.target.value === 'all';
+    const allDifficultiesSelected = difficulty === 'all';
+    const allDietsSelected = diet === 'all';
 
     setCuisine(event.target.value);
     if (allDifficultiesSelected && allCuisinesSelected && allDietsSelected) {
       setResults(fullData);
-
-    } else if (!allDifficultiesSelected && allCuisinesSelected && allDietsSelected) {
-      const cuisineResults = [...fullData.filter(recipe => recipe.difficulty === difficulty)];
+    } else if (
+      !allDifficultiesSelected &&
+      allCuisinesSelected &&
+      allDietsSelected
+    ) {
+      const cuisineResults = [
+        ...fullData.filter((recipe) => recipe.difficulty === difficulty),
+      ];
       setResults(cuisineResults);
-
-    } else if (allDifficultiesSelected && !allCuisinesSelected && allDietsSelected) {
-      const cuisineResults = [...fullData.filter(recipe => recipe.cuisine === event.target.value)];
+    } else if (
+      allDifficultiesSelected &&
+      !allCuisinesSelected &&
+      allDietsSelected
+    ) {
+      const cuisineResults = [
+        ...fullData.filter((recipe) => recipe.cuisine === event.target.value),
+      ];
       setResults(cuisineResults);
-
-    } else if (allDifficultiesSelected  && allCuisinesSelected && !allDietsSelected) {
-      const cuisineResults = [...fullData.filter(recipe => recipe.dietary_restriction === diet)];
+    } else if (
+      allDifficultiesSelected &&
+      allCuisinesSelected &&
+      !allDietsSelected
+    ) {
+      const cuisineResults = [
+        ...fullData.filter((recipe) => recipe.dietary_restriction === diet),
+      ];
       setResults(cuisineResults);
-
-    } else if (allDifficultiesSelected && !allDietsSelected && !allCuisinesSelected) {
+    } else if (
+      allDifficultiesSelected &&
+      !allDietsSelected &&
+      !allCuisinesSelected
+    ) {
       const cuisineResults = [
         ...fullData.filter((recipe) => {
           return (
@@ -163,8 +181,11 @@ function App() {
         }),
       ];
       setResults(cuisineResults);
-
-    } else if (!allDifficultiesSelected && !allDietsSelected && allCuisinesSelected) {
+    } else if (
+      !allDifficultiesSelected &&
+      !allDietsSelected &&
+      allCuisinesSelected
+    ) {
       const cuisineResults = [
         ...fullData.filter((recipe) => {
           return (
@@ -174,8 +195,11 @@ function App() {
         }),
       ];
       setResults(cuisineResults);
-
-    } else if (!allDifficultiesSelected && allDietsSelected && !allCuisinesSelected) {
+    } else if (
+      !allDifficultiesSelected &&
+      allDietsSelected &&
+      !allCuisinesSelected
+    ) {
       const cuisineResults = [
         ...fullData.filter((recipe) => {
           return (
@@ -185,7 +209,6 @@ function App() {
         }),
       ];
       setResults(cuisineResults);
-
     } else {
       const cuisineResults = [
         ...fullData.filter((recipe) => {
@@ -201,29 +224,49 @@ function App() {
   };
 
   const handleDiet = (event) => {
-    const allCuisinesSelected = cuisine === "all";
-    const allDifficultiesSelected = difficulty === "all";
-    const allDietsSelected = event.target.value === "all";
+    const allCuisinesSelected = cuisine === 'all';
+    const allDifficultiesSelected = difficulty === 'all';
+    const allDietsSelected = event.target.value === 'all';
 
     setDiet(event.target.value);
     if (allDifficultiesSelected && allDietsSelected && allCuisinesSelected) {
       setResults(fullData);
-
-    } else if (!allDifficultiesSelected && allDietsSelected && allCuisinesSelected) {
-      const dietResults = [...fullData.filter(recipe => recipe.difficulty === difficulty)];
-      setResults(dietResults);
-
-    } else if (allDifficultiesSelected && !allDietsSelected && allCuisinesSelected) {
-      const dietResults = [...fullData.filter(recipe => recipe.dietary_restriction === event.target.value)];
-      setResults(dietResults);
-
-    } else if (allDifficultiesSelected && !allCuisinesSelected && allDietsSelected) {
-      const dietResults = [...fullData.filter(recipe => recipe.cuisine === cuisine)];
-      setResults(dietResults);
-
-    } else if (allDifficultiesSelected && !allCuisinesSelected && !allDietsSelected) {
+    } else if (
+      !allDifficultiesSelected &&
+      allDietsSelected &&
+      allCuisinesSelected
+    ) {
       const dietResults = [
-        ...fullData.filter(recipe => {
+        ...fullData.filter((recipe) => recipe.difficulty === difficulty),
+      ];
+      setResults(dietResults);
+    } else if (
+      allDifficultiesSelected &&
+      !allDietsSelected &&
+      allCuisinesSelected
+    ) {
+      const dietResults = [
+        ...fullData.filter(
+          (recipe) => recipe.dietary_restriction === event.target.value
+        ),
+      ];
+      setResults(dietResults);
+    } else if (
+      allDifficultiesSelected &&
+      !allCuisinesSelected &&
+      allDietsSelected
+    ) {
+      const dietResults = [
+        ...fullData.filter((recipe) => recipe.cuisine === cuisine),
+      ];
+      setResults(dietResults);
+    } else if (
+      allDifficultiesSelected &&
+      !allCuisinesSelected &&
+      !allDietsSelected
+    ) {
+      const dietResults = [
+        ...fullData.filter((recipe) => {
           return (
             recipe.dietary_restriction === event.target.value &&
             recipe.cuisine === cuisine
@@ -231,18 +274,24 @@ function App() {
         }),
       ];
       setResults(dietResults);
-
-    } else if (!allDifficultiesSelected && !allCuisinesSelected && allDietsSelected) {
+    } else if (
+      !allDifficultiesSelected &&
+      !allCuisinesSelected &&
+      allDietsSelected
+    ) {
       const dietResults = [
-        ...fullData.filter(recipe => {
+        ...fullData.filter((recipe) => {
           return recipe.cuisine === cuisine && recipe.difficulty === difficulty;
         }),
       ];
       setResults(dietResults);
-
-    } else if (!allDifficultiesSelected && allCuisinesSelected && !allDietsSelected) {
+    } else if (
+      !allDifficultiesSelected &&
+      allCuisinesSelected &&
+      !allDietsSelected
+    ) {
       const dietResults = [
-        ...fullData.filter(recipe => {
+        ...fullData.filter((recipe) => {
           return (
             recipe.dietary_restriction === event.target.value &&
             recipe.difficulty === difficulty
@@ -250,7 +299,6 @@ function App() {
         }),
       ];
       setResults(dietResults);
-      
     } else {
       const dietResults = [
         ...fullData.filter((recipe) => {
@@ -267,17 +315,16 @@ function App() {
 
   useEffect(() => {
     setLoading(true);
-    
-      const testURL = `http://localhost:3001/api/recipes`;
-      axios.get(testURL).then((response) => {
-        setResults(response.data);
-        setFullData(response.data);
-        setLoading(false);
-      });
-    
+
+    const testURL = `http://localhost:3001/api/recipes`;
+    axios.get(testURL).then((response) => {
+      setResults(response.data);
+      setFullData(response.data);
+      setLoading(false);
+    });
   }, []);
-  
-  if(loading) {
+
+  if (loading) {
     return (
       <Box
         sx={{
@@ -286,6 +333,7 @@ function App() {
           alignItems: 'center',
           width: '100vw',
           height: '100vh',
+          backgroundColor: '#f0f2f5',
         }}>
         <img src={loadingGif} alt='Loading recipe GIF' />
       </Box>
@@ -315,7 +363,7 @@ function App() {
                 }}>
                 <Navigation />
                 <Box>
-                  {(results.length <= 0) && (
+                  {results.length <= 0 && (
                     <Typography
                       variant='h3'
                       component='h1'
@@ -380,66 +428,7 @@ function App() {
             </Container>
           </PrivateRoute>
 
-            <PrivateRoute path='/bookmarks'>
-              <SearchAppBar />
-              <Container>
-                <Box
-                  maxWidth='lg'
-                  mx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'flex-start',
-                    columnGap: '4rem',
-                    margin: '0 auto',
-                  }}>
-                  <Navigation />
-                  <Box>
-                  {results.length <= 0 && (
-                    <Typography
-                      variant="h3"
-                      component="h1"
-                      color="primary"
-                      fontWeight="bold"
-                      gutterBottom
-                      width="700px"
-                    >
-                      Sorry! There are no results. Please try another filter.
-                    </Typography>
-                  )}
-                    <BookmarkList results={results} />
-                  </Box>
-                  <RecipeFilters
-                    difficulty={difficulty}
-                    cuisine={cuisine}
-                    diet={diet}
-                    handleDifficulty={handleDifficulty}
-                    handleCuisine={handleCuisine}
-                    handleDiet={handleDiet}
-                  />
-                </Box>
-              </Container>
-            </PrivateRoute>
-
-            <PrivateRoute path='/create'>
-              <SearchAppBar />
-              <Container maxWidth='lg'>
-                <Box
-                  maxWidth='lg'
-                  mx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'flex-start',
-                    columnGap: '4rem',
-                    margin: '0 auto',
-                    height: '100vh',
-                  }}>
-                  <Navigation />
-                  <RecipeForm />
-                </Box>
-              </Container>
-            </PrivateRoute>
-
-          <PrivateRoute path="/recipe/:id">
+          <PrivateRoute path='/bookmarks'>
             <SearchAppBar />
             <Container>
               <Box
@@ -453,7 +442,18 @@ function App() {
                 }}>
                 <Navigation />
                 <Box>
-                  <BookmarkList fullData={fullData} />
+                  {results.length <= 0 && (
+                    <Typography
+                      variant='h3'
+                      component='h1'
+                      color='primary'
+                      fontWeight='bold'
+                      gutterBottom
+                      width='700px'>
+                      Sorry! There are no results. Please try another filter.
+                    </Typography>
+                  )}
+                  <BookmarkList results={results} />
                 </Box>
                 <RecipeFilters
                   difficulty={difficulty}
@@ -463,6 +463,44 @@ function App() {
                   handleCuisine={handleCuisine}
                   handleDiet={handleDiet}
                 />
+              </Box>
+            </Container>
+          </PrivateRoute>
+
+          <PrivateRoute path='/create'>
+            <SearchAppBar />
+            <Container maxWidth='lg'>
+              <Box
+                maxWidth='lg'
+                mx={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'flex-start',
+                  columnGap: '4rem',
+                  margin: '0 auto',
+                  height: '100vh',
+                }}>
+                <Navigation />
+                <RecipeForm />
+              </Box>
+            </Container>
+          </PrivateRoute>
+
+          <PrivateRoute path='/recipe/:id'>
+            <SearchAppBar />
+            <Container maxWidth='lg'>
+              <Box
+                maxWidth='lg'
+                mx={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'flex-start',
+                  columnGap: '4rem',
+                  margin: '0 auto',
+                  height: '100vh',
+                }}>
+                <Navigation />
+                <RecipeItem />
               </Box>
             </Container>
           </PrivateRoute>
