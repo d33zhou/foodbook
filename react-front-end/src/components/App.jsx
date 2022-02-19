@@ -27,7 +27,7 @@ import PrivateRoute from './PrivateRoute';
 import BookmarkList from './BookmarkList';
 import HomeList from './HomeList';
 
-import { AuthProvider,useAuth } from '../providers/AuthContext';
+import { AuthProvider, useAuth } from '../providers/AuthContext';
 import { useState, useEffect } from 'react';
 
 function App() {
@@ -35,7 +35,6 @@ function App() {
   const [fullData, setFullData] = useState([]);
   const [difficulty, setDifficulty] = useState('');
   const [cuisine, setCuisine] = useState('');
-  
 
   const handleDifficulty = (event) => {
     setDifficulty(event.target.value);
@@ -72,7 +71,6 @@ function App() {
       setResults(response.data);
       setFullData(response.data);
     });
-    
   }, []);
 
   return (
@@ -102,13 +100,19 @@ function App() {
                   <Box>
                     <HomeList fullData={fullData} />
                   </Box>
+                  <RecipeFilters
+                    difficulty={difficulty}
+                    cuisine={cuisine}
+                    handleDifficulty={handleDifficulty}
+                    handleCuisine={handleCuisine}
+                  />
                 </Box>
               </Container>
             </PrivateRoute>
 
             <PrivateRoute path='/explore'>
               <SearchAppBar />
-              
+
               <Container maxWidth='lg'>
                 <Box
                   maxWidth='lg'
@@ -134,22 +138,29 @@ function App() {
             </PrivateRoute>
 
             <PrivateRoute path='/bookmarks'>
+              <SearchAppBar />
               <Container>
-                  <Box
-                    maxWidth='lg'
-                    mx={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'flex-start',
-                      columnGap: '4rem',
-                      margin: '0 auto',
-                    }}>
-                    <Navigation />
-                    <Box>
-                      <BookmarkList fullData={fullData} />
-                    </Box>
+                <Box
+                  maxWidth='lg'
+                  mx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-start',
+                    columnGap: '4rem',
+                    margin: '0 auto',
+                  }}>
+                  <Navigation />
+                  <Box>
+                    <BookmarkList fullData={fullData} />
                   </Box>
-                </Container>
+                  <RecipeFilters
+                    difficulty={difficulty}
+                    cuisine={cuisine}
+                    handleDifficulty={handleDifficulty}
+                    handleCuisine={handleCuisine}
+                  />
+                </Box>
+              </Container>
             </PrivateRoute>
 
             <PrivateRoute path='/create'>
@@ -191,6 +202,7 @@ function App() {
             </PrivateRoute>
 
             <PrivateRoute path='/profile'>
+              <SearchAppBar />
               <Container>
                 <Box
                   maxWidth='lg'
