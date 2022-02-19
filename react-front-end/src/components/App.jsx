@@ -109,51 +109,27 @@ function App() {
   };
 
   const handleCuisine = (event) => {
+    const allCuisinesSelected = event.target.value === "all";
+    const allDifficultiesSelected = difficulty === "all";
+    const allDietsSelected = diet === "all";
+
     setCuisine(event.target.value);
-    if (
-      difficulty === "all" &&
-      event.target.value === "all" &&
-      diet === "all"
-    ) {
+    if (allDifficultiesSelected && allCuisinesSelected && allDietsSelected) {
       setResults(fullData);
-    } else if (
-      difficulty !== "all" &&
-      event.target.value === "all" &&
-      diet === "all"
-    ) {
-      const cuisineResults = [
-        ...fullData.filter((recipe) => {
-          return recipe.difficulty === difficulty;
-        }),
-      ];
+
+    } else if (!allDifficultiesSelected && allCuisinesSelected && allDietsSelected) {
+      const cuisineResults = [...fullData.filter(recipe => recipe.difficulty === difficulty)];
       setResults(cuisineResults);
-    } else if (
-      difficulty === "all" &&
-      event.target.value !== "all" &&
-      diet === "all"
-    ) {
-      const cuisineResults = [
-        ...fullData.filter((recipe) => {
-          return recipe.cuisine === event.target.value;
-        }),
-      ];
+
+    } else if (allDifficultiesSelected && !allCuisinesSelected && allDietsSelected) {
+      const cuisineResults = [...fullData.filter(recipe => recipe.cuisine === event.target.value)];
       setResults(cuisineResults);
-    } else if (
-      difficulty === "all" &&
-      diet !== "all" &&
-      event.target.value === "all"
-    ) {
-      const cuisineResults = [
-        ...fullData.filter((recipe) => {
-          return recipe.dietary_restriction === diet;
-        }),
-      ];
+
+    } else if (allDifficultiesSelected  && allCuisinesSelected && !allDietsSelected) {
+      const cuisineResults = [...fullData.filter(recipe => recipe.dietary_restriction === diet)];
       setResults(cuisineResults);
-    } else if (
-      difficulty === "all" &&
-      diet !== "all" &&
-      event.target.value !== "all"
-    ) {
+
+    } else if (allDifficultiesSelected && !allDietsSelected && !allCuisinesSelected) {
       const cuisineResults = [
         ...fullData.filter((recipe) => {
           return (
@@ -163,11 +139,8 @@ function App() {
         }),
       ];
       setResults(cuisineResults);
-    } else if (
-      difficulty !== "all" &&
-      diet !== "all" &&
-      event.target.value === "all"
-    ) {
+
+    } else if (!allDifficultiesSelected && !allDietsSelected && allCuisinesSelected) {
       const cuisineResults = [
         ...fullData.filter((recipe) => {
           return (
@@ -177,11 +150,8 @@ function App() {
         }),
       ];
       setResults(cuisineResults);
-    } else if (
-      difficulty !== "all" &&
-      diet === "all" &&
-      event.target.value !== "all"
-    ) {
+
+    } else if (!allDifficultiesSelected && allDietsSelected && !allCuisinesSelected) {
       const cuisineResults = [
         ...fullData.filter((recipe) => {
           return (
@@ -191,6 +161,7 @@ function App() {
         }),
       ];
       setResults(cuisineResults);
+
     } else {
       const cuisineResults = [
         ...fullData.filter((recipe) => {
@@ -301,17 +272,17 @@ function App() {
 
   useEffect(() => {
     setLoading(true);
-    setTimeout(() => {
+    // setTimeout(() => {
       const testURL = `http://localhost:3001/api/recipes`;
       axios.get(testURL).then((response) => {
         setResults(response.data);
         setFullData(response.data);
         setLoading(false);
       });
-    },5000)
+    // },5000)
     
   }, []);
-
+  console.log(results);
   if(loading) {
     return (
       <Box sx={{ display: 'flex', justifyContent:'center' , alignItems:'center', width:'100vw', height:'100vh'}}>
@@ -346,7 +317,7 @@ function App() {
               >
                 <Navigation />
                 <Box>
-                  {results.length === 0 && (
+                  {(results.length <= 0) && (
                     <Typography
                       variant="h3"
                       component="h1"
@@ -358,7 +329,7 @@ function App() {
                       Sorry! There are no results. Please try another filter.
                     </Typography>
                   )}
-                  <HomeList fullData={fullData} />
+                  <HomeList results={results} />
                 </Box>
                 <RecipeFilters
                   difficulty={difficulty}
@@ -427,7 +398,19 @@ function App() {
                   }}>
                   <Navigation />
                   <Box>
-                    <BookmarkList fullData={fullData} />
+                  {results.length <= 0 && (
+                    <Typography
+                      variant="h3"
+                      component="h1"
+                      color="primary"
+                      fontWeight="bold"
+                      gutterBottom
+                      width="700px"
+                    >
+                      Sorry! There are no results. Please try another filter.
+                    </Typography>
+                  )}
+                    <BookmarkList results={results} />
                   </Box>
                   <RecipeFilters
                     difficulty={difficulty}
