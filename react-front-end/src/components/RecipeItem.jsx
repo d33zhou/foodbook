@@ -134,20 +134,20 @@ const RecipeItem = () => {
     </li>
   ));
 
-  // if (loading) {
-  //   return (
-  //     <Box
-  //       sx={{
-  //         display: 'flex',
-  //         justifyContent: 'center',
-  //         alignItems: 'center',
-  //         width: '100vw',
-  //         height: '100vh',
-  //       }}>
-  //       <img src={loadingGif} alt='Loading recipe GIF' />
-  //     </Box>
-  //   );
-  // }
+  if (loading) {
+    return (
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: '100vw',
+          height: '100vh',
+        }}>
+        <img src={loadingGif} alt='Loading recipe GIF' />
+      </Box>
+    );
+  }
 
   return (
     <Box
