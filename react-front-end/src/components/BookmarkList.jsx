@@ -4,21 +4,23 @@ import { Box } from '@mui/material';
 import RecipeListItem from './RecipeListItem';
 import { useAuth } from '../providers/AuthContext';
 
-const BookmarkList = props => {
+const BookmarkList = (props) => {
   const { fullData } = props; // array of all recipe objects in DB
-  const [ bookmarks, setBookmarks ] = useState([]);
+  const [bookmarks, setBookmarks] = useState([]);
   const { user } = useAuth();
 
   useEffect(() => {
     if (user && bookmarks.length <= 0) {
       axios
         .get(`http://localhost:3001/api/users/${user.id}/bookmarks`)
-        .then(res => {
-          const bookmarksIdArray = res.data.map(recipe => recipe.id);
-          const bookmarksArray = fullData.filter(recipe => bookmarksIdArray.includes(recipe.id));
+        .then((res) => {
+          const bookmarksIdArray = res.data.map((recipe) => recipe.id);
+          const bookmarksArray = fullData.filter((recipe) =>
+            bookmarksIdArray.includes(recipe.id)
+          );
           setBookmarks([...bookmarksArray]);
         })
-        .catch(err => err.message);
+        .catch((err) => err.message);
     }
   }, [user, bookmarks]);
 
@@ -35,6 +37,7 @@ const BookmarkList = props => {
           cuisine={recipe.cuisine}
           restrictions={recipe.dietary_restriction}
           prepTime={recipe.prep_minutes}
+          difficulty={recipe.difficulty}
         />
       );
     });

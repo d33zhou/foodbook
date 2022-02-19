@@ -1,16 +1,16 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { Avatar, Box, Chip, Stack, Typography } from "@mui/material";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
-import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
-import BookmarkOutlinedIcon from "@mui/icons-material/BookmarkOutlined";
-import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
-import DinnerDiningOutlinedIcon from "@mui/icons-material/DinnerDiningOutlined";
-import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutlineOutlined";
-import { blue } from "@mui/material/colors";
-import { useParams } from "react-router-dom";
-import { useAuth } from "../providers/AuthContext";
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Avatar, Box, Chip, Link, Stack, Typography } from '@mui/material';
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
+import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
+import BookmarkOutlinedIcon from '@mui/icons-material/BookmarkOutlined';
+import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
+import DinnerDiningOutlinedIcon from '@mui/icons-material/DinnerDiningOutlined';
+import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
+import { blue } from '@mui/material/colors';
+import { useParams } from 'react-router-dom';
+import { useAuth } from '../providers/AuthContext';
 
 const RecipeItem = () => {
   const [results, setResults] = useState({});
@@ -55,24 +55,23 @@ const RecipeItem = () => {
 
   useEffect(() => {
     const getBookmarksURL = `http://localhost:3001/api/bookmark`;
-    if(user){
+    if (user) {
       axios
-      .get(getBookmarksURL, { params: { user_id: user.id, recipe_id: id } })
-      .then((res) => {
-        const response = res.data;
+        .get(getBookmarksURL, { params: { user_id: user.id, recipe_id: id } })
+        .then((res) => {
+          const response = res.data;
 
-        for (let obj of response.recipeBookmarks) {
-          if (obj.recipe_id === Number(id)) {
-            setBookmark(true);
-            console.log("inside setBookmark");
+          for (let obj of response.recipeBookmarks) {
+            if (obj.recipe_id === Number(id)) {
+              setBookmark(true);
+              console.log('inside setBookmark');
+            }
           }
-        }
-      })
-      .catch((err) => console.log(err.message));
+        })
+        .catch((err) => console.log(err.message));
     }
-    
-  }, [id, user,bookmark]);
-  
+  }, [id, user, bookmark]);
+
   const handleLike = () => {
     setLike(!like);
     if (!like) {
@@ -90,21 +89,20 @@ const RecipeItem = () => {
 
   useEffect(() => {
     const getLikesURL = `http://localhost:3001/api/like`;
-    if(user){
+    if (user) {
       axios
-      .get(getLikesURL, { params: { user_id: user.id, recipe_id: id } })
-      .then((res) => {
-        const response = res.data;
-        for (let obj of response.recipeLikes) {
-          if (obj.recipe_id === Number(id)) {
-            setLike(true);
+        .get(getLikesURL, { params: { user_id: user.id, recipe_id: id } })
+        .then((res) => {
+          const response = res.data;
+          for (let obj of response.recipeLikes) {
+            if (obj.recipe_id === Number(id)) {
+              setLike(true);
+            }
           }
-        }
-      })
-      .catch((err) => console.log(err.message));
+        })
+        .catch((err) => console.log(err.message));
     }
-    
-  }, [id, user,like]);
+  }, [id, user, like]);
 
   useEffect(() => {
     const testURL = `http://localhost:3001/api/recipes/${id}`;
@@ -113,7 +111,7 @@ const RecipeItem = () => {
       .then((response) => {
         setResults({ ...response.data });
       })
-      .catch((err) => console.log("Error ", err.message));
+      .catch((err) => console.log('Error ', err.message));
   }, [id]);
 
   useEffect(() => {
@@ -123,7 +121,7 @@ const RecipeItem = () => {
       .then((response) => {
         setIngredients([...response.data]);
       })
-      .catch((err) => console.log("Error ", err.message));
+      .catch((err) => console.log('Error ', err.message));
   }, [id]);
 
   const parsedIngredients = ingredients.map((ingredient) => (
@@ -134,27 +132,24 @@ const RecipeItem = () => {
 
   return (
     <Box
-      maxWidth="lg"
+      maxWidth='lg'
       sx={{
-        display: "flex",
-        flexDirection: "row",
-      }}
-    >
+        display: 'flex',
+        flexDirection: 'row',
+      }}>
       <Box
         sx={{
           flexGrow: 3,
-          width: "100%",
-          overflow: "hidden",
-          textAlign: "left",
-        }}
-      >
+          width: '100%',
+          overflow: 'hidden',
+          textAlign: 'left',
+        }}>
         <Typography
-          variant="h3"
-          component="h1"
-          color="primary"
-          fontWeight="bold"
-          gutterBottom
-        >
+          variant='h3'
+          component='h1'
+          color='primary'
+          fontWeight='bold'
+          gutterBottom>
           {title}
         </Typography>
         <Box
@@ -167,107 +162,128 @@ const RecipeItem = () => {
             maxWidth: '100%',
             height: '400px',
           }}></Box>
-        <Stack direction='row' spacing={1}>
-          <Chip icon={<DinnerDiningOutlinedIcon />} label={`${cuisine}`} />
-          <Chip
-            icon={<AccessTimeOutlinedIcon />}
-            label={`${prep_minutes} minutes`}
-          />
-          {dietary_restriction && (
+        <Box
+          sx={{
+            margin: '2rem 0',
+            display: 'flex',
+            justifyContent: 'space-between',
+          }}>
+          <Stack direction='row' spacing={1}>
+            <Chip icon={<DinnerDiningOutlinedIcon />} label={`${cuisine}`} />
             <Chip
-              icon={<CheckCircleOutlineOutlinedIcon />}
-              label={dietary_restriction}
+              icon={<AccessTimeOutlinedIcon />}
+              label={`${prep_minutes} minutes`}
             />
-          )}
-
-          <Chip
-            avatar={<Avatar alt="Natacha" src={avatar} />}
-            label={`${first_name} ${last_name}`}
-            color="secondary"
-          />
-        </Stack>
+            {dietary_restriction && (
+              <Chip
+                icon={<CheckCircleOutlineOutlinedIcon />}
+                label={dietary_restriction}
+              />
+            )}
+          </Stack>
+          <Stack direction='row' spacing={1}>
+            <Chip
+              avatar={<Avatar alt='Natacha' src={avatar} />}
+              label={`${first_name} ${last_name}`}
+              color='secondary'
+            />
+          </Stack>
+        </Box>
         <Typography variant='h4'>Description</Typography>
-        <Typography variant='p'>{description}</Typography>
+        <Typography
+          variant='p'
+          sx={{
+            display: 'inline-block',
+            marginBottom: '2rem',
+          }}>
+          {description}
+        </Typography>
         <Typography variant='h4'>Directions</Typography>
-        <Typography variant='p'>{directions}</Typography>
+        <Typography
+          variant='p'
+          sx={{
+            display: 'inline-block',
+            marginBottom: '2rem',
+          }}>
+          {directions}
+        </Typography>
       </Box>
       <Box
         sx={{
           flexGrow: 1,
-          marginLeft: "1rem",
-          padding: "2rem",
-          textAlign: "left",
-          height: "auto",
+          marginLeft: '1rem',
+          padding: '2rem',
+          textAlign: 'left',
+          height: 'auto',
           backgroundColor: blue[50],
-        }}
-      >
+        }}>
         <Box>
           {like && (
             <FavoriteOutlinedIcon
-              fontSize="medium"
+              fontSize='medium'
               onClick={handleLike}
-              style={{ color: "red" }}
+              style={{ color: 'red' }}
               sx={{
-                "&:hover": {
-                  color: "orangered",
+                '&:hover': {
+                  color: 'orangered',
                 },
               }}
             />
           )}
           {!like && (
             <FavoriteBorderOutlinedIcon
-              fontSize="medium"
+              fontSize='medium'
               onClick={handleLike}
-              style={{ color: "red" }}
+              style={{ color: 'red' }}
               sx={{
-                "&:hover": {
-                  color: "orangered",
+                '&:hover': {
+                  color: 'orangered',
                 },
               }}
             />
           )}
           {bookmark && (
             <BookmarkOutlinedIcon
-              fontSize="medium"
+              fontSize='medium'
               onClick={handleBookmark}
               sx={{
-                "&:hover": {
-                  color: "orangered",
+                '&:hover': {
+                  color: 'orangered',
                 },
               }}
             />
           )}
           {!bookmark && (
             <BookmarkBorderOutlinedIcon
-              fontSize="medium"
+              fontSize='medium'
               onClick={handleBookmark}
               sx={{
-                "&:hover": {
-                  color: "orangered",
+                '&:hover': {
+                  color: 'orangered',
                 },
               }}
             />
           )}
         </Box>
-        <Typography variant="h6" color="primary" fontWeight="bold" gutterBottom>
+        <Typography variant='h6' color='primary' fontWeight='bold' gutterBottom>
           Difficulty:
         </Typography>
-        <Typography variant="p" color="primary" fontWeight="bold" gutterBottom>
+        <Typography variant='p' color='primary' fontWeight='bold' gutterBottom>
           {difficulty}
         </Typography>
-        <Typography variant="h6" color="primary" fontWeight="bold" gutterBottom>
+        <Typography variant='h6' color='primary' fontWeight='bold' gutterBottom>
           Prep Time:
         </Typography>
-        <Typography variant="p" color="primary" fontWeight="bold" gutterBottom>
+        <Typography variant='p' color='primary' fontWeight='bold' gutterBottom>
           {prep_minutes} minutes
         </Typography>
-        <Typography variant="h6" color="primary" fontWeight="bold" gutterBottom>
+        <Typography variant='h6' color='primary' fontWeight='bold' gutterBottom>
           Ingredients:
         </Typography>
-        <Typography variant="p" color="primary" fontWeight="bold" gutterBottom>
+        <Typography variant='p' color='primary' fontWeight='bold' gutterBottom>
           Makes {servings} servings
         </Typography>
-        <Typography variant="p" color="primary" fontWeight="bold" gutterBottom>
+        <Typography variant='p' color='primary' fontWeight='bold' gutterBottom>
           {parsedIngredients}
         </Typography>
       </Box>

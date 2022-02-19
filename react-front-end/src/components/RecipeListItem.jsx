@@ -2,6 +2,7 @@ import { Box, Button, Chip, Stack, Typography } from '@mui/material';
 import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
 import DinnerDiningOutlinedIcon from '@mui/icons-material/DinnerDiningOutlined';
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
+import FeedOutlinedIcon from '@mui/icons-material/FeedOutlined';
 
 import { Link } from 'react-router-dom';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
@@ -21,9 +22,9 @@ const RecipeListItem = (props) => {
     cuisine,
     prepTime,
     restrictions,
-    difficulty
+    difficulty,
   } = props;
-  
+
   const { user } = useAuth();
   const [like, setLike] = useState(false);
   const [numberOfLikes, setNumberOfLikes] = useState(0);
@@ -44,24 +45,22 @@ const RecipeListItem = (props) => {
       });
     }
   };
-  
+
   const handleUserLikes = () => {
     const getLikesURL = `http://localhost:3001/api/like`;
-  axios
-    .get(getLikesURL, { params: { user_id: user.id, recipe_id: id } })
-    .then((res) => {
-      const response = res.data;
-      for (let obj of response.recipeLikes) {
-        if (obj.recipe_id === id) {
-          setLike(true);
+    axios
+      .get(getLikesURL, { params: { user_id: user.id, recipe_id: id } })
+      .then((res) => {
+        const response = res.data;
+        for (let obj of response.recipeLikes) {
+          if (obj.recipe_id === id) {
+            setLike(true);
+          }
         }
-      }
-      setNumberOfLikes(response.count.count);
-    })
-    .catch((err) => console.log(err.message));
-  }
-  
-  
+        setNumberOfLikes(response.count.count);
+      })
+      .catch((err) => console.log(err.message));
+  };
 
   const handleBookmark = () => {
     setBookmark(!bookmark);
@@ -84,29 +83,27 @@ const RecipeListItem = (props) => {
 
   const handleUserBookmarks = () => {
     const getBookmarksURL = `http://localhost:3001/api/bookmark`;
-  axios
-    .get(getBookmarksURL, { params: { user_id: user.id, recipe_id: id } })
-    .then((res) => {
-      const response = res.data;
-      for (let obj of response.recipeBookmarks) {
-        if (obj.recipe_id === id) {
-          setBookmark(true);
+    axios
+      .get(getBookmarksURL, { params: { user_id: user.id, recipe_id: id } })
+      .then((res) => {
+        const response = res.data;
+        for (let obj of response.recipeBookmarks) {
+          if (obj.recipe_id === id) {
+            setBookmark(true);
+          }
         }
-      }
-      setNumberOfBookmarks(response.count.count);
-    })
-    .catch((err) => console.log(err.message));
-  }
-  
+        setNumberOfBookmarks(response.count.count);
+      })
+      .catch((err) => console.log(err.message));
+  };
 
-    useEffect(() => handleUserLikes());
-    useEffect(() => handleUserBookmarks());
+  useEffect(() => handleUserLikes());
+  useEffect(() => handleUserBookmarks());
 
   return (
     <Box
       sx={{
         textAlign: 'left',
-        marginRight: '4rem',
         marginBottom: '2rem',
         backgroundColor: '#fff',
         boxShadow: '0 3px 10px rgb(0 0 0 / 0.2)',
@@ -143,6 +140,10 @@ const RecipeListItem = (props) => {
               <Chip
                 icon={<AccessTimeOutlinedIcon />}
                 label={`${prepTime} minutes`}
+              />
+              <Chip
+                icon={<FeedOutlinedIcon />}
+                label={`${difficulty} difficulty`}
               />
               {restrictions && (
                 <Chip
