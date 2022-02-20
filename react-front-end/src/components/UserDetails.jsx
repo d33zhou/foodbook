@@ -1,4 +1,4 @@
-import { Box, Typography, Stack, Avatar, IconButton } from '@mui/material';
+import { Box, Typography, Avatar, IconButton } from '@mui/material';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
 import AddReactionOutlinedIcon from '@mui/icons-material/AddReactionOutlined';
 import axios from 'axios';
@@ -55,7 +55,7 @@ const UserDetails = (props) => {
         alignItems: 'start',
         justifyContent: 'space-between',
       }}>
-      <Box sx={{ display: 'flex' }}>
+      <Box sx={{ display: 'flex', textAlign: 'left' }}>
         <Avatar
           alt={`${first_name} ${last_name}`}
           src={avatar}

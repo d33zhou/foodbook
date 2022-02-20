@@ -14,13 +14,13 @@ const User = (props) => {
     user && (
       <Container>
         <UserDetails {...user} self={true} />
-        <hr />
+
         <UserFollowList id={user.id} />
-        <hr />
+
         <UserFollowerList id={user.id} />
-        <hr />
+
         <UserRecipeList id={user.id} />
-        <hr />
+
         <UserBookmarkList id={user.id} />
       </Container>
     )
