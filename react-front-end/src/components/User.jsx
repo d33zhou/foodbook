@@ -16,7 +16,7 @@ const User = (props) => {
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          rowGap: '3rem',
+          rowGap: '2rem',
           paddingBottom: '4rem',
         }}>
         <UserDetails {...user} self={true} />

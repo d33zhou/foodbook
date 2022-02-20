@@ -1,4 +1,4 @@
-import { Box, Typography, Avatar, IconButton } from '@mui/material';
+import { Box, Typography, Avatar, IconButton, Button } from '@mui/material';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
 import AddReactionOutlinedIcon from '@mui/icons-material/AddReactionOutlined';
 import axios from 'axios';
@@ -62,7 +62,7 @@ const UserDetails = (props) => {
         textAlign: 'left',
         width: '100%',
         my: 3,
-        }}>
+      }}>
         <Avatar
           alt={`${first_name} ${last_name}`}
           src={avatar}
@@ -78,17 +78,31 @@ const UserDetails = (props) => {
         </Typography>
         
       </Box>
-      <Box>
+      <Box
+        sx={{
+          m: 3,
+          position: 'absolute',
+          right: '10%',
+        }}
+      >
         {!self && following && (
-          <IconButton onClick={handleUnfollow}>
-            <AddReactionIcon fontSize='large' />
-          </IconButton>
+          <Button
+            variant='contained'
+            endIcon={<AddReactionIcon fontSize='large' />}
+            onClick={handleUnfollow}
+          >
+            Unfollow
+          </Button>
         )}
 
         {!self && !following && (
-          <IconButton onClick={handleFollow}>
-            <AddReactionOutlinedIcon fontSize='large' />
-          </IconButton>
+          <Button
+            variant='outlined'
+            endIcon={<AddReactionOutlinedIcon fontSize='large' />}
+            onClick={handleFollow}
+          >
+            Follow
+          </Button>
         )}
       </Box>
     </Box>
