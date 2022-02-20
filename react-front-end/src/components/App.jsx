@@ -516,7 +516,6 @@ function App() {
                   alignItems: 'flex-start',
                   columnGap: '4rem',
                   margin: '0 auto',
-                  border: '1px solid blue',
                 }}>
                 <Navigation />
                 <Box>
