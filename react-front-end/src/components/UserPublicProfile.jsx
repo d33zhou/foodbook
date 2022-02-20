@@ -1,4 +1,4 @@
-import { Container } from '@mui/material';
+import { Box } from '@mui/material';
 import UserFollowerList from './UserFollowerList';
 import UserRecipeList from './UserRecipeList';
 import UserDetails from './UserDetails';
@@ -15,11 +15,9 @@ const UserPublicProfile = (props) => {
 
   // set user state for profile being viewed
   useEffect(() => {
-    axios
-      .get(`http://localhost:3001/api/users/${id}`)
-      .then(res => {
-        setOtherUser(res.data);
-      });
+    axios.get(`http://localhost:3001/api/users/${id}`).then((res) => {
+      setOtherUser(res.data);
+    });
   }, [id]);
 
   // set follow status for profile being viewed
@@ -27,27 +25,39 @@ const UserPublicProfile = (props) => {
     if (user) {
       const friendPairing = {
         auth_user: user.id,
-        target_user: id
+        target_user: id,
       };
-      
+
       axios
-        .get(`http://localhost:3001/api/friends/status`, { params: friendPairing })
-        .then(res => {
+        .get(`http://localhost:3001/api/friends/status`, {
+          params: friendPairing,
+        })
+        .then((res) => {
           res.data > 0 ? setFollowing(true) : setFollowing(false);
         })
-        .catch(err => err.message);
+        .catch((err) => err.message);
     }
   }, [id, following]);
 
   return (
-    <Container>
-      <hr/>
-      <UserDetails {...otherUser} following={following} setFollowing={setFollowing} />
-      <hr/>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        rowGap: '3rem',
+        paddingBottom: '4rem',
+        width: '960px',
+      }}>
+      <UserDetails
+        {...otherUser}
+        following={following}
+        setFollowing={setFollowing}
+      />
+
       <UserFollowerList id={id} following={following} />
-      <hr/>
+
       <UserRecipeList id={id} first_name={otherUser.first_name} />
-    </Container>
+    </Box>
   );
 };
 

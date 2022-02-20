@@ -526,6 +526,7 @@ function App() {
           </PrivateRoute>
 
           <PrivateRoute path='/users/:id'>
+            <SearchAppBar />
             <Container>
               <Box
                 maxWidth='lg'
