@@ -1,10 +1,4 @@
-import {
-  IconButton,
-  ImageListItem,
-  ImageListItemBar,
-  Box,
-  Typography,
-} from '@mui/material';
+import { Box, Link, Typography } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 import { useHistory } from 'react-router-dom';
 
@@ -13,18 +7,29 @@ const UserRecipeListItem = (props) => {
   const history = useHistory();
 
   return (
-    <Box sx={{ backgroundColor: '#fff', width: '200px' }}>
+    <Box
+      sx={{
+        backgroundColor: '#fff',
+        width: '200px',
+        overflow: 'hidden',
+        boxShadow: '0 3px 10px rgb(0 0 0 / 0.2)',
+      }}
+      onClick={() => history.push(`/recipe/${id}`)}>
       <Box
         component='div'
         sx={{
+          display: 'block',
           backgroundImage: `url(${image_link})`,
           backgroundPosition: 'center',
           backgroundSize: 'cover',
           width: '200px',
           height: '200px',
+          transition: 'all .2s',
+          '&:hover': { transform: 'scale(1.05)', cursor: 'pointer' },
         }}>
         &nbsp;
       </Box>
+
       <Typography variant='h6' sx={{ textAlign: 'left', margin: '1rem' }}>
         {title}
       </Typography>

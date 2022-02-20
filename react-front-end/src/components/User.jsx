@@ -1,4 +1,4 @@
-import { Container } from '@mui/material';
+import { Box } from '@mui/material';
 import UserFollowList from './UserFollowList';
 import UserFollowerList from './UserFollowerList';
 import UserRecipeList from './UserRecipeList';
@@ -12,7 +12,13 @@ const User = (props) => {
 
   return (
     user && (
-      <Container>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          rowGap: '3rem',
+          paddingBottom: '4rem',
+        }}>
         <UserDetails {...user} self={true} />
 
         <UserFollowList id={user.id} />
@@ -22,7 +28,7 @@ const User = (props) => {
         <UserRecipeList id={user.id} />
 
         <UserBookmarkList id={user.id} />
-      </Container>
+      </Box>
     )
   );
 };
