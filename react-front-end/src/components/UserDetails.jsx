@@ -2,9 +2,7 @@ import { Box, Typography, Avatar, IconButton } from '@mui/material';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
 import AddReactionOutlinedIcon from '@mui/icons-material/AddReactionOutlined';
 import axios from 'axios';
-
 import { useAuth } from '../providers/AuthContext';
-import { useEffect } from 'react';
 
 const UserDetails = (props) => {
   const {
@@ -54,21 +52,31 @@ const UserDetails = (props) => {
         flexDirection: 'row',
         alignItems: 'start',
         justifyContent: 'space-between',
+        backgroundColor: '#fff',
+        boxShadow: '0 3px 10px rgb(0 0 0 / 0.2)',
       }}>
-      <Box sx={{ display: 'flex', textAlign: 'left', width: '100%' }}>
+      <Box sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        textAlign: 'left',
+        width: '100%',
+        my: 3,
+        }}>
         <Avatar
           alt={`${first_name} ${last_name}`}
           src={avatar}
-          sx={{ width: 100, height: 100, margin: '0 2rem 2rem 0' }}
+          sx={{ width: 250, height: 250, mb: 2 }}
         />
-        <Box>
-          <Typography variant='h3' color='primary'>
-            {`${first_name} ${last_name}`}
-          </Typography>
-          <Typography variant='h5' color='primary'>
-            {email}
-          </Typography>
-        </Box>
+        
+        <Typography variant='h3' color='primary'>
+          {`${first_name} ${last_name}`}
+        </Typography>
+
+        <Typography variant='h5' color='primary'>
+          {email}
+        </Typography>
+        
       </Box>
       <Box>
         {!self && following && (

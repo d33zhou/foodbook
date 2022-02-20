@@ -29,6 +29,9 @@ const UserFollowerList = (props) => {
         flexDirection: 'column',
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
+        backgroundColor: '#fff',
+        boxShadow: '0 3px 10px rgb(0 0 0 / 0.2)',
+        p: 2,
       }}>
       <Typography variant='h5' color='primary' gutterBottom>
         Followers ({results.length}):
