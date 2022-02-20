@@ -86,6 +86,7 @@ const SearchAppBar = () => {
       }}>
       <AppBar position='static'>
         <Toolbar>
+        foodBook
           {/* <IconButton
             size='large'
             edge='start'
