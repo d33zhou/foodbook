@@ -1,4 +1,4 @@
-import { Container } from '@mui/material';
+import { Box } from '@mui/material';
 import UserFollowList from './UserFollowList';
 import UserFollowerList from './UserFollowerList';
 import UserRecipeList from './UserRecipeList';
@@ -11,18 +11,25 @@ const User = (props) => {
   const { user } = useAuth();
 
   return (
-    user && <Container>
-      <hr/>
-      <UserDetails {...user} self={true} />
-      <hr/>
-      <UserFollowList id={user.id} />
-      <hr/>
-      <UserFollowerList id={user.id} />
-      <hr/>
-      <UserRecipeList id={user.id} />
-      <hr/>
-      <UserBookmarkList id={user.id} />
-    </Container>
+    user && (
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          rowGap: '3rem',
+          paddingBottom: '4rem',
+        }}>
+        <UserDetails {...user} self={true} />
+
+        <UserFollowList id={user.id} />
+
+        <UserFollowerList id={user.id} />
+
+        <UserRecipeList id={user.id} />
+
+        <UserBookmarkList id={user.id} />
+      </Box>
+    )
   );
 };
 

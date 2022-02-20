@@ -516,6 +516,7 @@ function App() {
                   alignItems: 'flex-start',
                   columnGap: '4rem',
                   margin: '0 auto',
+                  border: '1px solid blue',
                 }}>
                 <Navigation />
                 <Box>
@@ -526,6 +527,7 @@ function App() {
           </PrivateRoute>
 
           <PrivateRoute path='/users/:id'>
+            <SearchAppBar />
             <Container>
               <Box
                 maxWidth='lg'
