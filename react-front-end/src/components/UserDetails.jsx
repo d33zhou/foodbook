@@ -55,7 +55,7 @@ const UserDetails = (props) => {
         alignItems: 'start',
         justifyContent: 'space-between',
       }}>
-      <Box sx={{ display: 'flex', textAlign: 'left' }}>
+      <Box sx={{ display: 'flex', textAlign: 'left', width: '100%' }}>
         <Avatar
           alt={`${first_name} ${last_name}`}
           src={avatar}
