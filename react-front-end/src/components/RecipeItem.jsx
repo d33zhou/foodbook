@@ -12,6 +12,7 @@ import { blue } from '@mui/material/colors';
 import { useParams } from 'react-router-dom';
 import { useAuth } from '../providers/AuthContext';
 import loadingGif from '../loading.gif';
+import { useHistory } from 'react-router-dom';
 
 const RecipeItem = () => {
   const [results, setResults] = useState({});
@@ -19,6 +20,7 @@ const RecipeItem = () => {
   const [like, setLike] = useState(false);
   const [bookmark, setBookmark] = useState(false);
   const [loading, setLoading] = useState(false);
+  const history = useHistory();
 
   const {
     title,
@@ -205,6 +207,7 @@ const RecipeItem = () => {
               avatar={<Avatar alt='Natacha' src={avatar} />}
               label={`${first_name} ${last_name}`}
               color='secondary'
+              onClick={() => history.push(`/users/${creator_id}`)}
             />
           </Stack>
         </Box>

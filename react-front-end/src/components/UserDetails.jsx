@@ -121,7 +121,7 @@ const UserDetails = (props) => {
           right: '10%',
         }}
       >
-        {!self && following && (
+        {!self && user && user.id !== id && following && (
           <Button
             variant='contained'
             endIcon={<AddReactionIcon fontSize='large' />}
@@ -131,13 +131,22 @@ const UserDetails = (props) => {
           </Button>
         )}
 
-        {!self && !following && (
+        {!self && user && user.id !== id && !following && (
           <Button
             variant='outlined'
             endIcon={<AddReactionOutlinedIcon fontSize='large' />}
             onClick={handleFollow}
           >
             Follow
+          </Button>
+        )}
+
+        {!self && user && user.id === id && (
+          <Button
+            variant='outlined'
+            disabled
+          >
+            Your Public Profile
           </Button>
         )}
       </Box>
