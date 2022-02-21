@@ -38,14 +38,12 @@ const UserFollowList = (props) => {
       </Typography>
       <Box
         sx={{
-          display: 'flex',
-          justifyContent: 'flex-start',
-          alignItems: 'flex-start',
-          columnGap: '1rem',
-          textAlign: 'left',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(12, 1fr)',
+          gap: 1,
         }}>
         {allFollows.length > 0 ? allFollows :
-          <Typography variant='h6' color='secondary'>
+          <Typography sx={{ gridColumn: 'span 12' }} variant='h6' color='secondary'>
             You are not following anyone. Follow a user to keep up-to-date!
           </Typography>}
       </Box>

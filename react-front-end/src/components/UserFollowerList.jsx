@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const UserFollowerList = (props) => {
-  const { id, following } = props;
+  const { id, following, setLoading } = props;
   const [results, setResults] = useState([]);
 
   // array of users that follow the logged in user
@@ -18,6 +18,7 @@ const UserFollowerList = (props) => {
   useEffect(() => {
     axios.get(`http://localhost:3001/api/users/${id}/followers`).then((res) => {
       setResults([...res.data]);
+      setLoading(false);
     });
   }, [id, following]);
 
@@ -38,14 +39,12 @@ const UserFollowerList = (props) => {
       </Typography>
       <Box
         sx={{
-          display: 'flex',
-          justifyContent: 'flex-start',
-          alignItems: 'flex-start',
-          columnGap: '1rem',
-          textAlign: 'left',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(12, 1fr)',
+          gap: 1,
         }}>
         {allFollowers.length > 0 ? allFollowers :
-          <Typography variant='h6' color='secondary'>
+          <Typography sx={{ gridColumn: 'span 12' }} variant='h6' color='secondary'>
             No followers found. Anyone looking for a sous-chef? :)
           </Typography>}
       </Box>

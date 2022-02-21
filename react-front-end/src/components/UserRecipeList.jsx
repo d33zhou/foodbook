@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const UserRecipeList = (props) => {
-  const { id, first_name } = props;
+  const { id, first_name, setLoading } = props;
   const [results, setResults] = useState([]);
 
   // array of recipes that the logged in user created
@@ -18,6 +18,7 @@ const UserRecipeList = (props) => {
   useEffect(() => {
     axios.get(`http://localhost:3001/api/users/${id}/recipes`).then((res) => {
       setResults([...res.data]);
+      setLoading(false);
     });
   }, [id]);
 
