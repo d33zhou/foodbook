@@ -37,6 +37,7 @@ const User = (props) => {
           flexDirection: 'column',
           rowGap: '2rem',
           paddingBottom: '4rem',
+          width: '960px',
         }}>
         <UserDetails {...user} self={true} loading={loadingDetails} />
 

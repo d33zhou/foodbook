@@ -56,10 +56,9 @@ const UserPublicProfile = (props) => {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        rowGap: '3rem',
+        rowGap: '2rem',
         paddingBottom: '4rem',
         width: '960px',
-        height: '100vh',
       }}
     >
 
