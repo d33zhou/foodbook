@@ -315,13 +315,15 @@ function App() {
 
   useEffect(() => {
     setLoading(true);
+    setTimeout(() => {
+      const testURL = `http://localhost:3001/api/recipes`;
 
-    const testURL = `http://localhost:3001/api/recipes`;
-    axios.get(testURL).then((response) => {
-      setResults(response.data);
-      setFullData(response.data);
-      setLoading(false);
-    });
+      axios.get(testURL).then((response) => {
+        setResults(response.data);
+        setFullData(response.data);
+        setLoading(false);
+      });
+    }, 2000);
   }, []);
 
   if (loading) {
