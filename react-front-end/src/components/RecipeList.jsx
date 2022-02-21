@@ -18,11 +18,13 @@ const RecipeList = ({ results }) => {
           restrictions={recipe.dietary_restriction}
           prepTime={recipe.prep_minutes}
           difficulty={recipe.difficulty}
-          
+          first_name={recipe.first_name}
+          last={recipe.last_name}
+          avatar={recipe.avatar}
+          creator_id={recipe.creator_id}
         />
       );
     });
-
 
   return (
     <Box

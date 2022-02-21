@@ -169,7 +169,11 @@ module.exports = (db) => {
   //get all recipes in db
   const getAllRecipes = () => {
     const query = {
-      text: `SELECT recipes.* FROM recipes ORDER BY id DESC`,
+      text: `
+      SELECT recipes.*, first_name, last_name, avatar
+      FROM recipes
+      JOIN users ON creator_id = users.id
+      ORDER BY id DESC`,
     };
 
     return db

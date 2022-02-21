@@ -1,10 +1,11 @@
-import { Box, Button, Chip, Stack, Typography } from '@mui/material';
+import { Avatar, Box, Button, Chip, Stack, Typography } from '@mui/material';
 import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
 import DinnerDiningOutlinedIcon from '@mui/icons-material/DinnerDiningOutlined';
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
 import FeedOutlinedIcon from '@mui/icons-material/FeedOutlined';
 
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
 import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
@@ -14,6 +15,7 @@ import { useAuth } from '../providers/AuthContext';
 import axios from 'axios';
 
 const RecipeListItem = (props) => {
+  // console.log(props);
   const {
     image_link,
     title,
@@ -23,6 +25,10 @@ const RecipeListItem = (props) => {
     prepTime,
     restrictions,
     difficulty,
+    first_name,
+    last_name,
+    avatar,
+    creator_id,
   } = props;
 
   const { user } = useAuth();
@@ -30,6 +36,7 @@ const RecipeListItem = (props) => {
   const [numberOfLikes, setNumberOfLikes] = useState(0);
   const [bookmark, setBookmark] = useState(false);
   const [numberOfBookmarks, setNumberOfBookmarks] = useState(0);
+  const history = useHistory();
 
   const handleLike = () => {
     setLike(!like);
@@ -251,22 +258,42 @@ const RecipeListItem = (props) => {
           </Box>
         </Box>
         <Link to={`/recipe/${id}`}></Link>
-        <Typography variant='h3' color='primary' fontWeight='bold' gutterBottom component={Link} to={`/recipe/${id}`} style={{ textDecoration: 'none' }}  >
+        <Typography
+          variant='h3'
+          color='primary'
+          fontWeight='bold'
+          gutterBottom
+          component={Link}
+          to={`/recipe/${id}`}
+          style={{ textDecoration: 'none' }}>
           {title}
         </Typography>
         <Typography variant='p' sx={{ display: 'block' }}>
           {description}
         </Typography>
-        <Button
-          component={Link}
-          variant='contained'
-          to={`/recipe/${id}`}
+        <Box
           sx={{
-            display: 'inline-block',
-            marginTop: '2rem',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'flex-end',
           }}>
-          See Recipe &raquo;
-        </Button>
+          <Button
+            component={Link}
+            variant='contained'
+            to={`/recipe/${id}`}
+            sx={{
+              display: 'inline-block',
+              marginTop: '2rem',
+            }}>
+            See Recipe &raquo;
+          </Button>
+          <Chip
+            avatar={<Avatar alt={`${first_name} ${last_name}`} src={avatar} />}
+            label={`${first_name} ${last_name}`}
+            color='primary'
+            onClick={() => history.push(`/users/${creator_id}`)}
+          />
+        </Box>
       </Box>
     </Box>
   );
