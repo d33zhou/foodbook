@@ -1,4 +1,4 @@
-import { Box, Typography, Avatar, IconButton, Button, Snackbar } from '@mui/material';
+import { Box, Typography, Avatar, IconButton, Button, Snackbar, Skeleton } from '@mui/material';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
 import AddReactionOutlinedIcon from '@mui/icons-material/AddReactionOutlined';
 import CloseIcon from '@mui/icons-material/Close';
@@ -16,6 +16,7 @@ const UserDetails = (props) => {
     following,
     setFollowing,
     self,
+    loading,
   } = props; // represents either the logged in user or user profile being viewed, depending on if called from User component or UserPublicProfile compoennt, respectively
   const { user } = useAuth(); // logged in user state
   const [open, setOpen] = useState(false); // for snackbar notification
@@ -100,21 +101,31 @@ const UserDetails = (props) => {
         width: '100%',
         my: 3,
       }}>
-        <Avatar
-          alt={`${first_name} ${last_name}`}
-          src={avatar}
-          sx={{ width: 250, height: 250, mb: 2 }}
-        />
-        
-        <Typography variant='h3' color='primary'>
-          {`${first_name} ${last_name}`}
-        </Typography>
+        {loading ? (
+          <>
+            <Skeleton variant='circular' width={250} height={250} />
+            <Skeleton variant='text' width={300} />
+            <Skeleton variant='text' width={250} />
+          </>
+        ) : (
+          <>
+            <Avatar
+              alt={`${first_name} ${last_name}`}
+              src={avatar}
+              sx={{ width: 250, height: 250, mb: 2 }}
+            />
+            
+            <Typography variant='h3' color='primary'>
+              {`${first_name} ${last_name}`}
+            </Typography>
 
-        <Typography variant='h5' color='primary'>
-          {email}
-        </Typography>
-        
+            <Typography variant='h5' color='primary'>
+              {email}
+            </Typography>
+          </>
+        )}
       </Box>
+      
       <Box
         sx={{
           m: 3,
@@ -122,34 +133,40 @@ const UserDetails = (props) => {
           right: '10%',
         }}
       >
-        {!self && user && user.id !== id && following && (
-          <Button
-            variant='contained'
-            endIcon={<AddReactionIcon fontSize='large' />}
-            onClick={handleUnfollow}
-          >
-            Unfollow
-          </Button>
-        )}
+        {loading ? (
+          <Skeleton variant='text' width={100} />
+        ) : (
+          <>
+            {!self && user && user.id !== id && following && (
+              <Button
+                variant='contained'
+                endIcon={<AddReactionIcon fontSize='large' />}
+                onClick={handleUnfollow}
+              >
+                Unfollow
+              </Button>
+            )}
 
-        {!self && user && user.id !== id && !following && (
-          <Button
-            variant='outlined'
-            endIcon={<AddReactionOutlinedIcon fontSize='large' />}
-            onClick={handleFollow}
-          >
-            Follow
-          </Button>
-        )}
+            {!self && user && user.id !== id && !following && (
+              <Button
+                variant='outlined'
+                endIcon={<AddReactionOutlinedIcon fontSize='large' />}
+                onClick={handleFollow}
+              >
+                Follow
+              </Button>
+            )}
 
-        {!self && user && user.id === id && (
-          <Button
-            variant='outlined'
-            disabled
-          >
-            Your Public Profile
-          </Button>
-        )}
+            {!self && user && user.id === id && (
+              <Button
+                variant='outlined'
+                disabled
+              >
+                Your Public Profile
+              </Button>
+            )}
+          </>
+        )}        
       </Box>
 
       <Snackbar
