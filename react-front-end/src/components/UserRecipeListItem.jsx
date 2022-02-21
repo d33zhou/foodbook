@@ -1,10 +1,11 @@
-import { Box, Link, Typography, Card, CardContent, CardMedia, CardActionArea } from '@mui/material';
-import StarIcon from '@mui/icons-material/Star';
+import { Typography, Card, CardContent, CardMedia, CardActionArea, CardActions, Avatar, Chip } from '@mui/material';
 import { useHistory } from 'react-router-dom';
 
 const UserRecipeListItem = (props) => {
-  const { id, image_link, title, creator_id, first_name, last_name } = props;
+  const { id, image_link, title, creator_id, first_name, last_name, avatar } = props;
   const history = useHistory();
+
+  console.log(creator_id)
 
   return (
     <Card sx={{
@@ -15,7 +16,6 @@ const UserRecipeListItem = (props) => {
     }}>
       <CardActionArea
         sx={{
-          height: '100%',
           width: '100%',
           display: 'flex',
           flexDirection: 'column',
@@ -40,6 +40,16 @@ const UserRecipeListItem = (props) => {
           </Typography>
         </CardContent>
       </CardActionArea>
+      {creator_id &&
+        <CardActions>
+          <Chip
+            avatar={<Avatar src={avatar} />}
+            label={`${first_name} ${last_name}`}
+            color='primary'
+            onClick={() => history.push(`/users/${creator_id}`)}
+          />
+        </CardActions>
+      }
     </Card>
     
     // <Box
