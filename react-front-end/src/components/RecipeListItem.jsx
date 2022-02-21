@@ -109,6 +109,8 @@ const RecipeListItem = (props) => {
         boxShadow: '0 3px 10px rgb(0 0 0 / 0.2)',
         transition: 'all .2s',
         overflow: 'hidden',
+       
+
       }}>
       <Link to={`/recipe/${id}`}>
         <Box

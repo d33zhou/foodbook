@@ -315,7 +315,7 @@ function App() {
 
   useEffect(() => {
     setLoading(true);
-
+    
     const testURL = `http://localhost:3001/api/recipes`;
     axios.get(testURL).then((response) => {
       setResults(response.data);
