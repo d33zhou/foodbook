@@ -1,8 +1,10 @@
-import { Box, Typography, Avatar, IconButton, Button } from '@mui/material';
+import { Box, Typography, Avatar, IconButton, Button, Snackbar } from '@mui/material';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
 import AddReactionOutlinedIcon from '@mui/icons-material/AddReactionOutlined';
+import CloseIcon from '@mui/icons-material/Close';
 import axios from 'axios';
 import { useAuth } from '../providers/AuthContext';
+import { useState } from 'react';
 
 const UserDetails = (props) => {
   const {
@@ -16,6 +18,9 @@ const UserDetails = (props) => {
     self,
   } = props; // represents either the logged in user or user profile being viewed, depending on if called from User component or UserPublicProfile compoennt, respectively
   const { user } = useAuth(); // logged in user state
+  const [open, setOpen] = useState(false); // for snackbar notification
+
+  // HANDLERS FOR FOLLOW/UNFOLLOW --------------------------------------------
 
   // follow the currently viewed user (only from UserPublicProfile)
   const handleFollow = () => {
@@ -27,7 +32,10 @@ const UserDetails = (props) => {
 
     axios
       .post(addFollowURL, friendPairing)
-      .then(() => setFollowing(true))
+      .then(() => {
+        setFollowing(true);
+        setOpen(true);
+      })
       .catch((err) => err.message);
   };
 
@@ -41,9 +49,37 @@ const UserDetails = (props) => {
 
     axios
       .delete(removeFollowURL, { data: friendPairing })
-      .then(() => setFollowing(false))
+      .then(() => {
+        setFollowing(false);
+        setOpen(true);
+      })
       .catch((err) => err.message);
   };
+
+  // HANDLERS FOR SNACKBAR --------------------------------------------------
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const action = (
+    <>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </>
+  );
+
+  // PAGE -------------------------------------------------------------------
 
   return (
     <Box
@@ -105,6 +141,15 @@ const UserDetails = (props) => {
           </Button>
         )}
       </Box>
+
+      <Snackbar
+        open={open}
+        autoHideDuration={3000}
+        onClose={handleClose}
+        message={following ? 'Followed user' : 'Unfollowed user'}
+        action={action}
+      />
+
     </Box>
   );
 };
