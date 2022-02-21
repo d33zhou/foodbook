@@ -1,4 +1,4 @@
-import { styled, alpha } from '@mui/material/styles';
+import { styled, alpha, } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 import {
   AppBar,
@@ -8,6 +8,7 @@ import {
   IconButton,
   Typography,
   InputBase,
+  Avatar,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
@@ -15,6 +16,34 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Autocomplete, TextField } from '@mui/material';
 import { useHistory } from 'react-router-dom';
+import { useAuth } from '../providers/AuthContext';
+
+const StyledAutocomplete = styled(Autocomplete)({
+  "& .MuiInputLabel-outlined:not(.MuiInputLabel-shrink)": {
+    // Default transform is "translate(14px, 20px) scale(1)""
+    // This lines up the label with the initial cursor position in the input
+    // after changing its padding-left.
+    transform: "translate(34px, 20px) scale(1);"
+  },
+  "& .MuiAutocomplete-inputRoot": {
+    color: "white",
+    // This matches the specificity of the default styles at https://github.com/mui-org/material-ui/blob/v4.11.3/packages/material-ui-lab/src/Autocomplete/Autocomplete.js#L90
+    '&[class*="MuiOutlinedInput-root"] .MuiAutocomplete-input:first-child': {
+      // Default left padding is 6px
+      paddingLeft: 26
+    },
+    "& .MuiOutlinedInput-notchedOutline": {
+      borderRadius: 20,
+      borderColor: "white"
+    },
+    "&:hover .MuiOutlinedInput-notchedOutline": {
+      borderColor: "white"
+    },
+    "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+      borderColor: "white"
+    }
+  }
+});
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -62,6 +91,7 @@ const SearchAppBar = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [query, setQuery] = useState('');
   const history = useHistory();
+  const { user } = useAuth();
 
   useEffect(() => {
     if (query) {
@@ -86,7 +116,7 @@ const SearchAppBar = () => {
       }}>
       <AppBar position='static'>
         <Toolbar>
-        foodBook
+        <Typography variant='h5'sx={{ fontWeight: 'bold' }} component={Link} to="/feed" color="inherit" style={{ textDecoration: 'none' }}>foodbook</Typography>
           {/* <IconButton
             size='large'
             edge='start'
@@ -105,6 +135,12 @@ const SearchAppBar = () => {
             }}>
             + Create New Recipe
           </Button>
+          {user && <Avatar
+          alt={`${user.first_name} ${user.last_name}`}
+          src={user.avatar}
+          component={Link}
+          to="/profile"
+          />}
           {/* <Search> */}
 
           {/* <StyledInputBase
@@ -112,12 +148,14 @@ const SearchAppBar = () => {
               inputProps={{ "aria-label": "search" }}
               onChange={event => setQuery(event.target.value)}
             /> */}
-          <Autocomplete
+          <StyledAutocomplete
             autoHighlight
             freeSolo
             id='combo-box-demo'
             autoFocus={true}
-            sx={{ width: 300 }}
+            sx={{
+              width: 300,
+            }}
             options={searchResults}
             onChange={(event: any, option: any) => {
               history.push(`/recipe/${option.id}`);

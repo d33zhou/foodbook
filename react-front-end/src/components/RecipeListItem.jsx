@@ -251,7 +251,7 @@ const RecipeListItem = (props) => {
           </Box>
         </Box>
         <Link to={`/recipe/${id}`}></Link>
-        <Typography variant='h3' color='primary' fontWeight='bold' gutterBottom>
+        <Typography variant='h3' color='primary' fontWeight='bold' gutterBottom component={Link} to={`/recipe/${id}`} style={{ textDecoration: 'none' }}  >
           {title}
         </Typography>
         <Typography variant='p' sx={{ display: 'block' }}>
