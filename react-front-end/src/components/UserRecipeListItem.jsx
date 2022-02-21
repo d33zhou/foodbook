@@ -34,7 +34,7 @@ const UserRecipeListItem = (props) => {
           <Typography
             gutterBottom variant="h6"
             component="div"
-            sx={{ textAlign: 'left' }}
+            sx={{ textAlign: 'left', fontWeight: 'light' }}
           >
             {title}
           </Typography>
