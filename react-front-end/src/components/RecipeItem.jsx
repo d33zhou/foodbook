@@ -161,7 +161,7 @@ const RecipeItem = () => {
       <Box
         sx={{
           flexGrow: 3,
-          width: '100%',
+          width: '800px',
           overflow: 'hidden',
           textAlign: 'left',
         }}>
