@@ -110,7 +110,7 @@ const SearchAppBar = () => {
   const history = useHistory();
   const { user,logout } = useAuth();
   const classes = useStyles();
-
+  
   useEffect(() => {
     if (query) {
       const searchURL = `http://localhost:3001/api/recipes/search`;
@@ -183,7 +183,8 @@ const SearchAppBar = () => {
             }}
             options={searchResults}
             onChange={(event: any, option: any) => {
-              history.push(`/recipe/${option.id}`);
+                history.push(`/recipe/${option.id}`);                
+              
             }}
             getOptionLabel={(option) => option.title}
             renderInput={(params) => (
