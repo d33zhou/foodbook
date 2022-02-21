@@ -92,7 +92,7 @@ module.exports = (db) => {
   // get bookmarked recipe details for all recipes bookmarked by a specific user
   const getBookmarksByUser = (id) => {
     const query = {
-      text: `SELECT recipes.id, title, image_link, creator_id, first_name, last_name
+      text: `SELECT recipes.id, title, image_link, creator_id, first_name, last_name, avatar
         FROM bookmarks
         JOIN recipes ON bookmarks.recipe_id = recipes.id
         JOIN users ON recipes.creator_id = users.id

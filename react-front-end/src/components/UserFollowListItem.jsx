@@ -10,7 +10,13 @@ const UserFollowListItem = (props) => {
   // render followed user avatar icon and name
   return (
       <Stack direction="column" alignItems="center">
-        <IconButton onClick={() => history.push(`/users/${id}`)}>
+        <IconButton
+          sx={{
+            transition: 'all .2s',
+            '&:hover': { transform: 'scale(1.05)', cursor: 'pointer' },
+          }}
+          onClick={() => history.push(`/users/${id}`)}
+        >
           <Avatar
             alt={`${first_name} ${last_name}`}
             src={avatar}
