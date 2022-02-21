@@ -5,8 +5,6 @@ const UserRecipeListItem = (props) => {
   const { id, image_link, title, creator_id, first_name, last_name, avatar } = props;
   const history = useHistory();
 
-  console.log(creator_id)
-
   return (
     <Card sx={{
       width: '23.5%', // for 4 cards per row -- remaining 1.5% from spacing between cards

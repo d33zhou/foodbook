@@ -11,10 +11,19 @@ const UserPublicProfile = (props) => {
   const { id } = useParams(); // id of user being viewed (not logged in user)
   const [otherUser, setOtherUser] = useState({});
   const [following, setFollowing] = useState(false);
+
+  const [loadingDetails, setLoadingDetails] = useState(false);
+  const [loadingRecipes, setLoadingRecipes] = useState(false);
+  const [loadingFollowers, setLoadingFollowers] = useState(false);
+
   const { user } = useAuth(); // logged in user state
 
   // set user state for profile being viewed
   useEffect(() => {
+    setLoadingDetails(true);
+    setLoadingRecipes(true);
+    setLoadingFollowers(true);
+
     axios.get(`http://localhost:3001/api/users/${id}`).then((res) => {
       setOtherUser(res.data);
     });
@@ -34,6 +43,9 @@ const UserPublicProfile = (props) => {
         })
         .then((res) => {
           res.data > 0 ? setFollowing(true) : setFollowing(false);
+          setTimeout(() => {
+            setLoadingDetails(false);
+          }, 1000);
         })
         .catch((err) => err.message);
     }
@@ -44,19 +56,33 @@ const UserPublicProfile = (props) => {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        rowGap: '3rem',
+        rowGap: '2rem',
         paddingBottom: '4rem',
         width: '960px',
-      }}>
+      }}
+    >
+
       <UserDetails
         {...otherUser}
         following={following}
         setFollowing={setFollowing}
+        loading={loadingDetails}
       />
 
-      <UserFollowerList id={id} following={following} />
+      <UserFollowerList
+        id={id}
+        following={following}
+        loading={loadingFollowers}
+        setLoading={setLoadingFollowers}
+      />
 
-      <UserRecipeList id={id} first_name={otherUser.first_name} />
+      <UserRecipeList
+        id={id}
+        first_name={otherUser.first_name}
+        loading={loadingRecipes}
+        setLoading={setLoadingRecipes}
+      />
+
     </Box>
   );
 };
