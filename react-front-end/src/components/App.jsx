@@ -27,6 +27,7 @@ import RecipeItem from './RecipeItem';
 import PrivateRoute from './PrivateRoute';
 import BookmarkList from './BookmarkList';
 import HomeList from './HomeList';
+import ScrollToTop from './ScrollToTop';
 
 import { AuthProvider, useAuth } from '../providers/AuthContext';
 import { useState, useEffect } from 'react';
@@ -352,6 +353,7 @@ function App() {
         }}>
         <Switch>
           <PrivateRoute path='/feed'>
+            <ScrollToTop showBelow={250} />
             <SearchAppBar />
             <Container maxWidth='lg'>
               <Box
@@ -387,12 +389,13 @@ function App() {
                   handleDiet={handleDiet}
                 />
               </Box>
+              <ScrollToTop showBelow={250} />
             </Container>
           </PrivateRoute>
 
           <PrivateRoute path='/explore'>
+            <ScrollToTop showBelow={250} />
             <SearchAppBar />
-
             <Container maxWidth='lg'>
               <Box
                 maxWidth='lg'
@@ -431,6 +434,7 @@ function App() {
           </PrivateRoute>
 
           <PrivateRoute path='/bookmarks'>
+            <ScrollToTop showBelow={250} />
             <SearchAppBar />
             <Container>
               <Box
@@ -508,6 +512,7 @@ function App() {
           </PrivateRoute>
 
           <PrivateRoute path='/profile'>
+            <ScrollToTop showBelow={250} />
             <SearchAppBar />
             <Container>
               <Box
@@ -528,6 +533,7 @@ function App() {
           </PrivateRoute>
 
           <PrivateRoute path='/users/:id'>
+            <ScrollToTop showBelow={250} />
             <SearchAppBar />
             <Container>
               <Box
