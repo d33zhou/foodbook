@@ -29,6 +29,9 @@ const UserFollowList = (props) => {
         flexDirection: 'column',
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
+        backgroundColor: '#fff',
+        boxShadow: '0 3px 10px rgb(0 0 0 / 0.2)',
+        p: 2,
       }}>
       <Typography variant='h5' color='primary' gutterBottom>
         Following ({results.length}):
@@ -41,7 +44,10 @@ const UserFollowList = (props) => {
           columnGap: '1rem',
           textAlign: 'left',
         }}>
-        {allFollows}
+        {allFollows.length > 0 ? allFollows :
+          <Typography variant='h6' color='secondary'>
+            You are not following anyone. Follow a user to keep up-to-date!
+          </Typography>}
       </Box>
     </Box>
   );

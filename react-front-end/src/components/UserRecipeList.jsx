@@ -39,7 +39,10 @@ const UserRecipeList = (props) => {
           rowGap: '1rem',
           flexWrap: 'wrap',
         }}>
-        {allRecipes}
+        {allRecipes.length > 0 ? allRecipes :
+          <Typography variant='h6' color='secondary'>
+            No recipes found. Time to get cooking!
+          </Typography>}
       </Box>
     </Box>
   );

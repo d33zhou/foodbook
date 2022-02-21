@@ -1,39 +1,84 @@
-import { Box, Link, Typography } from '@mui/material';
-import StarIcon from '@mui/icons-material/Star';
+import { Typography, Card, CardContent, CardMedia, CardActionArea, CardActions, Avatar, Chip } from '@mui/material';
 import { useHistory } from 'react-router-dom';
 
 const UserRecipeListItem = (props) => {
-  const { id, image_link, title, creator_id, first_name, last_name } = props;
+  const { id, image_link, title, creator_id, first_name, last_name, avatar } = props;
   const history = useHistory();
 
-  return (
-    <Box
-      sx={{
-        backgroundColor: '#fff',
-        width: '200px',
-        overflow: 'hidden',
-        boxShadow: '0 3px 10px rgb(0 0 0 / 0.2)',
-      }}
-      onClick={() => history.push(`/recipe/${id}`)}>
-      <Box
-        component='div'
-        sx={{
-          display: 'block',
-          backgroundImage: `url(${image_link})`,
-          backgroundPosition: 'center',
-          backgroundSize: 'cover',
-          width: '200px',
-          height: '200px',
-          transition: 'all .2s',
-          '&:hover': { transform: 'scale(1.05)', cursor: 'pointer' },
-        }}>
-        &nbsp;
-      </Box>
+  console.log(creator_id)
 
-      <Typography variant='h6' sx={{ textAlign: 'left', margin: '1rem' }}>
-        {title}
-      </Typography>
-    </Box>
+  return (
+    <Card sx={{
+      width: '23.5%', // for 4 cards per row -- remaining 1.5% from spacing between cards
+      boxShadow: '0 3px 10px rgb(0 0 0 / 0.2)',
+      transition: 'all .2s',
+      '&:hover': { transform: 'scale(1.05)', cursor: 'pointer' },
+    }}>
+      <CardActionArea
+        sx={{
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'flex-start',
+          alignItems: 'flex-start',
+        }}
+        onClick={() => history.push(`/recipe/${id}`)}
+      >
+        <CardMedia
+          component="img"
+          height="200"
+          image={image_link}
+          alt={title}
+        />
+        <CardContent>
+          <Typography
+            gutterBottom variant="h6"
+            component="div"
+            sx={{ textAlign: 'left', fontWeight: 'light' }}
+          >
+            {title}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+      {creator_id &&
+        <CardActions>
+          <Chip
+            avatar={<Avatar src={avatar} />}
+            label={`${first_name} ${last_name}`}
+            color='primary'
+            onClick={() => history.push(`/users/${creator_id}`)}
+          />
+        </CardActions>
+      }
+    </Card>
+    
+    // <Box
+    //   sx={{
+    //     backgroundColor: '#fff',
+    //     width: '200px',
+    //     overflow: 'hidden',
+    //     boxShadow: '0 3px 10px rgb(0 0 0 / 0.2)',
+    //   }}
+    //   onClick={() => history.push(`/recipe/${id}`)}>
+    //   <Box
+    //     component='div'
+    //     sx={{
+    //       display: 'block',
+    //       backgroundImage: `url(${image_link})`,
+    //       backgroundPosition: 'center',
+    //       backgroundSize: 'cover',
+    //       width: '200px',
+    //       height: '200px',
+    //       transition: 'all .2s',
+    //       '&:hover': { transform: 'scale(1.05)', cursor: 'pointer' },
+    //     }}>
+    //     &nbsp;
+    //   </Box>
+
+    //   <Typography variant='h6' sx={{ textAlign: 'left', margin: '1rem' }}>
+    //     {title}
+    //   </Typography>
+    // </Box>
 
     // <ImageListItem rows={1} onClick={() => history.push(`/recipe/${id}`)}>
     //   <Box
