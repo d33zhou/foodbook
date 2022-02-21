@@ -45,7 +45,7 @@ const UserPublicProfile = (props) => {
           res.data > 0 ? setFollowing(true) : setFollowing(false);
           setTimeout(() => {
             setLoadingDetails(false);
-          }, 5000);
+          }, 3000);
         })
         .catch((err) => err.message);
     }
@@ -60,7 +60,9 @@ const UserPublicProfile = (props) => {
         paddingBottom: '4rem',
         width: '960px',
         height: '100vh',
-      }}>
+      }}
+    >
+
       <UserDetails
         {...otherUser}
         following={following}
@@ -68,9 +70,20 @@ const UserPublicProfile = (props) => {
         loading={loadingDetails}
       />
 
-      <UserFollowerList id={id} following={following} setLoading={setLoadingFollowers} />
+      <UserFollowerList
+        id={id}
+        following={following}
+        loading={loadingFollowers}
+        setLoading={setLoadingFollowers}
+      />
 
-      <UserRecipeList id={id} first_name={otherUser.first_name} setLoading={setLoadingRecipes} />
+      <UserRecipeList
+        id={id}
+        first_name={otherUser.first_name}
+        loading={loadingRecipes}
+        setLoading={setLoadingRecipes}
+      />
+
     </Box>
   );
 };

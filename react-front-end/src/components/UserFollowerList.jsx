@@ -1,10 +1,10 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Skeleton, Stack, Typography } from '@mui/material';
 import UserFollowListItem from './UserFollowListItem';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const UserFollowerList = (props) => {
-  const { id, following, setLoading } = props;
+  const { id, following, loading, setLoading } = props;
   const [results, setResults] = useState([]);
 
   // array of users that follow the logged in user
@@ -14,11 +14,17 @@ const UserFollowerList = (props) => {
       return <UserFollowListItem key={follower.id} {...follower} />;
     });
 
+  const allSkeletons = Array(12).fill(null).map((element, index) => {
+    return <Skeleton key={index} variant='circular' width={56} height={56} />;
+  });
+
   // get the array of following user objects (incl. name, avatar)
   useEffect(() => {
     axios.get(`http://localhost:3001/api/users/${id}/followers`).then((res) => {
       setResults([...res.data]);
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 3000);
     });
   }, [id, following]);
 
@@ -42,11 +48,23 @@ const UserFollowerList = (props) => {
           display: 'grid',
           gridTemplateColumns: 'repeat(12, 1fr)',
           gap: 1,
-        }}>
-        {allFollowers.length > 0 ? allFollowers :
-          <Typography sx={{ gridColumn: 'span 12' }} variant='h6' color='secondary'>
-            No followers found. Anyone looking for a sous-chef? :)
-          </Typography>}
+        }}
+      >
+        
+        {loading ? (
+          <>
+            {allSkeletons}
+          </>
+        ) : (
+          <>
+            {allFollowers.length > 0 ? allFollowers :
+              <Typography sx={{ gridColumn: 'span 12' }} variant='h6' color='secondary'>
+                No followers found. Anyone looking for a sous-chef? :)
+              </Typography>
+            }
+          </>
+        )}
+
       </Box>
     </Box>
   );
