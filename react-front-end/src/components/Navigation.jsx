@@ -23,7 +23,7 @@ const Navigation = () => {
         alignItems: 'flex-start',
         textAlign: 'left',
         flexDirection: 'column',
-             
+        position:'fixed'     
       }}>
       <Button variant='text' size='large' component={Link} to="/feed">
         Home

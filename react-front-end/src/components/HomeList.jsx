@@ -59,6 +59,8 @@ const HomeList = (props) => {
     <Box
       sx={{
         flexGrow: 3,
+        paddingLeft:'8rem',
+        
       }}
     >
       <Box>

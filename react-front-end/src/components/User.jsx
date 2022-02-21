@@ -18,6 +18,7 @@ const User = (props) => {
           flexDirection: 'column',
           rowGap: '2rem',
           paddingBottom: '4rem',
+          paddingLeft:'8rem'
         }}>
         <UserDetails {...user} self={true} />
 

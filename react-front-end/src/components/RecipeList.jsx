@@ -28,6 +28,7 @@ const RecipeList = ({ results }) => {
     <Box
       sx={{
         flexGrow: 3,
+        paddingLeft:'8rem'
       }}>
       {parsedRecipes}
     </Box>
