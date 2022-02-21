@@ -45,7 +45,7 @@ const UserPublicProfile = (props) => {
           res.data > 0 ? setFollowing(true) : setFollowing(false);
           setTimeout(() => {
             setLoadingDetails(false);
-          }, 3000);
+          }, 1000);
         })
         .catch((err) => err.message);
     }
