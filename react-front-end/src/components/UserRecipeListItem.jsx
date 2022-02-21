@@ -30,14 +30,7 @@ const UserRecipeListItem = (props) => {
           image={image_link}
           alt={title}
         />
-        <CardContent
-          sx={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
+        <CardContent>
           <Typography
             gutterBottom variant="h6"
             component="div"

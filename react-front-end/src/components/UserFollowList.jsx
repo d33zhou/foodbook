@@ -44,7 +44,10 @@ const UserFollowList = (props) => {
           columnGap: '1rem',
           textAlign: 'left',
         }}>
-        {allFollows}
+        {allFollows.length > 0 ? allFollows :
+          <Typography variant='h6' color='secondary'>
+            You are not following anyone. Follow a user to keep up-to-date!
+          </Typography>}
       </Box>
     </Box>
   );
