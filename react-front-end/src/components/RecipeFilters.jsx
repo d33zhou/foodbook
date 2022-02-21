@@ -9,7 +9,8 @@ const RecipeFilters = (props) => {
   
   
   return (
-    <Box
+    
+     <Box
       sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -18,11 +19,10 @@ const RecipeFilters = (props) => {
         flexGrow: 4,
         width: '100%',
         // textAlign: 'left',
-      }}>
-      <Box sx={{ display: 'flex' }}>
-      <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-        <FormLabel component="legend">Difficulty Level</FormLabel>
-        <FormHelperText>Select any one</FormHelperText>
+    }}>
+      <FormControl sx={{ m: 1}} component="fieldset" variant="standard">
+        <FormLabel component="legend" sx={{paddingRight:'2rem'}}>Difficulty Level</FormLabel>
+        <FormHelperText >Select any one</FormHelperText>
         <RadioGroup
           aria-labelledby="demo-error-radios"
           value={difficulty}
@@ -58,9 +58,9 @@ const RecipeFilters = (props) => {
           />
         </RadioGroup>
       </FormControl>
-      </Box>
-      <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-        <FormLabel component="legend">Cuisines</FormLabel>
+      
+      <FormControl sx={{ m: 1 }} component="fieldset" variant="standard">
+        <FormLabel component="legend"  sx={{paddingRight:'6rem'}}>Cuisines</FormLabel>
         <FormHelperText>Select any one</FormHelperText>
         <RadioGroup
           aria-labelledby="demo-error-radios"
@@ -167,7 +167,7 @@ const RecipeFilters = (props) => {
           />
         </RadioGroup>
       </FormControl>
-      <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
+      <FormControl sx={{ m: 1 }} component="fieldset" variant="standard">
         <FormLabel component="legend">Dietary Restrictions</FormLabel>
         <FormHelperText>Select any one</FormHelperText>
         <RadioGroup
@@ -227,7 +227,7 @@ const RecipeFilters = (props) => {
         </RadioGroup>
       </FormControl>
       
-    </Box>
+     </Box>
   );
 };
 
