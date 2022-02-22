@@ -374,7 +374,8 @@ function App() {
                       color='primary'
                       fontWeight='bold'
                       gutterBottom
-                      width='700px'>
+                      width='800px'
+                      sx={{ paddingLeft: '10rem' }}>
                       Sorry! There are no results. Please try another filter.
                     </Typography>
                   )}
@@ -415,7 +416,8 @@ function App() {
                       color='primary'
                       fontWeight='bold'
                       gutterBottom
-                      width='700px'>
+                      width='800px'
+                      sx={{ paddingLeft: '10rem' }}>
                       Sorry! There are no results. Please try another filter.
                     </Typography>
                   )}
@@ -455,7 +457,8 @@ function App() {
                       color='primary'
                       fontWeight='bold'
                       gutterBottom
-                      width='700px'>
+                      width='800px'
+                      sx={{ paddingLeft: '10rem' }}>
                       Sorry! There are no results. Please try another filter.
                     </Typography>
                   )}
