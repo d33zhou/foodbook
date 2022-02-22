@@ -207,7 +207,7 @@ const RecipeItem = () => {
             <Chip
               avatar={<Avatar alt='Natacha' src={avatar} />}
               label={`${first_name} ${last_name}`}
-              color='secondary'
+              color='primary'
               onClick={() => history.push(`/users/${creator_id}`)}
             />
           </Stack>
