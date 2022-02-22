@@ -36,7 +36,7 @@ const HomeList = (props) => {
           display: 'block',
           justifyContent: 'center',
           alignItems: 'center',
-          width: '100%',
+          width: '780px',
           height: '100%',
           marginLeft: '10rem',
         }}>
