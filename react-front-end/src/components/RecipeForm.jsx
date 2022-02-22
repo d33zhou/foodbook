@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 import { useAuth } from '../providers/AuthContext';
 
-const RecipeForm = () => {
+const RecipeForm = (props) => {
   const history = useHistory();
   const { user } = useAuth();
 
@@ -76,12 +76,12 @@ const RecipeForm = () => {
       .post('http://localhost:3001/api/recipes/', recipeBody)
       .then((response) => response.data)
       .then((recipeObj) => {
-        console.log('recipeObj', recipeObj);
+        // console.log('recipeObj', recipeObj);
         const ingredientsBody = ingredientFields.map((ingredient) => ({
           ...ingredient,
           recipeId: recipeObj.id,
         }));
-        console.log(ingredientsBody);
+        // console.log(ingredientsBody);
         const requests = [];
         for (let i = 0; i < ingredientsBody.length; i++) {
           requests.push({
@@ -92,8 +92,12 @@ const RecipeForm = () => {
         const promises = requests.map((request) =>
           axios.post(request.url, request.body)
         );
-        Promise.all(promises).then(history.push(`/recipe/${recipeObj.id}`));
+
+        Promise.all(promises)
+          .then(history.push(`/recipe/${recipeObj.id}`))
+          .then(props.getAllRecipes());
       })
+
       .catch((err) => console.log('Error: ', err.message));
   };
   // .then(history.push(`/recipe/${recipeObj.id}`))

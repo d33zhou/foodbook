@@ -314,7 +314,7 @@ function App() {
     }
   };
 
-  useEffect(() => {
+  const getAllRecipes = () => {
     setLoading(true);
     setTimeout(() => {
       const testURL = `http://localhost:3001/api/recipes`;
@@ -325,7 +325,9 @@ function App() {
         setLoading(false);
       });
     }, 2000);
-  }, []);
+  };
+
+  useEffect(() => getAllRecipes(), []);
 
   if (loading) {
     return (
@@ -490,7 +492,7 @@ function App() {
                   height: '100vh',
                 }}>
                 <Navigation />
-                <RecipeForm />
+                <RecipeForm getAllRecipes={getAllRecipes} />
               </Box>
             </Container>
           </PrivateRoute>
