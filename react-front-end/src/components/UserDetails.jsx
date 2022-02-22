@@ -91,7 +91,7 @@ const UserDetails = (props) => {
         justifyContent: 'space-between',
         backgroundColor: '#fff',
         boxShadow: '0 3px 10px rgb(0 0 0 / 0.2)',
-        
+        position: 'relative',
       }}>
       <Box sx={{
         display: 'flex',
@@ -130,7 +130,7 @@ const UserDetails = (props) => {
         sx={{
           m: 3,
           position: 'absolute',
-          right: '30%',
+          right: '0',
         }}
       >
         {loading ? (
