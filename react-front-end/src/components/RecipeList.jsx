@@ -19,7 +19,7 @@ const RecipeList = ({ results }) => {
           prepTime={recipe.prep_minutes}
           difficulty={recipe.difficulty}
           first_name={recipe.first_name}
-          last={recipe.last_name}
+          last_name={recipe.last_name}
           avatar={recipe.avatar}
           creator_id={recipe.creator_id}
         />
@@ -30,7 +30,7 @@ const RecipeList = ({ results }) => {
     <Box
       sx={{
         flexGrow: 3,
-        paddingLeft:'8rem'
+        paddingLeft: '8rem',
       }}>
       {parsedRecipes}
     </Box>
