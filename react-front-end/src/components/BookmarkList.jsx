@@ -37,6 +37,7 @@ const BookmarkList = (props) => {
           alignItems: 'center',
           width: '100%',
           height: '100%',
+          marginLeft: '10rem',
         }}>
         <img src={loadingGif} alt='Loading recipe GIF' />
       </Box>
