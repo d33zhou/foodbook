@@ -69,7 +69,8 @@ const HomeList = (props) => {
     <Box
       sx={{
         flexGrow: 3,
-        paddingLeft: '8rem',
+        paddingLeft: '10rem',
+        width: '940px',
       }}>
       <Box>
         {home.length <= 0 && results.length > 0 && (
@@ -78,8 +79,7 @@ const HomeList = (props) => {
             component='h1'
             color='primary'
             fontWeight='bold'
-            gutterBottom
-            width='700px'>
+            width='800px'>
             Sorry! There are no results. Please try another filter.
           </Typography>
         )}
