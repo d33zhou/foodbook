@@ -59,9 +59,8 @@ const UserPublicProfile = (props) => {
         rowGap: '2rem',
         paddingBottom: '4rem',
         width: '960px',
-      }}
-    >
-
+        paddingLeft:'8rem'
+      }}>
       <UserDetails
         {...otherUser}
         following={following}

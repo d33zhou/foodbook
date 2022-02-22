@@ -69,6 +69,7 @@ const BookmarkList = (props) => {
     <Box
       sx={{
         flexGrow: 3,
+        paddingLeft:'8rem',
       }}>
       <Box>
         {bookmarks.length <= 0 && results.length > 0 && (

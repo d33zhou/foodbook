@@ -91,6 +91,7 @@ const UserDetails = (props) => {
         justifyContent: 'space-between',
         backgroundColor: '#fff',
         boxShadow: '0 3px 10px rgb(0 0 0 / 0.2)',
+        
       }}>
       <Box sx={{
         display: 'flex',

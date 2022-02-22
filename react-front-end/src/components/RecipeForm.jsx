@@ -105,6 +105,7 @@ const RecipeForm = () => {
     <Box
       sx={{
         width: '100%',
+        paddingLeft:'8rem'
       }}>
       <Typography
         variant='h2'

@@ -1,8 +1,20 @@
-import { Box, Button } from '@mui/material';
+import { Box, Button,Drawer } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-const Navigation = ({onClick}) => {
+const Navigation = () => {
   return (
+    // <Drawer
+    //     sx={{
+    //       width: 240,
+    //       flexShrink: 0,
+    //       '& .MuiDrawer-paper': {
+    //         width: 240,
+    //         boxSizing: 'border-box',
+    //       },
+    //     }}
+    //     variant="permanent"
+    //     anchor="left"
+    //   >
     <Box
       sx={{
         // marginRight: '4rem',
@@ -11,7 +23,7 @@ const Navigation = ({onClick}) => {
         alignItems: 'flex-start',
         textAlign: 'left',
         flexDirection: 'column',
-        minWidth: 'content',
+        position:'fixed'     
       }}>
       <Button variant='text' size='large' component={Link} to="/feed">
         Home
@@ -26,6 +38,7 @@ const Navigation = ({onClick}) => {
         Profile
       </Button>
     </Box>
+    // </Drawer>
   );
 };
 
