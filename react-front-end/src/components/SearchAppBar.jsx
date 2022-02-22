@@ -18,7 +18,7 @@ import { Autocomplete, TextField } from '@mui/material';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../providers/AuthContext';
 import { makeStyles, createStyles } from "@material-ui/core/styles";
-;const StyledAutocomplete = styled(Autocomplete)({
+const StyledAutocomplete = styled(Autocomplete)({
   "& .MuiInputLabel-outlined:not(.MuiInputLabel-shrink)": {
     // Default transform is "translate(14px, 20px) scale(1)""
     // This lines up the label with the initial cursor position in the input
