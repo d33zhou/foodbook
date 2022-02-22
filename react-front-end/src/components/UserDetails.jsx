@@ -130,7 +130,7 @@ const UserDetails = (props) => {
         sx={{
           m: 3,
           position: 'absolute',
-          right: '10%',
+          right: '30%',
         }}
       >
         {loading ? (
