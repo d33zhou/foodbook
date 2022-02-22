@@ -157,7 +157,7 @@ const RecipeItem = () => {
       sx={{
         display: 'flex',
         flexDirection: 'row',
-        paddingLeft:'8rem'
+        paddingLeft: '10rem',
       }}>
       <Box
         sx={{
