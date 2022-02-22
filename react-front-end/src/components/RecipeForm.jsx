@@ -33,10 +33,6 @@ const RecipeForm = () => {
     { amount: '', ingredientName: '' },
   ]);
 
-  // console.log(recipe);
-  // console.log(recipeId);
-  // console.log(ingredientFields);
-
   const handleDifficulty = (event) => {
     setRecipe({
       ...recipe,
@@ -105,7 +101,7 @@ const RecipeForm = () => {
     <Box
       sx={{
         width: '100%',
-        paddingLeft:'8rem'
+        paddingLeft: '10rem',
       }}>
       <Typography
         variant='h2'
@@ -128,6 +124,7 @@ const RecipeForm = () => {
           autoComplete='off'
           onSubmit={(e) => e.preventDefault()}>
           <TextField
+            required
             fullWidth
             label='Recipe Title'
             variant='standard'
@@ -140,6 +137,7 @@ const RecipeForm = () => {
           />
 
           <TextField
+            required
             fullWidth
             label='Add Image'
             variant='standard'
@@ -152,6 +150,7 @@ const RecipeForm = () => {
           />
 
           <TextField
+            required
             fullWidth
             multiline
             label='Description'
@@ -168,6 +167,7 @@ const RecipeForm = () => {
             return (
               <div key={index}>
                 <TextField
+                  required
                   sx={{
                     width: '30%',
                   }}
@@ -179,6 +179,7 @@ const RecipeForm = () => {
                 />
 
                 <TextField
+                  required
                   sx={{
                     width: '70%',
                   }}
@@ -202,6 +203,7 @@ const RecipeForm = () => {
           </Button>
 
           <TextField
+            required
             fullWidth
             multiline
             label='Directions'
@@ -222,6 +224,7 @@ const RecipeForm = () => {
               columnGap: '4rem',
             }}>
             <TextField
+              required
               sx={{
                 flexGrow: 1,
               }}
@@ -236,6 +239,7 @@ const RecipeForm = () => {
             />
 
             <TextField
+              required
               sx={{
                 flexGrow: 1,
               }}
@@ -262,6 +266,7 @@ const RecipeForm = () => {
                 Difficulty
               </InputLabel>
               <Select
+                required
                 labelId='demo-simple-select-standard-label'
                 id='demo-simple-select-standard'
                 value={recipe.difficulty}
@@ -281,6 +286,7 @@ const RecipeForm = () => {
                 Restrictions
               </InputLabel>
               <Select
+                required
                 labelId='demo-simple-select-standard-label'
                 id='demo-simple-select-standard'
                 value={recipe.restrictions}
@@ -303,6 +309,7 @@ const RecipeForm = () => {
                 Cuisine
               </InputLabel>
               <Select
+                required
                 labelId='demo-simple-select-standard-label'
                 id='demo-simple-select-standard'
                 value={recipe.cuisine}
