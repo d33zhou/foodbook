@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Box, Button } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import RecipeListItem from './RecipeListItem';
 
 const RecipeList = ({ results }) => {
@@ -30,9 +30,23 @@ const RecipeList = ({ results }) => {
     <Box
       sx={{
         flexGrow: 3,
-        paddingLeft: '8rem',
+        paddingLeft: '10rem',
+        width: '940px',
       }}>
-      {parsedRecipes}
+      <Box>
+        {results.length <= 0 && (
+          <Typography
+            variant='h3'
+            component='h1'
+            color='primary'
+            fontWeight='bold'
+            gutterBottom
+            width='800px'>
+            Sorry! There are no results. Please try another filter.
+          </Typography>
+        )}
+        {parsedRecipes}
+      </Box>
     </Box>
   );
 };

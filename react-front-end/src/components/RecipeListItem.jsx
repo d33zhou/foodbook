@@ -110,6 +110,7 @@ const RecipeListItem = (props) => {
   return (
     <Box
       sx={{
+        width: '800px',
         textAlign: 'left',
         marginBottom: '2rem',
         backgroundColor: '#fff',
