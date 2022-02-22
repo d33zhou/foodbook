@@ -58,7 +58,7 @@ const HomeList = (props) => {
           prepTime={recipe.prep_minutes}
           difficulty={recipe.difficulty}
           first_name={recipe.first_name}
-          last={recipe.last_name}
+          last_name={recipe.last_name}
           avatar={recipe.avatar}
           creator_id={recipe.creator_id}
         />
@@ -69,10 +69,8 @@ const HomeList = (props) => {
     <Box
       sx={{
         flexGrow: 3,
-        paddingLeft:'8rem',
-        
-      }}
-    >
+        paddingLeft: '8rem',
+      }}>
       <Box>
         {home.length <= 0 && results.length > 0 && (
           <Typography
