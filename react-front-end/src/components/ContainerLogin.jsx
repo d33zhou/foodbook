@@ -27,7 +27,7 @@ const ContainerLogin = () => {
           color='primary'
           fontWeight='bold'
           gutterBottom>
-          Foodbook
+          foodbook
         </Typography>
         <Typography variant='h6' gutterBottom>
           Welcome to Foodbook, a social network to share your favourite recipes
